@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>PHP</ID>
+  <OriginalElement>C:/wamp64/www/OC/P5-Blog PHP/3-POO/App</OriginalElement>
+  <nodes>
+    <node x="233.68500327439438" y="420.34446627373916">\App\config\Autoloader</node>
+    <node x="10.086444007858518" y="556.3752455795677">\App\src\DAO\ArticleDAO</node>
+    <node x="-97.16355599214148" y="387.3752455795678">\App\src\DAO\DAO</node>
+    <node x="-227.22396856581543" y="694.5422396856582">\App\src\view\View</node>
+    <node x="433.2665356908972" y="482.56843483955464">\App\config\Router</node>
+    <node x="-235.91355599214148" y="578.3752455795677">\App\src\DAO\CommentDAO</node>
+    <node x="-505.6397306397307" y="518.2138047138046">\App\src\model\Comment</node>
+    <node x="0.0" y="903.0">\App\src\model\Constraint</node>
+    <node x="384.0" y="738.0">\App\src\controller\BackController</node>
+    <node x="568.2344466273739" y="703.9960707269155">\App\src\controller\FrontController</node>
+    <node x="-776.5185185185185" y="503.7744107744108">\App\src\model\Article</node>
+    <node x="224.53176162409943" y="740.0694171578257">\App\src\controller\ErrorController</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="\App\src\DAO\CommentDAO" target="\App\src\DAO\DAO">
+      <point x="0.0" y="-37.0" />
+      <point x="-122.91355599214148" y="531.3752455795677" />
+      <point x="-57.91355599214148" y="531.3752455795677" />
+      <point x="-39.25" y="59.5" />
+    </edge>
+    <edge source="\App\src\DAO\ArticleDAO" target="\App\src\DAO\DAO">
+      <point x="0.0" y="-59.0" />
+      <point x="85.58644400785852" y="531.3752455795677" />
+      <point x="20.586444007858518" y="531.3752455795677" />
+      <point x="39.25" y="59.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9664556962025317" x="3.0" y="799.355926653569" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constants</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

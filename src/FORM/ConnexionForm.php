@@ -1,0 +1,51 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: c.perrotin
+ * Date: 26/09/2018
+ * Time: 16:14
+ */
+
+namespace App\src\FORM;
+
+
+class ConnexionForm extends FormBuilder
+{
+    public function build()
+    {
+        $this->form->add(new StringField([
+            'label' => 'Pseudo',
+            'name' => 'login',
+            'maxLength' => 50,
+            'validators' => array(
+                new NotNullValidator('Merci de spécifier votre pseudo'),
+                new MaxLengthValidator('pseudo spécifié est trop long 10 max', 10)
+            )
+            ]))
+            ->add(new StringField([
+                'label' => 'Mot de passe',
+                'name' => 'pass',
+                'maxLength' => 10,
+                'validators' => array(
+                    new NotNullValidator('Merci de saisir un mot de passe'),
+                    new MaxLengthValidator('mot de passe trop long 10 max', 10)
+                )
+            ]))
+            ->add(new StringField([
+                'label'=>'route',
+                'name'=>'route',
+                'hidden'=>'true'
+            ]))
+            ->add(new StringField([
+                'label'=>'idArt',
+                'name'=>'idArt',
+                'hidden'=>true
+            ]))
+            ->add(new StringField([
+                'label'=>'idComment',
+                'name'=>'idComment',
+                'hidden'=>true
+            ]))
+        ;
+    }
+}
