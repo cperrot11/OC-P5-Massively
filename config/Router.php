@@ -6,11 +6,13 @@ use App\src\controller\BackController;
 use App\src\controller\ErrorController;
 use App\src\controller\FrontController;
 use App\src\controller\ConnexionController;
+use App\src\controller\UserController;
 
 class Router
 {
     private $frontController;
     private $backController;
+    private $userController;
     private $errorController;
     private $connexionController;
     private $get;
@@ -21,6 +23,7 @@ class Router
         $this->frontController = new FrontController();
         $this->errorController = new ErrorController();
         $this->connexionController = new ConnexionController();
+        $this->userController = new UserController();
     }
 
     public function run()
@@ -54,6 +57,9 @@ class Router
                 }
                 else if($_GET['route'] === 'check') {
                     $this->frontController->check();
+                }
+                else if($_GET['route'] === 'admin') {
+                    $this->userController ->addUser();
                 }
                 else{
                     $this->errorController->unknown();

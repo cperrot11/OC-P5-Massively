@@ -31,21 +31,6 @@ class ConnexionForm extends FormBuilder
                     new MaxLengthValidator('mot de passe trop long 10 max', 10)
                 )
             ]))
-            ->add(new StringField([
-                'label'=>'route',
-                'name'=>'route',
-                'hidden'=>'true'
-            ]))
-            ->add(new StringField([
-                'label'=>'idArt',
-                'name'=>'idArt',
-                'hidden'=>true
-            ]))
-            ->add(new StringField([
-                'label'=>'idComment',
-                'name'=>'idComment',
-                'hidden'=>true
-            ]))
         ;
     }
 }

@@ -28,10 +28,11 @@ $this->title = "Article";
                         <p class="card-text"><?= htmlspecialchars($comment->getContent());?></p>
                     </div>
                 </div>
-
-                <a href="../public/index.php?route=updateComment&idArt=<?= htmlspecialchars($article->getId());?>&idComment=<?= htmlspecialchars($comment->getId());?>">Modifier, </a>
-                <a href="../public/index.php?route=deleteComment&idArt=<?= htmlspecialchars($article->getId());?>&idComment=<?= htmlspecialchars($comment->getId());?>">Supprimer, </a>
+                <?php if(isset($_SESSION['role']) && $_SESSION['role']==="admin") { ?>
+                    <a href="../public/index.php?route=updateComment&idArt=<?= htmlspecialchars($article->getId());?>&idComment=<?= htmlspecialchars($comment->getId());?>">Modifier, </a>
+                    <a href="../public/index.php?route=deleteComment&idArt=<?= htmlspecialchars($article->getId());?>&idComment=<?= htmlspecialchars($comment->getId());?>">Supprimer, </a>
                 <?php
+                }
             }
             ?>
             <a href="../public/index.php?route=addComment&idArt=<?= htmlspecialchars($article->getId());?>">Ajouter un commentaire</a>

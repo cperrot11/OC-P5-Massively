@@ -45,8 +45,9 @@ class BackController
     //4- modification commentaire
     public function updateComment()
     {
-        if (!isset($_SESSION['pseudo']) or $_SESSION['pseudo']<>'admin'){
+        if (!isset($_SESSION['role']) or $_SESSION['role']<>'admin'){
             $this->frontController->login($_GET);
+            $_SESSION['error']='modification impossible';
             return false;
         }
         $comment = new Comment();
@@ -74,6 +75,5 @@ class BackController
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('update_comment', ['formulaire' => $data]);
     }
-
 
 }

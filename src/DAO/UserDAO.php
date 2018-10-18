@@ -23,14 +23,23 @@ class UserDAO extends DAO
         }
         return $users;
     }
+    public function CheckUser($login, $pass)
+    {
+        $sql = 'SELECT login, pass, name, admin FROM user WHERE login = ?';
+        $result = $this->sql($sql, [$login]);
+        $row = $result->fetch();
+        return password_verify($pass, $row['pass']);
+    }
     public function getUser($login)
     {
         $sql = 'SELECT login, pass, name, admin FROM user WHERE login = ?';
         $result = $this->sql($sql, [$login]);
         $row = $result->fetch();
-        if($row) {
+        if($row)
+        {
             return $this->buildObject($row);
         } else {
+            //todo  : rajouter $_session['error']
             echo 'Aucun ustilisateur existant avec ce login';
         }
     }
@@ -38,7 +47,8 @@ class UserDAO extends DAO
     {
         extract($user);
         $sql = 'INSERT INTO user (login, name, pass, admin) VALUES (?, ?, ?, ?)';
-        $this->sql($sql, [$login,$name,$pass,$admin]);
+        $pass_hache = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+        $this->sql($sql, [$login,$name,$pass_hache,$admin]);
     }
 
     private function buildObject(array $row)

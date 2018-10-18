@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="../public/css/bootstrap.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#"><img src="../public/img/avatar.jpg" height="100"/></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -17,13 +17,13 @@
                     <a class="nav-link" href="../public/home.php">Accueil<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php">Blog</a>
+                    <a class="nav-link" href="">Articles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="">Commentaires</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php?route=admin">Admin</a>
+                    <a class="nav-link" href="#">Membres</a>
                 </li>
             </ul>
             <div class="badge badge-pill badge-info">

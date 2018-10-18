@@ -1,6 +1,7 @@
 <?php
 
 namespace App\src\controller;
+//todo virer de là !!!
 if(!isset($_SESSION))
 {
     session_start();
@@ -25,6 +26,7 @@ class FrontController
 {
     private $articleDAO;
     private $commentDAO;
+    private $user;
     private $userDAO;
     private $view;
 
@@ -32,6 +34,7 @@ class FrontController
     {
         $this->articleDAO = new ArticleDAO();
         $this->commentDAO = new CommentDAO();
+        $this->user = new User();
         $this->userDAO = new UserDAO();
         $this->view = new View();
     }
@@ -102,12 +105,11 @@ class FrontController
     }
 
     public function login(){
-        $user = $this->userDAO->getUser("admin");
-        if (isset($_GET['idArt'])){
-            $user->setRoute($_GET['route']);
-            $user->setIdArt($_GET['idArt']);
-            $user->setIdComment($_GET['idComment']);
+        if (isset($_SESSION['login']))
+        {
+            $user = $this->userDAO->getUser($_SESSION['login']);
         }
+        else $user = $this->user;
         $formBuilder = new ConnexionForm($user);
         $formBuilder->build();
         $form = $formBuilder->form();
@@ -115,6 +117,7 @@ class FrontController
         $this->view = new View();
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('connexion', ['formulaire' => $data]);
+        unset($_SESSION['error']);
 
         return false;
     }
@@ -123,37 +126,21 @@ class FrontController
     {
         if (isset($_POST['submit']))
         {
-            if ($_POST['login']==='admin' && $_POST['pass']==='pass')
-            {
-
-                $_SESSION['pseudo'] = 'admin';
-                $url = "../public/index.php?";
-                if (isset($_POST['route']) && !empty($_POST['route'])){
-                    $url.="route=".htmlspecialchars($_POST['route']);
+            if ($this->userDAO->CheckUser($_POST['login'],$_POST['pass']))
+                {
+                    $_SESSION['login']= $_POST['login'];
+                    $_SESSION['role'] = 'admin';
                 }
-                if (isset($_POST['idArt']) && !empty($_POST['idArt'])){
-                    $url.="&idArt=".htmlspecialchars($_POST['idArt']);
+            else
+                {
+                    $_SESSION['error']="pseudo ou mot de passe incorrect";
+                    $url = "../public/index.php?route=login";
                 }
-                if (isset($_POST['idComment']) && !empty($_POST['idComment'])){
-                    $url.="&idComment=".htmlspecialchars($_POST['idComment']);
-                }
-                header("location:".$url);
-            }
-            else{
-                //todo : géré l'erreur
-                $url = "../public/index.php";
-                if (isset($_POST['route']) && !empty($_POST['route'])){
-                    $url.="?route=article";
-                }
-                if (isset($_POST['idArt']) && !empty($_POST['idArt'])){
-                    $url.="&idArt=".htmlspecialchars($_POST['idArt']);
-                }
-                header("location:".$url);
-            }
+            header("location:".$url);
         }
         if (isset($_POST['logout']))
         {
-            $_SESSION = array();
+            //$_SESSION = array();
             session_destroy();
             $url = "../public/index.php";
             header("location:".$url);
