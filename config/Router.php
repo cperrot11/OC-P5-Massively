@@ -61,6 +61,12 @@ class Router
                 else if($_GET['route'] === 'admin') {
                     $this->userController ->addUser();
                 }
+                else if($_GET['route'] === 'new_user') {
+                    $this->userController ->addUser();
+                }
+                else if($_GET['route'] === 'check_user') {
+                    $this->userController ->checkUser();
+                }
                 else{
                     $this->errorController->unknown();
                 }

@@ -9,8 +9,9 @@
             <?= isset($_SESSION['error'])? $_SESSION['error']:"" ?>
         </div>
         <?php echo $formulaire;?>
-        <input type="submit" value="Envoyer" id="submit" name="submit">
         <input type="submit" value="Déconnecter" id="logout" name="logout">
+        <input type="submit" value="Envoyer" id="submit" name="submit">
+        <input type="submit" value="Céer membre" id="submit" name="new">
     </form>
     <a href="../public/index.php">Retour à l'accueil</a>
 </div>

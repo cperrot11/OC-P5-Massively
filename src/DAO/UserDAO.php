@@ -41,6 +41,7 @@ class UserDAO extends DAO
         } else {
             //todo  : rajouter $_session['error']
             echo 'Aucun ustilisateur existant avec ce login';
+            return false;
         }
     }
     public function saveUser($user)

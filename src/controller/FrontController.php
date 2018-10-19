@@ -145,5 +145,13 @@ class FrontController
             $url = "../public/index.php";
             header("location:".$url);
         }
+        if (isset($_POST['new']))
+        {
+            //$_SESSION = array();
+            session_destroy();
+            $url = "../public/index.php?route=new_user";
+            header("location:".$url);
+        }
+
     }
 }
