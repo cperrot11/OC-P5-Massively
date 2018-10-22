@@ -28,6 +28,18 @@ class BackController
         $this->view = new View();
         $this->frontController = new FrontController();
     }
+    public function admin_gestion()
+    {
+        if (!isset($_SESSION['role']) or $_SESSION['role']<>'admin'){
+            $_SESSION['error']="L'accès réservé aux administrateurs";
+            $this->frontController->login();
+            return false;
+        }
+        else{
+            $this->view->render('admin_gestion', []);
+        }
+
+    }
 
     public function addComment($post)
     {
@@ -39,7 +51,6 @@ class BackController
         $this->view->render('form_comment', [
             'post' => $post
         ]);
-
     }
 
     //4- modification commentaire

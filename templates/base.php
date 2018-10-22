@@ -5,7 +5,7 @@
     <title><?= $title ?></title>
 </head>
 <body>
-<?php require_once "navbar.php" ?>
+<?php require_once ($admin)?"admin_navbar.php":"navbar.php" ?>
 <div id="content">
     <?= $content ?>
 </div>

@@ -23,12 +23,12 @@
                     <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php?route=admin">Admin</a>
+                    <a class="nav-link" href="index.php?route=admin_gestion">Admin</a>
                 </li>
             </ul>
             <div class="badge badge-pill badge-info">
                  <a class="nav-link" href="index.php?route=login">
-                      <?= isset($_SESSION['role']) ? $_SESSION['role']:'Connexion' ?>
+                      <?= isset($_SESSION['role']) ? 'Membre = '.$_SESSION['login']:'Connexion' ?>
                  </a>
             </div>
 

@@ -28,7 +28,7 @@ class UserController
 
     public function addUser()
     {
-        $formBuilder = new ConnexionForm($this->user);
+        $formBuilder = new NewUserForm($this->user);
         $formBuilder->build();
         $form = $formBuilder->form();
 

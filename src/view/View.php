@@ -13,15 +13,18 @@ class View
 {
     private $file;
     private $title;
+    private $admin;
 
     public function render($template, $data = [])
     {
+        $this->admin = (substr($template,0,6)=="admin_")?true:false;
         $this->file = '../templates/'.$template.'.php';
         //1- Construit le template avec les valeurs
         $content  = $this->renderFile($this->file, $data);
         //2- Rajoute le masque général + titre
         $view = $this->renderFile('../templates/base.php', [
             'title' => $this->title,
+            'admin' => $this->admin,
             'content' => $content
         ]);
         echo $view;

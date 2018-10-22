@@ -109,7 +109,9 @@ class FrontController
         {
             $user = $this->userDAO->getUser($_SESSION['login']);
         }
-        else $user = $this->user;
+        else {
+            $user = $this->user;
+        }
         $formBuilder = new ConnexionForm($user);
         $formBuilder->build();
         $form = $formBuilder->form();
@@ -126,10 +128,12 @@ class FrontController
     {
         if (isset($_POST['submit']))
         {
-            if ($this->userDAO->CheckUser($_POST['login'],$_POST['pass']))
+            $test = $this->userDAO->CheckUser($_POST['login'],$_POST['pass']);
+            if ($test<>false)
                 {
-                    $_SESSION['login']= $_POST['login'];
-                    $_SESSION['role'] = 'admin';
+                    $_SESSION['login']= $test->getLogin();
+                    $_SESSION['role'] = ($test->getAdmin())? "admin":"membre";
+                    $url = "../public/index.php";
                 }
             else
                 {
@@ -147,7 +151,7 @@ class FrontController
         }
         if (isset($_POST['new']))
         {
-            //$_SESSION = array();
+            $_SESSION = array();
             session_destroy();
             $url = "../public/index.php?route=new_user";
             header("location:".$url);

@@ -10,7 +10,7 @@ abstract class Field
   protected $name;
   protected $validators = [];
   protected $value;
-  protected $hidden=false;
+  protected $password=false;
   
   public function __construct(array $options = [])
   {
@@ -86,6 +86,14 @@ abstract class Field
       $this->name = $name;
     }
   }
+
+    public function setPassword($name)
+    {
+        if (is_bool($name))
+        {
+            $this->password = $name;
+        }
+    }
   
   public function setValidators(array $validators)
   {

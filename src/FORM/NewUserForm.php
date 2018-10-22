@@ -23,6 +23,15 @@ class ConnexionForm extends FormBuilder
             )
             ]))
             ->add(new StringField([
+                'label' => 'Nom ',
+                'name' => 'name',
+                'maxLength' => 30,
+                'validators' => array(
+                    new NotNullValidator('Merci de saisir votre nom'),
+                    new MaxLengthValidator('Nom trop long 30 max', 30)
+                )
+            ]))
+            ->add(new StringField([
                 'label' => 'Mot de passe ',
                 'password' => true,
                 'name' => 'pass',

@@ -9,7 +9,7 @@ class StringField extends Field
   public function buildWidget()
   {
     $widget = '';
-    $type = !($this->hidden)? 'type="text"' : 'type="hidden"';
+    $type = !($this->password)? '"text"' : '"password"';
 
     if (!empty($this->errorMessage))
     {

@@ -11,7 +11,6 @@ $this->title = "Accueil";
     <link rel="stylesheet" href="../public/css/bootstrap.css">
 </head>
 
-</div>
 <div class="container">
     <div class="row">
         <div class="jumbotron-fluid">

@@ -28,7 +28,10 @@ class UserDAO extends DAO
         $sql = 'SELECT login, pass, name, admin FROM user WHERE login = ?';
         $result = $this->sql($sql, [$login]);
         $row = $result->fetch();
-        return password_verify($pass, $row['pass']);
+        if (password_verify($pass, $row['pass'])) {
+            return $this->buildObject($row);
+        }
+        else return false;
     }
     public function getUser($login)
     {
