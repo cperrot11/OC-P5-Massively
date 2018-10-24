@@ -9,7 +9,7 @@
 namespace App\src\controller;
 
 use App\src\view\View;
-use App\src\FORM\AddUserForm;
+use App\src\FORM\NewUserForm;
 use App\src\model\User;
 use App\src\DAO\UserDAO;
 use App\src\FORM\ConnexionForm;

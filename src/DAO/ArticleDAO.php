@@ -38,6 +38,18 @@ class ArticleDAO extends DAO
         $this->sql($sql, [$title, $content, $author]);
     }
 
+    public function updateArticle($idArt,$content)
+    {
+        $sql = 'UPDATE article set content=?,date_added=NOW() WHERE id= ?';
+        $this->sql($sql, [$content,intval($idArt)]);
+    }
+    public function deleteArticle($idArt)
+    {
+        $sql = 'DELETE FROM article WHERE id=?';
+        $result = $this->sql($sql,[intval($idArt)]);
+        //$result->fetch();
+    }
+
     private function buildObject(array $row)
     {
         $article = new Article();

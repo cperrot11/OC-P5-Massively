@@ -8,7 +8,9 @@ if(!isset($_SESSION))
 
 use App\src\DAO\ArticleDAO;
 use App\src\DAO\CommentDAO;
+use App\src\FORM\ArticleForm;
 use App\src\FORM\CommentForm;
+use App\src\model\Article;
 use App\src\view\View;
 use App\src\model\Comment;
 use App\src\controller\FrontController;
@@ -20,6 +22,7 @@ class BackController
     private $view;
     private $frontController;
     private $route;
+    private $article;
 
     public function __construct()
     {
@@ -38,7 +41,6 @@ class BackController
         else{
             $this->view->render('admin_gestion', []);
         }
-
     }
 
     public function addComment($post)
@@ -86,5 +88,42 @@ class BackController
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('update_comment', ['formulaire' => $data]);
     }
+    //6-Afficher liste article
+    public function admin_articles()
+    {
+        $articles = $this->articleDAO->getArticles();
+        $this->view->render('admin_blogs',['articles'=> $articles]);
+    }
+    public function updateArticle($idArt)
+    {
+        if (isset($_POST['submit']) )
+            {
+                $content = $_POST['content'];
+                $this->articleDAO->updateArticle($idArt,$content);
+            }
+        $article = $this->articleDAO->getArticle($idArt);
+        $formBuilder = new ArticleForm($article);
+        $formBuilder->build();
+        $form = $formBuilder->form();
+        $data = $form->createView();
+
+        $this->view->render('admin_updatearticle', [
+            'article'=> $article,
+            'formulaire' => $data
+        ]);
+    }
+    public function deleteArticle($idArt)
+    {
+        if ($this->articleDAO->deleteArticle($idArt))
+        {
+            $_SESSION['error'] = 'Article + commentaire correspondants effacés';
+        }
+        else
+        {
+            $_SESSION['error'] = 'Suppression impossible';
+        }
+        $this->admin_articles();
+    }
+
 
 }

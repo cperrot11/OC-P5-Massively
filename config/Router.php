@@ -67,6 +67,16 @@ class Router
                 else if($_GET['route'] === 'check_user') {
                     $this->userController ->checkUser();
                 }
+                else if($_GET['route'] === 'admin_articles') {
+                    $this->backController ->admin_articles();
+                }
+                else if($_GET['route'] === 'updateArticle') {
+                    $this->backController ->updateArticle($_GET['idArt']);
+                }
+                else if($_GET['route'] === 'deleteArticle') {
+                    $this->backController ->deleteArticle($_GET['idArt']);
+                }
+
                 else{
                     $this->errorController->unknown();
                 }
