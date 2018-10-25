@@ -6,8 +6,7 @@
     </div>
     <form method="post" action="../public/index.php?route=addComment<?php
      echo "&idArt=".$_GET['idArt'];?>">
-        <?php var_dump($formulaire);
-        echo $formulaire;?>
+        <?= $formulaire;?>
         <input type="submit" value="Envoyer" id="submit" name="submit">
     </form>
     <a href="../public/index.php">Retour à l'accueil</a>

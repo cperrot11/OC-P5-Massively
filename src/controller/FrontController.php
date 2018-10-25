@@ -38,25 +38,18 @@ class FrontController
         $this->userDAO = new UserDAO();
         $this->view = new View();
     }
-    //1- Création article
-    public function addArticle($post)
-    {
-        if(isset($post['submit'])) {
-            $articleDAO = new ArticleDAO();
-            $articleDAO->saveArticle($post);
-            session_start();
-            $_SESSION['add_article'] = 'Le nouvel article a bien été ajouté';
-            header('Location: ../public/index.php');
-        }
-        $this->view->render('form_article', [
-            'post' => $post
-        ]);
 
-    }
     //3- Création commentaire
     public function addComment($get)
     {
+        if (!isset($_SESSION['role']))
+        {
+            $_SESSION['error']='Ajout de commentaire est réservé aux membres';
+            $this->login();
+            return false;
+        }
         $comment = new Comment();
+        $comment->setPseudo($_SESSION['login']);
         // si retour de formulaire transfert vers $comment
         //todo : rajouter une boucle pour tester et alimenter la présence des champs du post
         if (isset($_POST['submit'])) {

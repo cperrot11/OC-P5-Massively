@@ -5,8 +5,16 @@
         </div>
     </div>
     <form method="post" action="../public/index.php?route=check">
+        <?php if (isset($_SESSION['error']))
+        {?>
+        <div class="alert alert-dismissible alert-success">
+            <?= $_SESSION['error']?>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+        <?php }
+        ?>
         <div class="text-danger">
-            <?= isset($_SESSION['error'])? $_SESSION['error']:"" ?>
+
         </div>
         <?php echo $formulaire;?>
         <input type="submit" value="Déconnecter" id="logout" name="logout">

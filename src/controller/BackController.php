@@ -31,6 +31,48 @@ class BackController
         $this->view = new View();
         $this->frontController = new FrontController();
     }
+    //1- Création article
+    public function addArticle($post)
+    {
+        if (!isset($_SESSION['role']) or $_SESSION['role']<>'admin'){
+            $_SESSION['error']='Création d\'article réservé aux administrateurs';
+            $this->frontController->login();
+            return false;
+        }
+        $article = new Article();
+        $article->setDateAdded(date("d-m-Y"));
+        $article->setAuthor($_SESSION['login']);
+
+        if (isset($_POST['submit']))
+        {
+            $article->setTitle($_POST['title']);
+            $article->setContent($_POST['content']);
+        }
+        $formBuilder = new ArticleForm($article);
+        $formBuilder->build();
+        $form = $formBuilder->form();
+        if(isset($post['submit']) && $form->isValid())
+        {
+            $articleDAO = new ArticleDAO();
+            $articleDAO->saveArticle($post);
+            session_start();
+            $_SESSION['add_article'] = 'Le nouvel article a bien été ajouté';
+            header('Location: ../public/index.php');
+        }
+
+
+
+        if (isset($_POST['submit']) && $form->isValid()){
+            //enregistrement en base
+            {$this->articleDAO->saveArticle($_POST);}
+            //affiche single article
+            $this->frontController->article($_GET['idArt']);
+            return;
+        }
+        $data = $form->createView(); // On passe le formulaire généré à la vue.
+        $this->view->render('admin_addarticle', ['formulaire' => $data]);
+
+    }
     public function admin_gestion()
     {
         if (!isset($_SESSION['role']) or $_SESSION['role']<>'admin'){

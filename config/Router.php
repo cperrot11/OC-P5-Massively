@@ -41,7 +41,7 @@ class Router
                 }
 //              Créer Article
                 else if($_GET['route'] === 'addArticle') {
-                    $this->frontController->addArticle($_POST);
+                    $this->backController->addArticle($_POST);
                 }
 //              3-Créer commentaire
                 else if($_GET['route'] === 'addComment') {
