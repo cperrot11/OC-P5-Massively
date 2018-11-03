@@ -45,8 +45,14 @@ class BackController
 
         if (isset($_POST['submit']))
         {
-            $article->setTitle($_POST['title']);
-            $article->setContent($_POST['content']);
+            if (isset($_POST['title']) && !empty($_POST['title']))
+            {
+                $article->setTitle($_POST['title']);
+            }
+            if (isset($_POST['content']) && !empty($_POST['content']))
+            {
+                $article->setContent($_POST['content']);
+            }
         }
         $formBuilder = new ArticleForm($article);
         $formBuilder->build();
@@ -58,16 +64,6 @@ class BackController
             session_start();
             $_SESSION['add_article'] = 'Le nouvel article a bien été ajouté';
             header('Location: ../public/index.php');
-        }
-
-
-
-        if (isset($_POST['submit']) && $form->isValid()){
-            //enregistrement en base
-            {$this->articleDAO->saveArticle($_POST);}
-            //affiche single article
-            $this->frontController->article($_GET['idArt']);
-            return;
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('admin_addarticle', ['formulaire' => $data]);
@@ -122,7 +118,7 @@ class BackController
 
         if (isset($_POST['submit']) && $form->isValid()){
             //enregistrement en base
-            {$this->commentDAO->updateComment($_GET['idComment'],$_POST);}
+            $this->commentDAO->updateComment($_GET['idComment'],$_POST);
             //affiche single article
             $this->frontController->article($_GET['idArt']);
             return;
@@ -138,17 +134,30 @@ class BackController
     }
     public function updateArticle($idArt)
     {
-        if (isset($_POST['submit']) )
-            {
-                $content = $_POST['content'];
-                $this->articleDAO->updateArticle($idArt,$content);
-            }
+        $article = new Article();
         $article = $this->articleDAO->getArticle($idArt);
+        if (isset($_POST['submit']))
+        {
+            //reprends les données ayant pu être modifiées
+            if (isset($_POST['title']) && !empty($_POST['title'])) {
+                $article->setTitle($_POST['title']);
+            }
+            if (isset($_POST['content']) && !empty($_POST['content'])) {
+                $article->setContent($_POST['content']);
+            }
+        }
         $formBuilder = new ArticleForm($article);
         $formBuilder->build();
         $form = $formBuilder->form();
-        $data = $form->createView();
+        if (isset($_POST['submit'])&& $form->isValid() )
+            {
+                $this->articleDAO->updateArticle($idArt,$_POST);
+                $_SESSION['error']='Modification effectuées sur l\'article '.$idArt ;
+                $this->admin_articles();
+                return;
+            }
 
+        $data = $form->createView();
         $this->view->render('admin_updatearticle', [
             'article'=> $article,
             'formulaire' => $data

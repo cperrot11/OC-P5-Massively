@@ -11,6 +11,7 @@ abstract class Field
   protected $validators = [];
   protected $value;
   protected $password=false;
+  protected $readonly=false;
   
   public function __construct(array $options = [])
   {
@@ -92,6 +93,14 @@ abstract class Field
         if (is_bool($name))
         {
             $this->password = $name;
+        }
+    }
+
+    public function setReadonly($name)
+    {
+        if (is_bool($name))
+        {
+            $this->readonly = $name;
         }
     }
   

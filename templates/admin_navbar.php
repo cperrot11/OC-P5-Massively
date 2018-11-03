@@ -17,7 +17,7 @@
                     <a class="nav-link" href="../public/index.php">Site<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../public/index.php?route=gestion_articles">Articles</a>
+                    <a class="nav-link" href="../public/index.php?route=admin_articles">Articles</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../public/index.php?route=gestion_commentaire">Commentaires</a>
@@ -27,9 +27,9 @@
                 </li>
             </ul>
             <div class="badge badge-pill badge-info">
-                 <a class="nav-link" href="index.php?route=login">
-                      <?= isset($_SESSION['role']) ? $_SESSION['role']:'Connexion' ?>
-                 </a>
+                <a class="nav-link" href="index.php?route=login">
+                    <?= isset($_SESSION['role']) ? 'Membre = '.$_SESSION['login']:'Connexion' ?>
+                </a>
             </div>
         </div>
     </nav>

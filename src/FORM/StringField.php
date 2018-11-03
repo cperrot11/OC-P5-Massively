@@ -5,6 +5,7 @@ class StringField extends Field
 {
   protected $maxLength;
   private $type;
+  protected $readonly;
   
   public function buildWidget()
   {
@@ -30,6 +31,10 @@ class StringField extends Field
     if (!empty($this->maxLength))
     {
       $widget .= ' maxlength="'.$this->maxLength.'"';
+    }
+    if ($this->readonly)
+    {
+        $widget.= 'readonly';
     }
 
     return $widget .= ' />';

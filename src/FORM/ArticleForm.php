@@ -16,10 +16,10 @@ class ArticleForm extends FormBuilder
         $this->form->add(new StringField([
             'label' => 'Titre',
             'name' => 'title',
-            'maxLength' => 100,
+            'maxLength' => 30,
             'validators' => array(
                 new NotNullValidator('Merci de spécifier le titre'),
-                new MaxLengthValidator('Le titre spécifié est trop long 100 max', 100)
+                new MaxLengthValidator('Le titre spécifié est trop long 30 max', 30)
             )
         ]))
             ->add(new TextField([
@@ -33,11 +33,13 @@ class ArticleForm extends FormBuilder
         ]))
             ->add(new StringField([
                 'label' => 'Auteur',
-                'name' => 'author'
+                'name' => 'author',
+                'readonly' => true
         ]))
             ->add(new StringField([
             'label' => 'Date',
-            'name' => 'DateAdded'
+            'name' => 'DateAdded',
+            'readonly' => true
         ]));
 
     }

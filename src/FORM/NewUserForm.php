@@ -9,7 +9,7 @@
 namespace App\src\FORM;
 
 
-class ConnexionForm extends FormBuilder
+class NewUserForm extends FormBuilder
 {
     public function build()
     {

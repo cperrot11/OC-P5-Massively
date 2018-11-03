@@ -10,5 +10,5 @@
         <input type="reset" value="Annuler">
         <input type="submit" value="Envoyer" id="submit" name="submit">
     </form>
-    <a href="../public/index.php?route=admin_gestion">Retour à l'administration du blog</a>
+    <a href="../public/index.php?route=admin_articles">Retour à la gestion des articles</a>
 </div>
