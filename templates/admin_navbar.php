@@ -25,6 +25,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="../public/index.php?route=gestion_membres">Membres</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?route=admin_gestion">Admin</a>
+                </li>
             </ul>
             <div class="badge badge-pill badge-info">
                 <a class="nav-link" href="index.php?route=login">

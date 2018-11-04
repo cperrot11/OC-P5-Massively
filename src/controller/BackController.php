@@ -167,7 +167,7 @@ class BackController
     {
         if ($this->articleDAO->deleteArticle($idArt))
         {
-            $_SESSION['error'] = 'Article + commentaire correspondants effacés';
+            $_SESSION['error'] = 'Article + commentaires correspondants effacés';
         }
         else
         {

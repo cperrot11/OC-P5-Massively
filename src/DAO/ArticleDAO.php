@@ -48,7 +48,9 @@ class ArticleDAO extends DAO
     {
         $sql = 'DELETE FROM article WHERE id=?';
         $result = $this->sql($sql,[intval($idArt)]);
-        //$result->fetch();
+        if ($result->rowCount())
+                {return true;}
+                else {return false;}
     }
 
     private function buildObject(array $row)
