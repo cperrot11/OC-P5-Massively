@@ -66,10 +66,10 @@ class BackController
             header('Location: ../public/index.php');
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
-        $this->view->render('admin_addarticle', ['formulaire' => $data]);
+        $this->view->render('AdminAddArticle', ['formulaire' => $data]);
 
     }
-    public function admin_gestion()
+    public function adminGestion()
     {
         if (!isset($_SESSION['role']) or $_SESSION['role']<>'admin'){
             $_SESSION['error']="L'accès réservé aux administrateurs";
@@ -77,21 +77,21 @@ class BackController
             return false;
         }
         else{
-            $this->view->render('admin_gestion', []);
+            $this->view->render('AdminGestion', []);
         }
     }
 
-    public function addComment($post)
-    {
-        if(isset($post['submit'])) {
-            $commentDAO = new CommentDAO();
-            $commentDAO->saveComment($post);
-            header('Location: ../public/index.php');
-        }
-        $this->view->render('form_comment', [
-            'post' => $post
-        ]);
-    }
+//    public function addComment($post)
+//    {
+//        if(isset($post['submit'])) {
+//            $commentDAO = new CommentDAO();
+//            $commentDAO->saveComment($post);
+//            header('Location: ../public/index.php');
+//        }
+//        $this->view->render('FormComment', [
+//            'post' => $post
+//        ]);
+//    }
 
     //4- modification commentaire
     public function updateComment()
@@ -119,18 +119,32 @@ class BackController
         if (isset($_POST['submit']) && $form->isValid()){
             //enregistrement en base
             $this->commentDAO->updateComment($_GET['idComment'],$_POST);
-            //affiche single article
-            $this->frontController->article($_GET['idArt']);
+            if (isset($_GET['appel']) && $_GET['appel']==="front")
+                {
+                    //affiche single article
+                    $this->frontController->article($_GET['idArt']);
+                }
+            if (isset($_GET['appel']) && $_GET['appel']==="back")
+            {
+                //affiche single article
+                $this->adminCommentaires();
+            }
             return;
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
-        $this->view->render('update_comment', ['formulaire' => $data]);
+        $this->view->render('AdminUpdateComment', ['formulaire' => $data]);
     }
     //6-Afficher liste article
-    public function admin_articles()
+    public function adminArticles()
     {
         $articles = $this->articleDAO->getArticles();
-        $this->view->render('admin_blogs',['articles'=> $articles]);
+        $this->view->render('AdminBlog',['articles'=> $articles]);
+    }
+    //6-Afficher liste commentaires
+    public function adminCommentaires()
+    {
+        $comments = $this->commentDAO->getCommentAll();
+        $this->view->render('AdminComment',['comments'=> $comments]);
     }
     public function updateArticle($idArt)
     {
@@ -153,15 +167,24 @@ class BackController
             {
                 $this->articleDAO->updateArticle($idArt,$_POST);
                 $_SESSION['error']='Modification effectuées sur l\'article '.$idArt ;
-                $this->admin_articles();
+                $this->adminArticles();
                 return;
             }
 
         $data = $form->createView();
-        $this->view->render('admin_updatearticle', [
+        $this->view->render('AdminUpdateArticle', [
             'article'=> $article,
             'formulaire' => $data
         ]);
+    }
+    public  function valideComment($get)
+    {
+        if (!$this->commentDAO->valideComment($get))
+        {
+            $_SESSION['error'] = 'Validation impossible';
+        }
+        $this->adminCommentaires();
+
     }
     public function deleteArticle($idArt)
     {
@@ -173,7 +196,7 @@ class BackController
         {
             $_SESSION['error'] = 'Suppression impossible';
         }
-        $this->admin_articles();
+        $this->adminArticles();
     }
 
 

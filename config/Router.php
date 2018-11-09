@@ -36,7 +36,7 @@ class Router
                     $this->frontController->login();
                 }
 //              Article précis
-                if($_GET['route'] === 'article'){
+                else if ($_GET['route'] === 'article'){
                     $this->frontController->article($_GET['idArt']);
                 }
 //              Créer Article
@@ -55,20 +55,27 @@ class Router
                 else if($_GET['route'] === 'deleteComment') {
                     $this->frontController->deleteComment($_GET);
                 }
+//              Valider commentaire
+                else if($_GET['route'] === 'valideComment') {
+                    $this->backController->valideComment($_GET);
+                }
                 else if($_GET['route'] === 'check') {
                     $this->frontController->check();
                 }
-                else if($_GET['route'] === 'admin_gestion') {
-                    $this->backController ->admin_gestion();
+                else if($_GET['route'] === 'adminGestion') {
+                    $this->backController ->adminGestion();
                 }
-                else if($_GET['route'] === 'new_user') {
+                else if($_GET['route'] === 'newUser') {
                     $this->userController ->addUser();
                 }
-                else if($_GET['route'] === 'check_user') {
+                else if($_GET['route'] === 'checkUser') {
                     $this->userController ->checkUser();
                 }
-                else if($_GET['route'] === 'admin_articles') {
-                    $this->backController ->admin_articles();
+                else if($_GET['route'] === 'adminArticles') {
+                    $this->backController ->adminArticles();
+                }
+                else if($_GET['route'] === 'adminCommentaires') {
+                    $this->backController ->adminCommentaires();
                 }
                 else if($_GET['route'] === 'updateArticle') {
                     $this->backController ->updateArticle($_GET['idArt']);
@@ -76,7 +83,6 @@ class Router
                 else if($_GET['route'] === 'deleteArticle') {
                     $this->backController ->deleteArticle($_GET['idArt']);
                 }
-
                 else{
                     $this->errorController->unknown();
                 }

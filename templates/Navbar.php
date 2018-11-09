@@ -23,7 +23,7 @@
                     <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php?route=admin_gestion">Admin</a>
+                    <a class="nav-link" href="index.php?route=adminGestion">Admin</a>
                 </li>
             </ul>
             <div class="badge badge-pill badge-info">

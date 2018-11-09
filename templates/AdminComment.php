@@ -5,7 +5,7 @@ if(!isset($_SESSION))
 }
 ?>
 <?php
-$this->title = "Accueil";
+$this->title = "Gestion commentaire";
 ?>
 <head>
     <link rel="stylesheet" href="../public/css/bootstrap.css">
@@ -30,10 +30,10 @@ $this->title = "Accueil";
     <div class="container">
         <div class="row">
             <div class="jumbotron-fluid">
-                <h1 id="test" >Gestion des articles</h1>
+                <h1 id="test" >Gestion des commentaires</h1>
                 <hr class="my-4">
                 <span class="subheading">Trier le listing en cliquant sur le titre des colonnes.</span><br/>
-                <span class="subheading">Vous pouvez modifier le contenu d'un article ou le supprimer.</span>
+                <span class="subheading">Vous pouvez valider un commentaire ou le supprimer.</span>
             </div>
         </div>
         <br/>
@@ -52,23 +52,28 @@ $this->title = "Accueil";
                 <thead>
                 <tr>
                     <th scope="col">Num</th>
-                    <th scope="col">Titre</th>
                     <th scope="col">Auteur</th>
+                    <th scope="col">Contenu</th>
                     <th scope="col">Date</th>
+                    <th scope="col">N° Article</th>
+                    <th scope="col">Valide</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
-                    foreach ($articles as $article)
+                    foreach ($comments as $comment)
                     {
                         ?>
                             <tr class="table-light">
-                                <td scope="row"><?= htmlspecialchars($article->getId());?></td>
-                                <td><?= htmlspecialchars($article->getTitle());?></td>
-                                <td><?= htmlspecialchars($article->getAuthor());?></td>
-                                <td><?= htmlspecialchars($article->getDateAdded());?></td>
-                                <td><a href="../public/index.php?route=updateArticle&idArt=<?= htmlspecialchars($article->getId());?>">Modifier</a></td>
-                                <td><a href="../public/index.php?route=deleteArticle&idArt=<?= htmlspecialchars($article->getId());?>">Supprimer</a> </td>
+                                <td scope="row"><?= htmlspecialchars($comment->getId());?></td>
+                                <td><?= htmlspecialchars($comment->getPseudo());?></td>
+                                <td><?= htmlspecialchars($comment->getContent());?></td>
+                                <td><?= htmlspecialchars($comment->getDateAdded());?></td>
+                                <td><?= htmlspecialchars($comment->getArticleId());?></td>
+                                <td><?= htmlspecialchars($comment->getValide());?></td>
+                                <td><a href="../public/index.php?route=valideComment&idComment=<?= htmlspecialchars($comment->getId());?>&valide=<?= htmlspecialchars($comment->getValide());?>">Valider(O/N)</a></td>
+                                <td><a href="../public/index.php?route=updateComment&idArt=<?= htmlspecialchars($comment->getArticleId());?>&idComment=<?= htmlspecialchars($comment->getId());?>&appel=back">Modifier</a></td>
+                                <td><a href="../public/index.php?route=deleteComment&idComment=<?= htmlspecialchars($comment->getId());?>">Supprimer</a> </td>
                             </tr>
                         <?php
                     }
@@ -78,7 +83,5 @@ $this->title = "Accueil";
 
         </div>
     </div>
-    <script src="../public/js/jquery.js"></script>
-    <script src="../public/js/myJs.js"></script>
 
 </body>

@@ -5,9 +5,10 @@
         </div>
     </div>
     <form method="post" action="../public/index.php?route=updateComment<?php
-     echo "&idArt=".$_GET['idArt']."&idComment=".$_GET['idComment'];?>">
+     echo "&idArt=".$_GET['idArt']."&idComment=".$_GET['idComment']."&appel=".$_GET['appel'];?>">
         <?php echo $formulaire;?>
         <input type="submit" value="Envoyer" id="submit" name="submit">
     </form>
     <a href="../public/index.php">Retour à l'accueil</a>
 </div>
+

@@ -34,4 +34,16 @@ $(function() {
     $('.close').click(function () {
         $('.alert').remove();
     })
+    $('.cpTremble').jrumble({
+        x: 2,
+        y: 2,
+        rotation: 1,
+        speed: 100
+    });
+    $('.cpTremble').hover(function(){
+        $(this).trigger('startRumble');
+    }, function(){
+        $(this).trigger('stopRumble');
+    });
+
 });

@@ -17,16 +17,16 @@
                     <a class="nav-link" href="../public/index.php">Site<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../public/index.php?route=admin_articles">Articles</a>
+                    <a class="nav-link" href="../public/index.php?route=adminArticles">Articles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../public/index.php?route=gestion_commentaire">Commentaires</a>
+                    <a class="nav-link" href="../public/index.php?route=adminCommentaires">Commentaires</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../public/index.php?route=gestion_membres">Membres</a>
+                    <a class="nav-link" href="../public/index.php?route=gestionMembres">Membres</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php?route=admin_gestion">Admin</a>
+                    <a class="nav-link" href="index.php?route=adminGestion">Admin</a>
                 </li>
             </ul>
             <div class="badge badge-pill badge-info">

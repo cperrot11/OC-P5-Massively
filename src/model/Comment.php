@@ -8,6 +8,40 @@ class Comment extends Entity
     private $pseudo;
     private $content;
     private $dateAdded;
+    private $articleId;
+
+    /**
+     * @return mixed
+     */
+    public function getArticleId()
+    {
+        return $this->articleId;
+    }
+
+    /**
+     * @param mixed $articleId
+     */
+    public function setArticleId($articleId)
+    {
+        $this->articleId = $articleId;
+    }
+    private $valide;
+
+    /**
+     * @return mixed
+     */
+    public function getValide()
+    {
+        return $this->valide;
+    }
+
+    /**
+     * @param mixed $valide
+     */
+    public function setValide($valide)
+    {
+        $this->valide = $valide;
+    }
 
     /**
      * @return mixed

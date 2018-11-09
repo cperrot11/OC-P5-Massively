@@ -22,7 +22,7 @@ class ErrorController
 
     public function error()
     {
-        require '../templates/error.php';
+        require '../templates/Error.php';
     }
 
 

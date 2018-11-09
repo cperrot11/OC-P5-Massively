@@ -24,7 +24,7 @@ $this->title = "Gestion";
         <br>
         <div class="row">
             <div class="card text-white bg-primary mb-3 mb-offset-1" style="max-width: 20rem;">
-                <a class="text-white" href="../public/index.php?route=admin_articles">
+                <a class="text-white" href="../public/index.php?route=adminArticles">
                     <div class="card-header text-center">Articles</div>
                     <div class="card-body">
                         <h4 class="card-title">Gestion des articles</h4>
@@ -33,11 +33,13 @@ $this->title = "Gestion";
                 </a>
             </div>
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                <div class="card-header  text-center">Commentaires</div>
-                <div class="card-body">
-                    <h4 class="card-title">Approbation des commentaires</h4>
-                    <p class="card-text">Cliquez içi pour valider les commentaires en attente.</p>
-                </div>
+                <a class="text-white" href="../public/index.php?route=adminCommentaires">
+                    <div class="card-header  text-center">Commentaires</div>
+                    <div class="card-body">
+                        <h4 class="card-title">Approbation des commentaires</h4>
+                        <p class="card-text">Cliquez içi pour valider les commentaires en attente.</p>
+                    </div>
+                </a>
             </div>
             <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
                 <div class="card-header  text-center">Membres</div>

@@ -29,7 +29,7 @@ $this->title = "Article";
                     </div>
                 </div>
                 <?php if(isset($_SESSION['role']) && $_SESSION['role']==="admin") { ?>
-                    <a href="../public/index.php?route=updateComment&idArt=<?= htmlspecialchars($article->getId());?>&idComment=<?= htmlspecialchars($comment->getId());?>">Modifier, </a>
+                    <a href="../public/index.php?route=updateComment&idArt=<?= htmlspecialchars($article->getId());?>&idComment=<?= htmlspecialchars($comment->getId());?>&appel=front">Modifier, </a>
                     <a href="../public/index.php?route=deleteComment&idArt=<?= htmlspecialchars($article->getId());?>&idComment=<?= htmlspecialchars($comment->getId());?>">Supprimer, </a>
                 <?php
                 }

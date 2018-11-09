@@ -8,8 +8,9 @@
         <?php echo $formulaire;?>
         <input type="reset" value="Annuler">
         <input type="submit" value="Céer" id="submit" name="submit">
+        <button name="submit" type="submit" value="Céer">Créer</button>
     </form>
-    <a href="../public/index.php?route=admin_gestion">Retour à l'administration du blog</a>
+    <a href="../public/index.php?route=adminGestion">Retour à l'administration du blog</a>
     <br/>
     <a href="../public/index.php">Retour à l'acceuil du blog</a>
 </div>

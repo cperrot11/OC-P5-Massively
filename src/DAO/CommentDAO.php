@@ -8,7 +8,7 @@ class CommentDAO extends DAO
 {
     public function getCommentsFromArticle($idArt)
     {
-        $sql = 'SELECT id, pseudo, content, date_added FROM comment WHERE article_id = ?';
+        $sql = 'SELECT id, pseudo, content, date_added FROM comment WHERE valide=1 and article_id = ?';
         $result = $this->sql($sql, [$idArt]);
         $comments = [];
         foreach ($result as $row) {
@@ -19,7 +19,7 @@ class CommentDAO extends DAO
     }
     public function getComment($idComment)
     {
-        $sql = 'SELECT id, pseudo, content, date_added FROM comment WHERE id = ?';
+        $sql = 'SELECT id, pseudo, content, date_added, valide, article_id FROM comment WHERE id = ?';
         $result = $this->sql($sql, [$idComment]);
         $row = $result->fetch();
         if($row) {
@@ -28,10 +28,21 @@ class CommentDAO extends DAO
             echo 'Aucun commentaire existant avec cet identifiant';
         }
     }
+    public function getCommentAll()
+    {
+        $sql = 'SELECT id, pseudo, content, date_added, valide, article_id FROM comment';
+        $result = $this->sql($sql);
+        $comment=[];
+        foreach ($result as $row) {
+            $commentId = $row['id'];
+            $comment[$commentId] = $this->buildObject($row);
+        }
+        return $comment;
+    }
     public function addComment($idArt,$comment)
     {
         extract($comment);
-        $sql = 'INSERT INTO comment (pseudo,content,article_id, date_added) VALUES (?, ?, ?, NOW())';
+        $sql = 'INSERT INTO comment (pseudo,content,article_id, date_added, valide) VALUES (?, ?, ?, NOW(),0)';
         $this->sql($sql, [$pseudo, $content, $idArt]);
     }
 
@@ -46,6 +57,17 @@ class CommentDAO extends DAO
         $sql = 'DELETE FROM comment WHERE id=?';
         $this->sql($sql,[intval($id)]);
     }
+    public function valideComment($get)
+    {
+        extract($get);
+        $valide = ($valide==="0")?1:0;  //valider-dévalider
+        $sql = 'UPDATE comment set valide=? WHERE id=?';
+        $result = $this->sql($sql,[intval($valide),intval($idComment)]);
+
+        if ($result->rowCount())
+        {return true;}
+        else {return false;}
+    }
 
     private function buildObject(array $row)
     {
@@ -54,6 +76,8 @@ class CommentDAO extends DAO
         $comment->setPseudo($row['pseudo']);
         $comment->setContent($row['content']);
         $comment->setDateAdded($row['date_added']);
+        if (isset($row['valide'])) {$comment->setValide($row['valide']);}
+        if (isset($row['article_id'])) {$comment->setArticleId($row['article_id']);}
         return $comment;
     }
 

@@ -68,7 +68,7 @@ class FrontController
             return;
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
-        $this->view->render('add_comment', ['formulaire' => $data]);
+        $this->view->render('AddComment', ['formulaire' => $data]);
     }
 
     //5- Supprimer commentaire
@@ -82,7 +82,7 @@ class FrontController
     public function articles()
     {
         $articles = $this->articleDAO->getArticles();
-        $this->view->render('blogs',['articles'=> $articles]);
+        $this->view->render('blog',['articles'=> $articles]);
     }
     //7-Afficher 1 article
     public function article($idArt)
@@ -90,7 +90,7 @@ class FrontController
         $article = $this->articleDAO->getArticle($idArt);
         $comments = $this->commentDAO->getCommentsFromArticle($idArt);
 
-        $this->view->render('single', [
+        $this->view->render('Single', [
             'article'=> $article,
             'comments' => $comments
         ]);
@@ -111,7 +111,7 @@ class FrontController
 
         $this->view = new View();
         $data = $form->createView(); // On passe le formulaire généré à la vue.
-        $this->view->render('connexion', ['formulaire' => $data]);
+        $this->view->render('Connexion', ['formulaire' => $data]);
         unset($_SESSION['error']);
 
         return false;
@@ -146,7 +146,7 @@ class FrontController
         {
             $_SESSION = array();
             session_destroy();
-            $url = "../public/index.php?route=new_user";
+            $url = "../public/index.php?route=newUser";
             header("location:".$url);
         }
 
