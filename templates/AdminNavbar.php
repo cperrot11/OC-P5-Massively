@@ -23,7 +23,7 @@
                     <a class="nav-link" href="../public/index.php?route=adminCommentaires">Commentaires</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../public/index.php?route=gestionMembres">Membres</a>
+                    <a class="nav-link" href="../public/index.php?route=adminUsers">Membres</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?route=adminGestion">Admin</a>

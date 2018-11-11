@@ -5,7 +5,7 @@ if(!isset($_SESSION))
 }
 ?>
 <?php
-$this->title = "Gestion commentaire";
+$this->title = "Gestion des membres";
 ?>
 <head>
     <link rel="stylesheet" href="../public/css/bootstrap.css">
@@ -30,10 +30,10 @@ $this->title = "Gestion commentaire";
     <div class="container">
         <div class="row">
             <div class="jumbotron-fluid">
-                <h1 id="test" >Gestion des commentaires</h1>
+                <h1 id="test" >Gestion des membres</h1>
                 <hr class="my-4">
                 <span class="subheading">Trier le listing en cliquant sur le titre des colonnes.</span><br/>
-                <span class="subheading">Vous pouvez valider/dévalider un commentaire, le modifier ou supprimer.</span>
+                <span class="subheading">Vous pouvez modifier ou supprimer un utilisateur.</span>
             </div>
         </div>
         <br/>
@@ -51,36 +51,30 @@ $this->title = "Gestion commentaire";
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">Num</th>
-                    <th scope="col">Auteur</th>
-                    <th scope="col">Contenu</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">N° Article</th>
-                    <th scope="col">Valide</th>
+                    <th scope="col">Login</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Adresse e-mail</th>
+                    <th scope="col">Admin</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
-                    foreach ($comments as $comment)
+                    foreach ($users as $user)
                     {
                         ?>
                             <tr class="table-light">
-                                <td scope="row"><?= htmlspecialchars($comment->getId());?></td>
-                                <td><?= htmlspecialchars($comment->getPseudo());?></td>
-                                <td><?= htmlspecialchars($comment->getContent());?></td>
-                                <td><?= htmlspecialchars($comment->getDateAdded());?></td>
-                                <td><?= htmlspecialchars($comment->getArticleId());?></td>
-                                <td><?= htmlspecialchars($comment->getValide());?></td>
-                                <td><a href="../public/index.php?route=valideComment&idComment=<?= htmlspecialchars($comment->getId());?>&valide=<?= htmlspecialchars($comment->getValide());?>">Valider(O/N)</a></td>
-                                <td><a href="../public/index.php?route=updateComment&idArt=<?= htmlspecialchars($comment->getArticleId());?>&idComment=<?= htmlspecialchars($comment->getId());?>&appel=back">Modifier</a></td>
-                                <td><a href="../public/index.php?route=deleteComment&idComment=<?= htmlspecialchars($comment->getId());?>&appel=back">Supprimer</a> </td>
+                                <td scope="row"><?= htmlspecialchars($user->getLogin());?></td>
+                                <td><?= htmlspecialchars($user->getName());?></td>
+                                <td><?= htmlspecialchars($user->getEmail());?></td>
+                                <td><?= htmlspecialchars($user->getAdmin());?></td>
+                                <td><a href="../public/index.php?route=updateUser&login=<?= htmlspecialchars($user->getLogin());?>&appel=back">Modifier</a></td>
+                                <td><a href="../public/index.php?route=deleteUser&login=<?= htmlspecialchars($user->getLogin());?>">Supprimer</a> </td>
                             </tr>
                         <?php
                     }
                     ?>
                 </tbody>
             </table>
-
         </div>
     </div>
 

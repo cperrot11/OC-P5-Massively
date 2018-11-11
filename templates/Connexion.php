@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="row">
-        <form method="post" action="../public/index.php?route=check">
+        <form method="post" action="../public/index.php?route=checkLogin">
                 <?php if (isset($_SESSION['error']))
                 {?>
                     <div class="alert alert-dismissible alert-success">
@@ -24,12 +24,12 @@
                 <?php echo $formulaire;?>
             <br/>
             <input class="btn btn-outline-success" type="submit" value="Connecter" id="submit" name="submit">
-            <input class="btn btn-outline-danger" type="submit" value="Déconnecter" id="logout" name="logout">
+            <button  class="btn btn-outline-danger" id="logout" name="logout"><a href="../public/index.php?route=logout">Déconnecter</a></button>
         </form>
     </div>
 
         <p class="subheading">Pour créer un nouveau compte cliquez ci dessous.</p>
-        <button class="btn btn-outline-warning"><a href="../public/index.php?route=newUser">Nouvel utilisateur</a></button>
+        <button class="btn btn-outline-warning"><a href="../public/index.php?route=addUser">Nouvel utilisateur</a></button>
     <div class="row">
         <a href="../public/index.php">Retour à l'accueil</a>
     </div>

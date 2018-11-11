@@ -6,9 +6,8 @@
     </div>
     <form method="post" action="../public/index.php?route=addArticle">
         <?php echo $formulaire;?>
-        <input type="reset" value="Annuler">
-        <input type="submit" value="Céer" id="submit" name="submit">
-        <button name="submit" type="submit" value="Céer">Créer</button>
+        <button class="btn btn-outline-success" name="submit" type="submit" value="Céer">Créer</button>
+        <input class="btn btn-outline-danger" type="reset" value="Annuler">
     </form>
     <a href="../public/index.php?route=adminGestion">Retour à l'administration du blog</a>
     <br/>

@@ -9,7 +9,7 @@
 namespace App\src\FORM;
 
 
-class NewUserForm extends FormBuilder
+class AddUserForm extends FormBuilder
 {
     public function build()
     {
@@ -39,6 +39,15 @@ class NewUserForm extends FormBuilder
                 'validators' => array(
                     new NotNullValidator('Merci de saisir un mot de passe'),
                     new MaxLengthValidator('mot de passe trop long 10 max', 20)
+                )
+            ]))
+            ->add(new StringField([
+                'label' => 'Adresse e-mail ',
+                'name' => 'email',
+                'maxLength' => 255,
+                'validators' => array(
+                    new NotNullValidator('Merci de saisir une adresse mail')
+//                    créér un email validator
                 )
             ]))
         ;

@@ -8,6 +8,7 @@ if(!isset($_SESSION))
 
 use App\src\DAO\ArticleDAO;
 use App\src\DAO\CommentDAO;
+use App\src\DAO\UserDAO;
 use App\src\FORM\ArticleForm;
 use App\src\FORM\CommentForm;
 use App\src\model\Article;
@@ -19,6 +20,7 @@ class BackController
 {
     private $articleDAO;
     private $commentDAO;
+    private $userDAO;
     private $view;
     private $frontController;
     private $route;
@@ -28,6 +30,7 @@ class BackController
     {
         $this->articleDAO = new ArticleDAO();
         $this->commentDAO = new CommentDAO();
+        $this->userDAO = new UserDAO();
         $this->view = new View();
         $this->frontController = new FrontController();
     }
@@ -81,19 +84,11 @@ class BackController
         }
     }
 
-//    public function addComment($post)
-//    {
-//        if(isset($post['submit'])) {
-//            $commentDAO = new CommentDAO();
-//            $commentDAO->saveComment($post);
-//            header('Location: ../public/index.php');
-//        }
-//        $this->view->render('FormComment', [
-//            'post' => $post
-//        ]);
-//    }
-
-    //4- modification commentaire
+    public function adminCommentaires()
+    {
+        $comments = $this->commentDAO->getCommentAll();
+        $this->view->render('AdminComment',['comments'=> $comments]);
+    }
     public function updateComment()
     {
         if (!isset($_SESSION['role']) or $_SESSION['role']<>'admin'){
@@ -119,11 +114,12 @@ class BackController
         if (isset($_POST['submit']) && $form->isValid()){
             //enregistrement en base
             $this->commentDAO->updateComment($_GET['idComment'],$_POST);
+            $_SESSION['error']="Commentaire mis à jour !";
             if (isset($_GET['appel']) && $_GET['appel']==="front")
-                {
-                    //affiche single article
-                    $this->frontController->article($_GET['idArt']);
-                }
+            {
+                //affiche single article
+                $this->frontController->article($_GET['idArt']);
+            }
             if (isset($_GET['appel']) && $_GET['appel']==="back")
             {
                 //affiche single article
@@ -134,18 +130,35 @@ class BackController
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('AdminUpdateComment', ['formulaire' => $data]);
     }
-    //6-Afficher liste article
+    public  function valideComment($get)
+    {
+        if (!$this->commentDAO->valideComment($get))
+        {
+            $_SESSION['error'] = 'Validation impossible';
+        }
+        $this->adminCommentaires();
+
+    }
+    public function deleteComment($get)
+    {
+        extract($get);
+        $this->commentDAO->deleteComment($get['idComment']);
+        if (isset($_GET['appel']) && $_GET['appel']==="front")
+        {
+            $this->frontController->article($get['idArt']);
+        }
+        if (isset($_GET['appel']) && $_GET['appel']==="back")
+        {
+            $this->adminCommentaires();
+        }
+    }
+
     public function adminArticles()
     {
         $articles = $this->articleDAO->getArticles();
         $this->view->render('AdminBlog',['articles'=> $articles]);
     }
-    //6-Afficher liste commentaires
-    public function adminCommentaires()
-    {
-        $comments = $this->commentDAO->getCommentAll();
-        $this->view->render('AdminComment',['comments'=> $comments]);
-    }
+
     public function updateArticle($idArt)
     {
         $article = new Article();
@@ -177,15 +190,7 @@ class BackController
             'formulaire' => $data
         ]);
     }
-    public  function valideComment($get)
-    {
-        if (!$this->commentDAO->valideComment($get))
-        {
-            $_SESSION['error'] = 'Validation impossible';
-        }
-        $this->adminCommentaires();
 
-    }
     public function deleteArticle($idArt)
     {
         if ($this->articleDAO->deleteArticle($idArt))
@@ -198,6 +203,9 @@ class BackController
         }
         $this->adminArticles();
     }
+
+
+
 
 
 }

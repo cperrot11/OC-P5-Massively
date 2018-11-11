@@ -14,7 +14,7 @@ class UserDAO extends DAO
 {
     public function getUsers()
     {
-        $sql = 'SELECT login,pass,name,admin FROM user ORDER BY name asc ';
+        $sql = 'SELECT * FROM user ORDER BY name asc ';
         $result = $this->sql($sql);
         $users = [];
         foreach ($result as $row) {
@@ -25,7 +25,7 @@ class UserDAO extends DAO
     }
     public function CheckUser($login, $pass)
     {
-        $sql = 'SELECT login, pass, name, admin FROM user WHERE login = ?';
+        $sql = 'SELECT * FROM user WHERE login = ?';
         $result = $this->sql($sql, [$login]);
         $row = $result->fetch();
         if (password_verify($pass, $row['pass'])) {
@@ -35,7 +35,7 @@ class UserDAO extends DAO
     }
     public function getUser($login)
     {
-        $sql = 'SELECT login, pass, name, admin FROM user WHERE login = ?';
+        $sql = 'SELECT * FROM user WHERE login = ?';
         $result = $this->sql($sql, [$login]);
         $row = $result->fetch();
         if($row)
@@ -50,19 +50,47 @@ class UserDAO extends DAO
     public function saveUser($user)
     {
         extract($user);
-        $sql = 'INSERT INTO user (login, name, pass, admin) VALUES (?, ?, ?, ?)';
+        //vériif si utilisateur existant
+        if ($this->CheckUser($login,$pass)<>false)
+        {
+            $_SESSION['error'] = "L'utilisateur existe déjà";
+            return false;
+        }
+        $sql = 'INSERT INTO user (login, name, pass, email, admin) VALUES (?, ?, ?, ?, ?)';
         $pass_hache = password_hash($_POST['pass'], PASSWORD_DEFAULT);
-        $this->sql($sql, [$login,$name,$pass_hache,$admin]);
+        $result=$this->sql($sql, [$login,$name,$pass_hache,$email,$admin]);
+        if ($result)
+            {return true;}
+        else
+            {return false;}
     }
-
+    public function updateUser($user)
+    {
+        extract($user);
+        $sql = 'UPDATE user set name=?,email=?,pass=?,admin=? WHERE login= ?';
+        if ($this->CheckUser($login,$pass))
+            {
+                $pass_hache = $pass;
+            }
+        else
+            {
+                $pass_hache = password_hash($pass, PASSWORD_DEFAULT);
+            }
+        $this->sql($sql, [$name,$email,$pass_hache,intval($admin),$login]);
+    }
+    public function deleteUser($login)
+    {
+        $sql = 'DELETE FROM user WHERE login=?';
+        $this->sql($sql,[$login]);
+    }
     private function buildObject(array $row)
     {
         $user = new User();
         $user->setLogin($row['login']);
         $user->setName($row['name']);
         $user->setPass($row['pass']);
+        $user->setEmail($row['email']);
         $user->setAdmin($row['admin']);
-
         return $user;
     }
 

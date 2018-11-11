@@ -14,7 +14,26 @@ class User extends Entity
     private $login;
     private $pass;
     private $name;
+    private $email;
     private $admin;
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+
     //Trouver une meilleure solution !
     private $route;
 
@@ -33,40 +52,6 @@ class User extends Entity
     {
         $this->route = $route;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getIdArt()
-    {
-        return $this->idArt;
-    }
-
-    /**
-     * @param mixed $idArt
-     */
-    public function setIdArt($idArt): void
-    {
-        $this->idArt = $idArt;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIdComment()
-    {
-        return $this->idComment;
-    }
-
-    /**
-     * @param mixed $idComment
-     */
-    public function setIdComment($idComment): void
-    {
-        $this->idComment = $idComment;
-    }
-    private $idArt;
-    private $idComment;
 
     /**
      * @return mixed
@@ -129,7 +114,7 @@ class User extends Entity
      */
     public function setAdmin($admin): void
     {
-        $this->admin = $admin;
+        $this->admin = intval($admin);
     }
 
 

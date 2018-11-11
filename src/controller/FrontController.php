@@ -64,6 +64,7 @@ class FrontController
             //enregistrement en base
             {$this->commentDAO->addComment($_GET['idArt'],$_POST);}
             //affiche single article
+            $_SESSION['error']='Commentaire ajouté et en attente de validation';
             $this->article($_GET['idArt']);
             return;
         }
@@ -116,39 +117,24 @@ class FrontController
 
         return false;
     }
-
-    public function check()
+    public function checkLogin()
     {
         if (isset($_POST['submit']))
         {
             $test = $this->userDAO->CheckUser($_POST['login'],$_POST['pass']);
             if ($test<>false)
-                {
-                    $_SESSION['login']= $test->getLogin();
-                    $_SESSION['role'] = ($test->getAdmin())? "admin":"membre";
-                    $url = "../public/index.php";
-                }
+            {
+                $_SESSION['login']= $test->getLogin();
+                $_SESSION['role'] = ($test->getAdmin())? "admin":"membre";
+                $url = "../public/index.php";
+            }
             else
-                {
-                    $_SESSION['error']="pseudo ou mot de passe incorrect";
-                    $url = "../public/index.php?route=login";
-                }
+            {
+                $_SESSION['error']="pseudo ou mot de passe incorrect";
+                $url = "../public/index.php?route=login";
+            }
             header("location:".$url);
         }
-        if (isset($_POST['logout']))
-        {
-            //$_SESSION = array();
-            session_destroy();
-            $url = "../public/index.php";
-            header("location:".$url);
-        }
-        if (isset($_POST['new']))
-        {
-            $_SESSION = array();
-            session_destroy();
-            $url = "../public/index.php?route=newUser";
-            header("location:".$url);
-        }
-
     }
+
 }

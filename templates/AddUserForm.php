@@ -31,7 +31,7 @@
                     </label>
                 </div>
             </fieldset>
-            <button type="submit" class="btn btn-primary">Envoyer</button>
+            <button class="btn btn-outline-success" type="submit">Envoyer</button>
         </fieldset>
     </form>
 </body>

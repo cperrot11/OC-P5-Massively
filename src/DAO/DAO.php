@@ -49,8 +49,16 @@ abstract class DAO
         if($parameters)
         {
             $result = $this->getConnection()->prepare($sql);
-            $result->execute($parameters);
-            return $result;
+            try
+            {
+                $result->execute($parameters);
+                return $result;
+            }
+            catch (\PDOException $e)
+            {
+                $_SESSION['error'] = $e->getMessage();
+                return false;
+            }
         }
         else{
             $result= $this->getConnection()->query($sql);

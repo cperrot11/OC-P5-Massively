@@ -37,7 +37,7 @@ class StringField extends Field
         $widget.= 'readonly';
     }
 
-    return $widget .= ' />';
+      return $widget .= ' />';
   }
   
   public function setMaxLength($maxLength)

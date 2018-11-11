@@ -9,7 +9,8 @@
 namespace App\src\controller;
 
 use App\src\view\View;
-use App\src\FORM\NewUserForm;
+use App\src\FORM\AddUserForm;
+use App\src\FORM\UpdateUserForm;
 use App\src\model\User;
 use App\src\DAO\UserDAO;
 use App\src\FORM\ConnexionForm;
@@ -24,34 +25,114 @@ class UserController
     {
         $this->user = new User();
         $this->userDAO = new UserDAO();
+        $this->view =new View();
     }
 
     public function addUser()
     {
-        $formBuilder = new NewUserForm($this->user);
+        $this->user = new User();
+        // si retour de formulaire transfert vers $user
+        if (isset($_POST['submit']))
+            {
+                //todo : rajouter une boucle pour tester et alimenter la présence des champs du post
+                $this->user->setLogin($_POST['login']);
+                $this->user->setName($_POST['name']);
+                $this->user->setPass($_POST['pass']);
+                $this->user->setEmail($_POST['email']);
+            }
+        $formBuilder = new AddUserForm($this->user);
+        $formBuilder->build();
+        $form = $formBuilder->form();
+        if (isset($_POST['submit']) && $form->isValid()){
+            //enregistrement en base
+            $_POST['admin']=0;
+            if($this->userDAO->saveUser($_POST))
+                {
+                    $_SESSION['login']= $_POST['login'];
+                    $_SESSION['role'] = "membre";
+                    $_SESSION['error']="L'utilisateur '".$this->user->getName()."' a été créé en tant que membre !\n Pour devenir administrateur, voir avec un administrateur en place";
+                }
+            else
+                {
+                    $url = "../public/index.php?route=addUser";
+                    header("location:".$url);
+                    return;
+                };
+            if (isset($_GET['appel']) && $_GET['appel']==="back")
+            {
+                $this->adminUsers();
+            }
+            else
+            {
+                $url = "../public/index.php";
+                header("location:".$url);
+            }
+            return;
+        }
+        $this->view = new View();
+        $data = $form->createView(); // On passe le formulaire généré à la vue.
+        $this->view->render('addUser', ['formulaire' => $data]);
+    }
+    public function updateUser()
+    {
+        if (!isset($_SESSION['role'])){
+            $this->frontController->login($_GET);
+            $_SESSION['error']='modification impossible pas de connexion en cours';
+            return false;
+        }
+        $user = new User();
+        // si retour de formulaire transfert vers $user
+        if (isset($_POST['submit'])) {
+            //todo : rajouter une boucle pour tester et alimenter la présence des champs du post
+            $user->setLogin($_POST['login']);
+            $user->setName($_POST['name']);
+            $user->setPass($_POST['pass']);
+            $user->setEmail($_POST['email']);
+            $user->setAdmin($_POST['admin']);
+        }
+        else{
+            //récupère l'user a modifier.
+            $user = $this->userDAO->getUser($_GET['login']);
+        }
+        $formBuilder = new UpdateUserForm($user);
         $formBuilder->build();
         $form = $formBuilder->form();
 
-        $this->view = new View();
+        if (isset($_POST['submit']) && $form->isValid()){
+            //enregistrement en base
+            $this->userDAO->updateUser($_POST);
+            $_SESSION['error']='Données utilisateur "'.$user->getName().'" mises à jour !';
+            if (isset($_GET['appel']) && $_GET['appel']==="front")
+            {
+                //affiche single article
+                $this->frontController->article($_GET['idArt']);
+            }
+            if (isset($_GET['appel']) && $_GET['appel']==="back")
+            {
+                $this->adminUsers();
+            }
+            return;
+        }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
-        $this->view->render('newUser', ['formulaire' => $data]);
+        $this->view->render('AdminUpdateUser', ['formulaire' => $data]);
+    }
+    public function deleteUser($get)
+    {
+        extract($get);
+        $this->userDAO->deleteUser($get['login']);
+        $this->adminUsers();
     }
 
-    public function checkUser()
+    public function adminUsers()
     {
-        if ($this->userDAO->getUser($_POST['login'])<>false)
-        {
-            $_SESSION['error']= 'Adresse e-mail déjà utilisée';
-            $url = "../public/index.php?route=login";
-        }
-        else{
-            $_POST['name']='jef';
-            $_POST['admin']=1;
-            $this->userDAO->saveUser($_POST);
-            $url = "../public/index.php";
-        }
+        $users = $this->userDAO->getUsers();
+        $this->view->render('AdminUsers',['users'=>$users]);
+    }
+    public function logout()
+    {
+        session_destroy();
+        $url = "../public/index.php";
         header("location:".$url);
     }
-
 
 }

@@ -7,7 +7,7 @@
     <form method="post" action="../public/index.php?route=addComment<?php
      echo "&idArt=".$_GET['idArt'];?>">
         <?= $formulaire;?>
-        <input type="submit" value="Envoyer" id="submit" name="submit">
+        <input class="btn btn-outline-success" type="submit" value="Envoyer" id="submit" name="submit">
     </form>
     <a href="../public/index.php">Retour à l'accueil</a>
 </div>

@@ -5,7 +5,7 @@ namespace App\config;
 use App\src\controller\BackController;
 use App\src\controller\ErrorController;
 use App\src\controller\FrontController;
-use App\src\controller\ConnexionController;
+//use App\src\controller\ConnexionController;
 use App\src\controller\UserController;
 
 class Router
@@ -14,7 +14,7 @@ class Router
     private $backController;
     private $userController;
     private $errorController;
-    private $connexionController;
+//    private $connexionController;
     private $get;
 
     public function __construct()
@@ -22,7 +22,7 @@ class Router
         $this->backController = new BackController();
         $this->frontController = new FrontController();
         $this->errorController = new ErrorController();
-        $this->connexionController = new ConnexionController();
+//        $this->connexionController = new ConnexionController();
         $this->userController = new UserController();
     }
 
@@ -35,7 +35,13 @@ class Router
                 if($_GET['route'] === 'login'){
                     $this->frontController->login();
                 }
-//              Article précis
+                if($_GET['route'] === 'logout'){
+                    $this->userController->logout();
+                }
+
+//Région Article
+
+                //              Article précis
                 else if ($_GET['route'] === 'article'){
                     $this->frontController->article($_GET['idArt']);
                 }
@@ -43,7 +49,17 @@ class Router
                 else if($_GET['route'] === 'addArticle') {
                     $this->backController->addArticle($_POST);
                 }
-//              3-Créer commentaire
+                else if($_GET['route'] === 'adminArticles') {
+                    $this->backController ->adminArticles();
+                }
+                else if($_GET['route'] === 'updateArticle') {
+                    $this->backController ->updateArticle($_GET['idArt']);
+                }
+                else if($_GET['route'] === 'deleteArticle') {
+                    $this->backController ->deleteArticle($_GET['idArt']);
+                }
+//Région Commentaire
+                //              3-Créer commentaire
                 else if($_GET['route'] === 'addComment') {
                     $this->frontController->addComment($_GET);
                 }
@@ -53,35 +69,37 @@ class Router
                  }
 //              Supprimer commentaire
                 else if($_GET['route'] === 'deleteComment') {
-                    $this->frontController->deleteComment($_GET);
+                    $this->backController->deleteComment($_GET);
                 }
 //              Valider commentaire
                 else if($_GET['route'] === 'valideComment') {
                     $this->backController->valideComment($_GET);
                 }
-                else if($_GET['route'] === 'check') {
-                    $this->frontController->check();
+                else if($_GET['route'] === 'adminCommentaires') {
+                    $this->backController ->adminCommentaires();
+                }
+
+                else if($_GET['route'] === 'checkLogin') {
+                    $this->frontController->checkLogin();
                 }
                 else if($_GET['route'] === 'adminGestion') {
                     $this->backController ->adminGestion();
                 }
-                else if($_GET['route'] === 'newUser') {
+//Région User
+                else if($_GET['route'] === 'adminUsers') {
+                    $this->userController->adminUsers();
+                }
+                else if($_GET['route'] === 'addUser') {
                     $this->userController ->addUser();
                 }
                 else if($_GET['route'] === 'checkUser') {
                     $this->userController ->checkUser();
                 }
-                else if($_GET['route'] === 'adminArticles') {
-                    $this->backController ->adminArticles();
+                else if($_GET['route'] === 'updateUser') {
+                    $this->userController->updateUser();
                 }
-                else if($_GET['route'] === 'adminCommentaires') {
-                    $this->backController ->adminCommentaires();
-                }
-                else if($_GET['route'] === 'updateArticle') {
-                    $this->backController ->updateArticle($_GET['idArt']);
-                }
-                else if($_GET['route'] === 'deleteArticle') {
-                    $this->backController ->deleteArticle($_GET['idArt']);
+                else if($_GET['route'] === 'deleteUser') {
+                    $this->userController->deleteUser($_GET);
                 }
                 else{
                     $this->errorController->unknown();

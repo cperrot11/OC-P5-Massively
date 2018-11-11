@@ -12,7 +12,20 @@ $this->title = "Article";
         <h3>Créé le : <?= htmlspecialchars($article->getDateAdded());?></h3>
     </div>
     <span class="subheading">Auteur : <?= htmlspecialchars($article->getAuthor());?></span>
+    <div class="row">
+        <?php
+        if(isset($_SESSION['error'])) {?>
+            <div class="alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong><?php echo '<p>'.$_SESSION['error'].'</p>';?> </strong>
+            </div>
+            <?php
+            unset($_SESSION['error']);
+        }
+        ?>
+    </div>
 </div>
+
 <div class="container">
     <div class="row">
         <div id="comments" class="text-left" style="margin-left: 50px">
@@ -30,7 +43,7 @@ $this->title = "Article";
                 </div>
                 <?php if(isset($_SESSION['role']) && $_SESSION['role']==="admin") { ?>
                     <a href="../public/index.php?route=updateComment&idArt=<?= htmlspecialchars($article->getId());?>&idComment=<?= htmlspecialchars($comment->getId());?>&appel=front">Modifier, </a>
-                    <a href="../public/index.php?route=deleteComment&idArt=<?= htmlspecialchars($article->getId());?>&idComment=<?= htmlspecialchars($comment->getId());?>">Supprimer, </a>
+                    <a href="../public/index.php?route=deleteComment&idArt=<?= htmlspecialchars($article->getId());?>&idComment=<?= htmlspecialchars($comment->getId());?>&appel=front">Supprimer, </a>
                 <?php
                 }
             }

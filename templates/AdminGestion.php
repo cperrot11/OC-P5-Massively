@@ -36,17 +36,19 @@ $this->title = "Gestion";
                 <a class="text-white" href="../public/index.php?route=adminCommentaires">
                     <div class="card-header  text-center">Commentaires</div>
                     <div class="card-body">
-                        <h4 class="card-title">Approbation des commentaires</h4>
+                        <h4 class="card-title">Approbation et gestion des commentaires</h4>
                         <p class="card-text">Cliquez içi pour valider les commentaires en attente.</p>
                     </div>
                 </a>
             </div>
             <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                <div class="card-header  text-center">Membres</div>
-                <div class="card-body">
-                    <h4 class="card-title">Gestions de membres</h4>
-                    <p class="card-text">Cliquez içi pour ajouter, modifier ou supprimer des membres..</p>
-                </div>
+                <a class="text-white" href="../public/index.php?route=adminUsers">
+                    <div class="card-header  text-center">Membres</div>
+                    <div class="card-body">
+                        <h4 class="card-title">Gestions de membres</h4>
+                        <p class="card-text">Cliquez içi pour ajouter, modifier ou supprimer des membres..</p>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
