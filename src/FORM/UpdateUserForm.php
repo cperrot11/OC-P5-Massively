@@ -50,7 +50,7 @@ class UpdateUserForm extends FormBuilder
 //                    créér un email validator
                 )
             ]))
-            ->add(new StringField([
+            ->add(new CheckboxField([
                 'label' => 'Administrateur ',
                 'name' => 'admin'
             ]));

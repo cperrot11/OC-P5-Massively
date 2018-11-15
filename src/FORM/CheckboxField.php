@@ -1,11 +1,9 @@
 <?php
 namespace App\src\FORM;
 
-class RadioField extends Field
+class CheckboxField extends Field
 {
-  protected $checked;
-
-  public function buildWidget()
+    public function buildWidget()
   {
     $widget = '';
 
@@ -16,18 +14,14 @@ class RadioField extends Field
         $widget .= '<input class="form-control is-invalid" type="text" name="'.$this->name.'"';
     }
     else{
-        $widget .= '<label>'.$this->label.'</label><input type="radio" name="'.$this->name.'"';
+        $widget .= '<label>'.$this->label.'</label><input type="checkbox" name="'.$this->name.'"';
     }
 
     
-    if (!empty($this->value))
+    if ($this->value=='Oui')
     {
       $widget .= ' value="'.htmlspecialchars($this->value).'"';
-    }
-    
-    if (!empty($this->checked))
-    {
-      $widget .= ' checked="'.$this->checked.'"';
+      $widget .= ' checked';
     }
 
     return $widget .= ' />';

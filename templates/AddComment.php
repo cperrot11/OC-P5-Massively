@@ -1,13 +1,13 @@
-<div class="container">
-    <div class="row">
-        <div class="jumbotron-fluid">
-            <h1 class="display-3">Ajouter commentaire</h1>
-        </div>
+<div class="container" xmlns="http://www.w3.org/1999/html">
+    <hr>
+    <div>
+        <h1 class="display-5">Ajouter votre commentaire</h1>
+        <p class="subheading">Attention : Les commentaires saisies doivent être validé avant publication.</p>
     </div>
     <form method="post" action="../public/index.php?route=addComment<?php
      echo "&idArt=".$_GET['idArt'];?>">
         <?= $formulaire;?>
         <input class="btn btn-outline-success" type="submit" value="Envoyer" id="submit" name="submit">
+        <input class="btn btn-outline-danger" type="reset" value="Annuler" id="reset" name="reset">
     </form>
-    <a href="../public/index.php">Retour à l'accueil</a>
 </div>

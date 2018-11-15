@@ -6,6 +6,10 @@
             <hr class="my-4">
         </div>
     </div>
+    <div>
+        <a class="btn btn-warning btn-sm" href="../public/index.php">Retour à l'accueil</a>
+    </div>
+    <hr class="my-4">
     <form method="post" action="../public/index.php?route=addUser">
         <div class="text-danger">
             <?= isset($_SESSION['error'])? $_SESSION['error']:"" ?>
@@ -14,5 +18,4 @@
         <input class="btn btn-outline-success" type="submit" value="Valider" id="submit" name="submit">
         <input class="btn btn-outline-danger" type="submit" value="Annuler" id="logout" name="logout">
     </form>
-    <a href="../public/index.php">Retour à l'accueil</a>
 </div>

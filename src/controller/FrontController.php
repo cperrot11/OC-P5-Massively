@@ -44,8 +44,8 @@ class FrontController
     {
         if (!isset($_SESSION['role']))
         {
-            $_SESSION['error']='Ajout de commentaire est réservé aux membres';
-            $this->login();
+            echo "<p>L'ajout de commentaire est réservé aux membres</p>";
+            echo "<a class='btn btn-warning btn-sm' href='../public/index.php?route=login'>Connexion</a>";
             return false;
         }
         $comment = new Comment();

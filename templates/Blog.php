@@ -33,9 +33,9 @@ $this->title = "Accueil";
     </div>
 </div>
 <div class="container">
-    <div class="row">
+    <div>
         <br/>
-        <a class="btn btn-primary btn-lg" href="../public/index.php?route=addArticle">Ajouter un article</a>
+        <a class="btn btn-warning btn-sm" href="../public/index.php?route=addArticle">Ajouter un article</a>
     </div>
     <hr class="my-4">
     <div class="row">

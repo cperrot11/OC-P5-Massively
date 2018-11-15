@@ -10,7 +10,6 @@ $this->title = "Gestion";
 <head>
     <link rel="stylesheet" href="../public/css/bootstrap.css">
     <link rel="stylesheet" href="../public/css/mystyle.css">
-    <!--todo:personnaliser une classe pour le "a"-->
 </head>
 <body>
     <div class="container">
@@ -21,6 +20,8 @@ $this->title = "Gestion";
                 <span class="subheading">Accéder à la gestion des articles, des commentaires et des membres</span>
             </div>
         </div>
+
+
         <br>
         <div class="row">
             <div class="card text-white bg-primary mb-3 mb-offset-1" style="max-width: 20rem;">

@@ -50,7 +50,7 @@ class UserController
                 {
                     $_SESSION['login']= $_POST['login'];
                     $_SESSION['role'] = "membre";
-                    $_SESSION['error']="L'utilisateur '".$this->user->getName()."' a été créé en tant que membre !\n Pour devenir administrateur, voir avec un administrateur en place";
+                    $_SESSION['error']="<p>L'utilisateur '".$this->user->getName()."' a été créé en tant que membre !</p><p>Pour devenir administrateur, voir avec un administrateur en place</p>";
                 }
             else
                 {
@@ -88,7 +88,7 @@ class UserController
             $user->setName($_POST['name']);
             $user->setPass($_POST['pass']);
             $user->setEmail($_POST['email']);
-            $user->setAdmin($_POST['admin']);
+            $_POST['admin']=($_POST['admin']=="on")?1:0;
         }
         else{
             //récupère l'user a modifier.

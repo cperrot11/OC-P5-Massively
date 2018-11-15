@@ -9,6 +9,11 @@
             else { ?>
                 <span class="subheading">Saisir votre identifiant et votre mot de passe</span>
             <?php } ?>
+            <div>
+                <br/>
+                <a class="btn btn-warning btn-sm" href="../public/index.php?route=addUser">Nouvel utilisateur</a>
+                <a class="btn btn-warning btn-sm" href="../public/index.php">Retour à l'accueil</a>
+            </div>
             <hr class="my-4">
         </div>
     </div>
@@ -29,9 +34,9 @@
     </div>
 
         <p class="subheading">Pour créer un nouveau compte cliquez ci dessous.</p>
-        <button class="btn btn-outline-warning"><a href="../public/index.php?route=addUser">Nouvel utilisateur</a></button>
+
     <div class="row">
-        <a href="../public/index.php">Retour à l'accueil</a>
+
     </div>
 </div>
 

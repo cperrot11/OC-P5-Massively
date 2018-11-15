@@ -106,7 +106,7 @@ class User extends Entity
      */
     public function getAdmin()
     {
-        return $this->admin;
+        return ($this->admin)==1?'Oui':'Non';
     }
 
     /**
@@ -114,7 +114,14 @@ class User extends Entity
      */
     public function setAdmin($admin): void
     {
-        $this->admin = intval($admin);
+        if ($admin=="on"||$admin==1)
+        {
+            $this->admin=1;
+        }
+        else
+        {
+            $this->admin=0;
+        }
     }
 
 

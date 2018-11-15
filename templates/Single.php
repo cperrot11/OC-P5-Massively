@@ -25,11 +25,17 @@ $this->title = "Article";
         ?>
     </div>
 </div>
-
 <div class="container">
+    <div>
+        <br/>
+        <a class="btn btn-warning btn-sm" href="../public/index.php">Retour à la liste des articles</a>
+    </div>
+    <hr class="my-4">
+
     <div class="row">
         <div id="comments" class="text-left" style="margin-left: 50px">
-            <h3>Commentaires</h3>
+            <h3><?= (count($comments)>0)?count($comments)." Commentaires":"Pas de commentaire pour l'instant, soignez le premier."; ?></h3>
+
             <?php
             foreach ($comments as $comment)
             {
@@ -48,10 +54,9 @@ $this->title = "Article";
                 }
             }
             ?>
-            <a href="../public/index.php?route=addComment&idArt=<?= htmlspecialchars($article->getId());?>">Ajouter un commentaire</a>
         </div>
+        <?php  ?>
     </div>
 </div>
 
-<a href="../public/index.php">Retour à la liste des articles</a>
 

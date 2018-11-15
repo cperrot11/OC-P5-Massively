@@ -26,17 +26,22 @@ $this->title = "Accueil";
         }
         .asc:after {content: "\25B2"; }
         .desc:after {content: "\25BC"; }
+        .table th{border-top: none;}
     </style>
     <div class="container">
         <div class="row">
             <div class="jumbotron-fluid">
                 <h1 id="test" >Gestion des articles</h1>
-                <hr class="my-4">
                 <span class="subheading">Trier le listing en cliquant sur le titre des colonnes.</span><br/>
                 <span class="subheading">Vous pouvez modifier le contenu d'un article ou le supprimer.</span>
             </div>
         </div>
-        <br/>
+        <div>
+            <br/>
+            <a class="btn btn-warning btn-sm" href="../public/index.php?route=addArticle">Ajouter un article</a>
+            <a class="btn btn-warning btn-sm" href="../public/index.php?route=adminGestion">Retour à l'administration du blog</a>
+        </div>
+        <hr class="my-4">
         <div class="row">
             <?php
             if(isset($_SESSION['error'])) {?>
