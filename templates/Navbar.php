@@ -20,7 +20,7 @@
                     <a class="nav-link" href="index.php">Blog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="index.php?route=contact">Contact</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?route=adminGestion">Admin</a>

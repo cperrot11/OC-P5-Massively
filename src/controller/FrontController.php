@@ -10,11 +10,14 @@ if(!isset($_SESSION))
 use App\src\DAO\ArticleDAO;
 use App\src\DAO\CommentDAO;
 use App\src\DAO\UserDAO;
+use App\src\controller\ContactController;
 use App\src\FORM\CommentForm;
 use App\src\FORM\ConnexionForm;
+use App\src\FORM\ContactForm;
 use App\src\FORM\MaxLengthValidator;
 use App\src\FORM\NotNullValidator;
 use App\src\model\Comment;
+use App\src\model\Message;
 use App\src\view\View;
 use App\src\model\user;
 use Zend\Validator\StringLength;
@@ -29,6 +32,7 @@ class FrontController
     private $user;
     private $userDAO;
     private $view;
+    private $contact;
 
     public function __construct()
     {
@@ -70,6 +74,28 @@ class FrontController
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('AddComment', ['formulaire' => $data]);
+    }
+
+    public function contact()
+    {
+        $message = new Message();
+        $contact = new ContactController();
+        if (isset($_POST['submit'])) {
+            $message->setNom($_POST['nom']);
+            $message->getMail($_POST['mail']);
+            $message->setContent($_POST['content']);
+        }
+        $formBuilder = new ContactForm($message);
+        $formBuilder->build();
+        $form = $formBuilder->form();
+
+        if (isset($_POST['submit']) && $form->isValid())
+        {
+            $contact->envoi($_POST);
+            return;
+        }
+        $data = $form->createView(); // On passe le formulaire généré à la vue.
+        $this->view->render('contact', ['formulaire' => $data]);
     }
 
     //5- Supprimer commentaire

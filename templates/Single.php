@@ -34,7 +34,11 @@ $this->title = "Article";
 
     <div class="row">
         <div id="comments" class="text-left" style="margin-left: 50px">
-            <h3><?= (count($comments)>0)?count($comments)." Commentaires":"Pas de commentaire pour l'instant, soignez le premier."; ?></h3>
+            <h3><?php if (count($comments)>0)
+            {
+              echo count($comments)." Commentaires";
+            }
+            else {echo "Pas de commentaire pour l'instant, soignez le premier.";} ?></h3>
 
             <?php
             foreach ($comments as $comment)

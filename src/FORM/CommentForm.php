@@ -17,6 +17,7 @@ class CommentForm extends FormBuilder
             'label' => 'Pseudo',
             'name' => 'pseudo',
             'maxLength' => 50,
+            'readonly' => true,
             'validators' => array(
                 new NotNullValidator('Merci de spécifier l\'auteur'),
                 new MaxLengthValidator('L\'auteur spécifié est trop long 10 max', 10)

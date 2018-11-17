@@ -2,7 +2,7 @@
     <hr>
     <div>
         <h1 class="display-5">Ajouter votre commentaire</h1>
-        <p class="subheading">Attention : Les commentaires saisies doivent être validé avant publication.</p>
+        <p class="subheading">Attention : Les commentaires saisies doivent être validés avant publication.</p>
     </div>
     <form method="post" action="../public/index.php?route=addComment<?php
      echo "&idArt=".$_GET['idArt'];?>">

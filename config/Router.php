@@ -38,7 +38,9 @@ class Router
                 if($_GET['route'] === 'logout'){
                     $this->userController->logout();
                 }
-
+                else if ($_GET['route'] === 'contact'){
+                    $this->frontController->contact();
+                }
 //Région Article
 
                 //              Article précis

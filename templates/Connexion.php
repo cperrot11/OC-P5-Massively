@@ -32,11 +32,5 @@
             <button  class="btn btn-outline-danger" id="logout" name="logout"><a href="../public/index.php?route=logout">Déconnecter</a></button>
         </form>
     </div>
-
-        <p class="subheading">Pour créer un nouveau compte cliquez ci dessous.</p>
-
-    <div class="row">
-
-    </div>
 </div>
 
