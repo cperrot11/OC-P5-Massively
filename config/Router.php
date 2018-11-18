@@ -31,7 +31,10 @@ class Router
         try{
             if(isset($_GET['route']))
             {
-//              Connexion
+//Accueil & Connexion
+                if($_GET['route'] === 'accueil'){
+                    $this->frontController->accueil();
+                }
                 if($_GET['route'] === 'login'){
                     $this->frontController->login();
                 }

@@ -26,18 +26,15 @@ class ContactController
         $this->mail->Password = 'Mecani4306';                           // SMTP password
         $this->mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
         $this->mail->Port = 587;                                    // TCP port to connect to
-
-        //Recipients
-        $this->mail->setFrom('contact@perrotin.eu', 'Mailer');
-
     }
     public function envoi($post)
     {
         extract($post);
         try
         {
-            $this->mail->addAddress($mail,$nom);     // Add a recipient
-            $this->mail->addReplyTo('contact@perrotin.eu', 'Mailer');
+            $this->mail->setFrom($mail,$nom);
+            $this->mail->addAddress('contact@perrotin.eu', 'Blog');     // Add a recipient
+            $this->mail->addReplyTo('contact@perrotin.eu', 'Blog');
 
             //Attachments
             $this->mail->addAttachment('../public/img/avatar.jpg', 'new.jpg');    // Optional name

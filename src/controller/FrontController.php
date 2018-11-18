@@ -97,6 +97,11 @@ class FrontController
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('contact', ['formulaire' => $data]);
     }
+    public function accueil()
+    {
+        $this->view->render('accueil');
+        $this->contact();
+    }
 
     //5- Supprimer commentaire
     public function deleteComment($get)

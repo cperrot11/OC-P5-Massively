@@ -1,6 +1,5 @@
-<div class="container" xmlns="http://www.w3.org/1999/html">
-    <hr>
-    <div>
+<div class="container jumbotron">
+    <div class="row d-block text-center">
         <h1 class="display-5">CONTACTEZ-MOI</h1>
         <p class="subheading font-italic">Vos messages sont les bienvenus et je me ferais un plaisir d'y répondre.</p>
     </div>

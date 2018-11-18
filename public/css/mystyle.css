@@ -2,3 +2,16 @@
 {
     color : #00CC00;
 }
+@media (min-width: 576px) {
+    .jumbotron {
+        padding: 2rem 2rem;
+    }
+}
+.jumbotron
+{
+    margin-bottom: 1rem;
+    background-color: #546e88;
+    border-radius: 35px;
+    border-style: groove;
+    border-color: darkgoldenrod;
+}

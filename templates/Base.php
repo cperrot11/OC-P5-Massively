@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <title><?= $title ?></title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../public/css/bootstrap.css">
+    <link rel="stylesheet" href="../public/css/mystyle.css">
 </head>
 <body>
 <?php require_once ($admin)?"AdminNavbar.php":"Navbar.php" ?>
