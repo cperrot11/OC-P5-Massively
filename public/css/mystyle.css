@@ -15,3 +15,13 @@
     border-style: groove;
     border-color: darkgoldenrod;
 }
+.btn-outline-success, .btn-outline-danger
+{
+    background-color: #2B3E50;
+}
+
+.colonne
+{
+    flex-direction: column;
+
+}

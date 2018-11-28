@@ -2,16 +2,18 @@
 $this->title = "Article";
 ?>
 <div class="container">
-    <div class="row">
-        <div class="jumbotron-fluid">
+    <div class="row justify-content-center jumbotron">
             <h1 class="display-3"><?= htmlspecialchars($article->getTitle());?></h1>
+    </div>
+    <div class="row justify-content-center jumbotron">
+        <h3><?= htmlspecialchars($article->getContent());?></h3>
+        <hr class="my-4">
+        <div>
+            <h3 class="col-6">Créé le : <?= htmlspecialchars($article->getDateAdded());?></h3>
+            <h3 class="col-6">Auteur : <?= htmlspecialchars($article->getAuthor());?></h3>
         </div>
     </div>
-    <div>
-        <h2><?= htmlspecialchars($article->getContent());?></h2>
-        <h3>Créé le : <?= htmlspecialchars($article->getDateAdded());?></h3>
-    </div>
-    <span class="subheading">Auteur : <?= htmlspecialchars($article->getAuthor());?></span>
+
     <div class="row">
         <?php
         if(isset($_SESSION['error'])) {?>

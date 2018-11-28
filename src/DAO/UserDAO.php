@@ -76,7 +76,6 @@ class UserDAO extends DAO
             {
                 $pass_hache = password_hash($pass, PASSWORD_DEFAULT);
             }
-        var_dump($user);
         $this->sql($sql, [$name,$email,$pass_hache,$admin,$login]);
     }
     public function deleteUser($login)

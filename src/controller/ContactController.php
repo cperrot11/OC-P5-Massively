@@ -33,8 +33,8 @@ class ContactController
         try
         {
             $this->mail->setFrom($mail,$nom);
-            $this->mail->addAddress('contact@perrotin.eu', 'Blog');     // Add a recipient
-            $this->mail->addReplyTo('contact@perrotin.eu', 'Blog');
+            $this->mail->addAddress('c.perrotin@mecanicsud.com', 'Blog');     // Add a recipient
+            $this->mail->addReplyTo('c.perrotin@mecanicsud.com', 'Blog');
 
             //Attachments
             $this->mail->addAttachment('../public/img/avatar.jpg', 'new.jpg');    // Optional name
@@ -45,12 +45,12 @@ class ContactController
             $this->mail->Body    = $content;
 
             $this->mail->send();
-            $_SESSION = 'Le message a été envoyé';
+            $_SESSION['error'] = 'Le message a été envoyé';
             return true;
         }
         catch (Exception $e)
         {
-            $_SESSION = "Le Message n'a pas pu être envoyé : ".$this->mail->ErrorInfo;
+            $_SESSION['error'] = "Le Message n'a pas pu être envoyé : ".$this->mail->ErrorInfo;
             return false;
         }
     }

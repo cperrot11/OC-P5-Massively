@@ -82,7 +82,7 @@ class FrontController
         $contact = new ContactController();
         if (isset($_POST['submit'])) {
             $message->setNom($_POST['nom']);
-            $message->getMail($_POST['mail']);
+            $message->setMail($_POST['mail']);
             $message->setContent($_POST['content']);
         }
         $formBuilder = new ContactForm($message);
@@ -92,7 +92,6 @@ class FrontController
         if (isset($_POST['submit']) && $form->isValid())
         {
             $contact->envoi($_POST);
-            return;
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('contact', ['formulaire' => $data]);
@@ -100,7 +99,7 @@ class FrontController
     public function accueil()
     {
         $this->view->render('accueil');
-        $this->contact();
+//        $this->contact();
     }
 
     //5- Supprimer commentaire

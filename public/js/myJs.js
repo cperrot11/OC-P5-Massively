@@ -1,4 +1,4 @@
-$(function() {
+$(document).ready(function() {
     $('th').each(function(col) {
         $(this).hover(
             function() { $(this).addClass('focus'); },
@@ -34,6 +34,15 @@ $(function() {
     $('.close').click(function () {
         $('.alert').remove();
     })
+
+
+    // var div = $('.alert');
+    // div.animate({height: '+=30px',width: '+=30px'}, "slow");
+    // div.animate({height: '-=30px',width: '-=30px'}, "slow");
+
+    $('.alert').effect( "shake", {times:4}, 1000 );
+
+
     $('.cpTremble').jrumble({
         x: 2,
         y: 2,
@@ -45,5 +54,4 @@ $(function() {
     }, function(){
         $(this).trigger('stopRumble');
     });
-
 });

@@ -88,7 +88,9 @@ class UserController
             $user->setName($_POST['name']);
             $user->setPass($_POST['pass']);
             $user->setEmail($_POST['email']);
-            $_POST['admin']=($_POST['admin']=="on")?1:0;
+            if (isset($_POST['admin'])){$_POST['admin']=($_POST['admin']=="on")?1:0;}
+            else $_POST['admin']=0;
+
         }
         else{
             //récupère l'user a modifier.

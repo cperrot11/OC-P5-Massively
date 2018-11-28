@@ -7,17 +7,11 @@ if(!isset($_SESSION))
 <?php
 $this->title = "Accueil";
 ?>
-<head>
-    <link rel="stylesheet" href="../public/css/bootstrap.css">
-</head>
 <body>
 <div class="container">
-    <div class="row">
-        <div class="jumbotron-fluid">
-            <h1 class="display-3">Mon blog !</h1>
-            <hr class="my-4">
-            <span class="subheading">Des articles sur les sujets passionnants</span>
-        </div>
+    <div class="row jumbotron colonne align-items-center">
+        <h1 class="display-3">Mon blog !</h1>
+        <p>Des articles sur les sujets passionnants</p>
     </div>
     <div class="row">
         <?php
@@ -35,7 +29,7 @@ $this->title = "Accueil";
 <div class="container">
     <div>
         <br/>
-        <a class="btn btn-warning btn-sm" href="../public/index.php?route=addArticle">Ajouter un article</a>
+        <a class="btn btn-primary btn-sm" href="../public/index.php?route=addArticle">Ajouter un article</a>
     </div>
     <hr class="my-4">
     <div class="row">

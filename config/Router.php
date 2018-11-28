@@ -112,7 +112,7 @@ class Router
                 }
             }
             else{
-                $this->frontController->articles();
+                $this->frontController->accueil();
             }
         }
         catch (Exception $e)
