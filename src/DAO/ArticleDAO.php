@@ -8,7 +8,7 @@ class ArticleDAO extends DAO
 {
     public function getArticles()
     {
-        $sql = 'SELECT id, title, content, author, date_added FROM article ORDER BY id DESC';
+        $sql = 'SELECT id, title, content, author, date_added, picture FROM article ORDER BY id DESC';
         $result = $this->sql($sql);
         $articles = [];
         foreach ($result as $row) {
@@ -20,7 +20,7 @@ class ArticleDAO extends DAO
 
     public function getArticle($idArt)
     {
-        $sql = 'SELECT id, title, content, author, date_added FROM article WHERE id = ?';
+        $sql = 'SELECT id, title, content, author, date_added, picture FROM article WHERE id = ?';
         $result = $this->sql($sql, [$idArt]);
         $row = $result->fetch();
         if($row) {
@@ -30,12 +30,12 @@ class ArticleDAO extends DAO
         }
     }
 
-    public function saveArticle($article)
+    public function saveArticle($article,$picture)
     {
         //Permet de récupérer les variables $title, $content et $author
         extract($article);
-        $sql = 'INSERT INTO article (title, content, author, date_added) VALUES (?, ?, ?, NOW())';
-        $this->sql($sql, [$title, $content, $author]);
+        $sql = 'INSERT INTO article (title, content, author, picture, date_added) VALUES (?, ?, ?, ?,NOW())';
+        $this->sql($sql, [$title, $content, $author, $picture]);
     }
 
     public function updateArticle($idArt,$post)
@@ -59,6 +59,7 @@ class ArticleDAO extends DAO
         $article->setId($row['id']);
         $article->setTitle($row['title']);
         $article->setContent($row['content']);
+        $article->setPicture($row['picture']);
         $article->setDateAdded($row['date_added']);
         $article->setAuthor($row['author']);
         return $article;

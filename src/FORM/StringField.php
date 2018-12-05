@@ -15,11 +15,10 @@ class StringField extends Field
     if (!empty($this->errorMessage))
     {
         $widget .= '<div class="text-danger">'.$this->errorMessage.'</div>';
-        $widget .= '<label class="control-label">'.$this->label.'</label>';
-        $widget .= '<input class="form-control is-invalid" type="text" name="'.$this->name.'"';
+        $widget .= '<input placeholder='.$this->label.' class="is-invalid" type="text" name="'.$this->name.'"';
     }
     else{
-        $widget .= '<label>'.$this->label.'</label><input type='.$type.' name="'.$this->name.'"';
+        $widget .= '<input placeholder='.$this->label.' type='.$type.' name="'.$this->name.'"';
     }
 
     

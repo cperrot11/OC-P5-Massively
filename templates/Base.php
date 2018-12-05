@@ -16,9 +16,25 @@ if(!isset($_SESSION))
     <body class="is-preload">
         <div id="wrapper" class="fade-in">
             <div id="content">
-                <?= $content ?>
+                <!-- Intro -->
+                <div id="intro">
+                    <h1>Christophe <br />PERROTIN</h1>
+                    <p>La mise en place d'une application Web est subtil mélange de technique, <br />
+                        de sensibilité et beaucoup de passion.</p>
+                    <ul class="actions">
+                        <li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
+                    </ul>
+                </div>
+                <!-- Header -->
+                <header id="header">
+                    <a href="index.html" class="logo">Bienvenue</a>
+                </header>
+                <!-- Nav -->
+                <?php require_once ($admin)?"AdminNavbar.php":"Navbar.php" ?>
+<!--                <div id="main">-->
+                    <?= $content ?>
+<!--                </div>-->
             </div>
-            <?php require_once ($admin)?"AdminNavbar.php":"Navbar.php" ?>
         </div>
         <!-- Scripts -->
         <script src="../public/js/jquery.js"></script>

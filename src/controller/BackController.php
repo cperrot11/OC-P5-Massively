@@ -56,20 +56,26 @@ class BackController
             {
                 $article->setContent($_POST['content']);
             }
+            if (isset($_FILES['picture']) && !empty($_FILES['picture']['name']))
+            {
+                $article->setPicture($_FILES['picture']['name']);
+            }
+
         }
         $formBuilder = new ArticleForm($article);
         $formBuilder->build();
         $form = $formBuilder->form();
         if(isset($post['submit']) && $form->isValid())
         {
+            move_uploaded_file($_FILES['picture']['tmp_name'], 'C:/wamp64/www/OC/P5-Blog PHP/3-POO/App/uploads/' . basename($_FILES['picture']['name']));
             $articleDAO = new ArticleDAO();
-            $articleDAO->saveArticle($post);
-            session_start();
+            $articleDAO->saveArticle($post,$article->getPicture());
             $_SESSION['add_article'] = 'Le nouvel article a bien été ajouté';
             header('Location: ../public/index.php');
+            return true;
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
-        $this->view->render('AdminAddArticle', ['formulaire' => $data]);
+        $this->view->render('AdminAddArticle',true, ['formulaire' => $data]);
 
     }
     public function adminGestion()
@@ -80,8 +86,8 @@ class BackController
             return false;
         }
         else{
-            $this->view->render('AdminGestion', []);
-        }
+            $this->view->render('AdminGestion',true, []);
+            }
     }
 
     public function adminCommentaires()

@@ -1,7 +1,6 @@
-<div class="container">
-    <div class="row">
-        <div class="jumbotron-fluid">
-            <h1 class="display-3">Connexion</h1>
+<div id="main">
+    <section class="post">
+    <h2>Connexion</h2>
             <?php if (isset($_SESSION['login']))
             {?>
                 <span class="subheading">Vous êtes déjà connecté</span>
@@ -11,12 +10,11 @@
             <?php } ?>
             <div>
                 <br/>
-                <a class="btn btn-warning btn-sm" href="../public/index.php?route=addUser">Nouvel utilisateur</a>
-                <a class="btn btn-warning btn-sm" href="../public/index.php">Retour à l'accueil</a>
+                <a class="button primary small" href="../public/index.php?route=addUser">Nouvel utilisateur</a>
+                <a class="button primary small" href="../public/index.php">Retour à l'accueil</a>
             </div>
-            <hr class="my-4">
-        </div>
-    </div>
+            <hr>
+
     <div class="row">
         <form method="post" action="../public/index.php?route=checkLogin">
                 <?php if (isset($_SESSION['error']))
@@ -28,9 +26,10 @@
                 <?php }?>
                 <?php echo $formulaire;?>
             <br/>
-            <input class="btn btn-outline-success" type="submit" value="Connecter" id="submit" name="submit">
-            <button  class="btn btn-outline-danger" id="logout" name="logout"><a href="../public/index.php?route=logout">Déconnecter</a></button>
+            <input class="button primary small" type="submit" value="Connecter" id="submit" name="submit">
+            <a class="button primary small" href="../public/index.php?route=logout">Déconnecter</a>
         </form>
     </div>
+    </section>
 </div>
 

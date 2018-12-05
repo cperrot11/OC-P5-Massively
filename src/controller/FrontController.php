@@ -94,12 +94,12 @@ class FrontController
             $contact->envoi($_POST);
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
-        $this->view->render('contact', ['formulaire' => $data]);
+        $this->view->render('contact', true,['formulaire' => $data]);
     }
     public function accueil()
     {
-        $this->view->render('accueil');
-//        $this->contact();
+        $this->view->render('accueil',false);
+        $this->contact();
     }
 
     //5- Supprimer commentaire
@@ -113,7 +113,7 @@ class FrontController
     public function articles()
     {
         $articles = $this->articleDAO->getArticles();
-        $this->view->render('blog',['articles'=> $articles]);
+        $this->view->render('blog',true,['articles'=> $articles]);
     }
     //7-Afficher 1 article
     public function article($idArt)
@@ -121,7 +121,7 @@ class FrontController
         $article = $this->articleDAO->getArticle($idArt);
         $comments = $this->commentDAO->getCommentsFromArticle($idArt);
 
-        $this->view->render('Single', [
+        $this->view->render('Single',true, [
             'article'=> $article,
             'comments' => $comments
         ]);
@@ -142,7 +142,7 @@ class FrontController
 
         $this->view = new View();
         $data = $form->createView(); // On passe le formulaire généré à la vue.
-        $this->view->render('Connexion', ['formulaire' => $data]);
+        $this->view->render('Connexion',true , ['formulaire' => $data]);
         unset($_SESSION['error']);
 
         return false;

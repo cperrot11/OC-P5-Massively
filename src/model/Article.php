@@ -8,6 +8,23 @@ class Article extends Entity
     private $title;
     private $content;
     private $author;
+    private $picture;
+
+    /**
+     * @return mixed
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param mixed $picture
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+    }
     private $date_added;
 
     /**

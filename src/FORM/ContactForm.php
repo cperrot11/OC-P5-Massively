@@ -14,7 +14,7 @@ class ContactForm extends FormBuilder
     public function build()
     {
         $this->form->add(new StringField([
-            'label' => 'Votre nom',
+            'label' => "Nom",
             'name' => 'nom',
             'maxLength' => 30,
             'validators' => array(
@@ -23,11 +23,11 @@ class ContactForm extends FormBuilder
             )
         ]))
             ->add(new StringField([
-                'label' => 'Votre adresse email',
+                'label' => 'E-mail',
                 'name' => 'mail'
             ]))
             ->add(new TextField([
-                'label' => 'Votre message',
+                'label' => 'Message',
                 'name' => 'content',
                 'rows' => 5,
                 'cols' => 30,

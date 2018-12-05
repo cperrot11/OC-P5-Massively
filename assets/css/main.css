@@ -2331,6 +2331,7 @@ input, select, textarea {
 		}
 
 	input[type="text"],
+	input[type="file"],
 	input[type="password"],
 	input[type="email"],
 	select,
@@ -2351,6 +2352,7 @@ input, select, textarea {
 	}
 
 		input[type="text"]:invalid,
+		input[type="file"]:invalid,
 		input[type="password"]:invalid,
 		input[type="email"]:invalid,
 		select:invalid,
@@ -2376,6 +2378,7 @@ input, select, textarea {
 		}
 
 	input[type="text"],
+	input[type="file"],
 	input[type="password"],
 	input[type="email"],
 	select {
@@ -2474,6 +2477,7 @@ input, select, textarea {
 	}
 
 	input[type="text"],
+	input[type="file"],
 	input[type="password"],
 	input[type="email"],
 	select,
@@ -2482,6 +2486,7 @@ input, select, textarea {
 	}
 
 		input[type="text"]:focus,
+		input[type="file"]:focus,
 		input[type="password"]:focus,
 		input[type="email"]:focus,
 		select:focus,
@@ -4017,6 +4022,7 @@ input, select, textarea {
 		}
 
 		#footer input[type="text"],
+		#footer input[type="file"],
 		#footer input[type="password"],
 		#footer input[type="email"],
 		#footer select,
@@ -4025,6 +4031,7 @@ input, select, textarea {
 		}
 
 			#footer input[type="text"]:focus,
+			#footer input[type="file"]:focus,
 			#footer input[type="password"]:focus,
 			#footer input[type="email"]:focus,
 			#footer select:focus,
@@ -4651,3 +4658,41 @@ input, select, textarea {
 		}
 
 	}
+
+/*personnalisation*/
+.ligne
+{
+	display: flex;
+	text-align: center;
+}
+
+.boite
+{
+	border: solid;
+	margin: 0 10px 0 10px;
+	padding: 10px;
+}
+	.boite .header {
+		color: darkred;
+		text-align: center;
+	}
+	.boite footer {
+		text-align: left;
+		font-style: italic;
+		line-height: 1.2em;
+	}
+/*table*/
+.focus {
+	background-color: #DF691A !important;
+	color: #fff;
+	cursor: pointer;
+	font-weight: bold;
+}
+.selected {
+	background-color: #DF691A !important;
+	color: #fff;
+	font-weight: bold;
+}
+.asc:after {content: "\25B2"; }
+.desc:after {content: "\25BC"; }
+.table th{border-top: none;}

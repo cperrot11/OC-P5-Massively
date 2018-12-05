@@ -13,10 +13,10 @@ class TextField extends Field
     if (!empty($this->errorMessage))
     {
       $widget .= '<div class="text-danger">'.$this->errorMessage.'</div>';
-      $widget .= '<label class="control-label">'.$this->label.'</label><textarea class="form-control is-invalid" name="'.$this->name.'"';
+      $widget .= '<textarea placeholder='.$this->label.' class="is-invalid" name="'.$this->name.'"';
     }
     else{
-        $widget .= '<label class="control-label">'.$this->label.'</label><textarea class="form-control" name="'.$this->name.'"';
+        $widget .= '<textarea placeholder='.$this->label.' name="'.$this->name.'"';
     }
 
     

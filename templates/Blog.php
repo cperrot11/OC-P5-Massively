@@ -1,73 +1,56 @@
 <?php
-if(!isset($_SESSION))
-{
-    session_start();
-}
+$this->title = "Blog";
 ?>
-<?php
-$this->title = "Accueil";
-?>
-<body>
-<div class="container">
-    <div class="row jumbotron colonne align-items-center">
-        <h1 class="display-3">Mon blog !</h1>
-        <p>Des articles sur les sujets passionnants</p>
-    </div>
-    <div class="row">
-        <?php
-        if(isset($_SESSION['error'])) {?>
-            <div class="alert alert-dismissible alert-success">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong><?php echo '<p>'.$_SESSION['error'].'</p>';?> </strong>
-            </div>
+<div id="main">
+    <section class="post">
+        <h2>Mon blog !</h2>
+        <blockquote>Des articles sur les sujets passionnants</blockquote>
             <?php
-            unset($_SESSION['error']);
-        }
-        ?>
-    </div>
-</div>
-<div class="container">
-    <div>
-        <br/>
-        <a class="btn btn-primary btn-sm" href="../public/index.php?route=addArticle">Ajouter un article</a>
-    </div>
-    <hr class="my-4">
-    <div class="row">
-        <?php
-        if(isset($_SESSION['add_article'])) {?>
-            <div class="alert alert-dismissible alert-success">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Félicitation!</strong> <?php echo '<p>'.$_SESSION['add_article'].'</p>';?>
-            </div>
-            <?php
-            unset($_SESSION['add_article']);
-        }
-        ?>
-    </div>
-    <div class="row">
-        <?php
-        foreach ($articles as $article)
-        {
-            ?>
-            <div class="col-sm-6 col-md-4 col-lg-4 posts cpTremble">
-                <div class="card border-dark mb-3" style="max-width: 20rem;">
-                    <h2 class="card-header">>
-                        <a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>">
-                            <?= htmlspecialchars($article->getTitle());?>
-                        </a>
-                    </h2>
-                    <div class="card-body">
-                        <p class="card-text"><?= htmlspecialchars($article->getContent());?></p>
-                        <p class="card-text"><?= htmlspecialchars($article->getAuthor());?></p>
-                        <p class="card-text">Créé le : <?= htmlspecialchars($article->getDateAdded());?></p>
-                    </div>
+            if(isset($_SESSION['error'])) {?>
+                <div class="">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong><?php echo '<p>'.$_SESSION['error'].'</p>';?> </strong>
                 </div>
-            </div>
-            <br>
+                <?php
+                unset($_SESSION['error']);
+            }
+            ?>
+            <a class="" href="../public/index.php?route=addArticle">Ajouter un article</a>
             <?php
-        }
-        ?>
-
-    </div>
+            if(isset($_SESSION['add_article'])) {?>
+                <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Félicitation!</strong> <?php echo '<p>'.$_SESSION['add_article'].'</p>';?>
+                </div>
+                <?php
+                unset($_SESSION['add_article']);
+            }
+            ?>
+    </section>
+    <section class="posts">
+            <?php
+            $cpt=0;
+            foreach ($articles as $article)
+            {
+                $cpt++;
+                ?>
+                    <article>
+                        <ul class="actions special">
+                            <a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>">
+                                    <?= htmlspecialchars($article->getTitle());?>
+                            </a>
+                        </ul>
+                        <p>
+                            <span class="image left"><img src=<?= "../uploads/".htmlspecialchars($article->getPicture());?> alt="" /></span>
+                            <?= htmlspecialchars(substr($article->getContent(),0,200).'...');?></p>
+                        <p class=""><?= htmlspecialchars($article->getAuthor());?></p>
+                        <p class="date">Créé le : <?= htmlspecialchars($article->getDateAdded());?></p>
+                        <ul class="actions special">
+                            <li><a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>" class="button">Lire la suite</a></li>
+                        </ul>
+                    </article>
+                <?php
+            }
+            ?>
+    </section>
 </div>
-</body>

@@ -1,47 +1,16 @@
 <?php
-if(!isset($_SESSION))
-{
-    session_start();
-}
+    $this->title = "Admin articles";
 ?>
-<?php
-$this->title = "Accueil";
-?>
-<head>
-    <link rel="stylesheet" href="../public/css/bootstrap.css">
-    <link rel="stylesheet" href="../public/css/mystyle.css">
-</head>
-<body>
-    <style>
-        .focus {
-            background-color: #DF691A !important;
-            color: #fff;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .selected {
-            background-color: #DF691A !important;
-            color: #fff;
-            font-weight: bold;
-        }
-        .asc:after {content: "\25B2"; }
-        .desc:after {content: "\25BC"; }
-        .table th{border-top: none;}
-    </style>
-    <div class="container">
-        <div class="row">
-            <div class="jumbotron-fluid">
-                <h1 id="test" >Gestion des articles</h1>
+<div id="main">
+    <section class="post">
+                <h2>Gestion des articles</h2>
                 <span class="subheading">Trier le listing en cliquant sur le titre des colonnes.</span><br/>
                 <span class="subheading">Vous pouvez modifier le contenu d'un article ou le supprimer.</span>
-            </div>
-        </div>
-        <div>
             <br/>
-            <a class="btn btn-warning btn-sm" href="../public/index.php?route=addArticle">Ajouter un article</a>
-            <a class="btn btn-warning btn-sm" href="../public/index.php?route=adminGestion">Retour à l'administration du blog</a>
-        </div>
-        <hr class="my-4">
+            <a class="button primary small" href="../public/index.php?route=addArticle">Ajouter un article</a>
+            <a class="button primary small" href="../public/index.php?route=adminGestion">Retour à l'administration du blog</a>
+
+        <hr>
         <div class="row">
             <?php
             if(isset($_SESSION['error'])) {?>
@@ -82,6 +51,6 @@ $this->title = "Accueil";
             </table>
 
         </div>
-    </div>
+    </section>>
 
-</body>
+</div>>

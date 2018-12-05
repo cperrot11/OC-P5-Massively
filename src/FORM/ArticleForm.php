@@ -23,7 +23,7 @@ class ArticleForm extends FormBuilder
             )
         ]))
             ->add(new TextField([
-                'label' => 'Content',
+                'label' => 'Contenu',
                 'name' => 'content',
                 'rows' => 7,
                 'cols' => 50,
@@ -40,7 +40,14 @@ class ArticleForm extends FormBuilder
             'label' => 'Date',
             'name' => 'DateAdded',
             'readonly' => true
+        ]))
+            ->add(new File([
+                'label'=>'Fichier image',
+                'name'=>'picture',
+                'validators' => array(
+                    new PictureSizeValidator('Taille maximum 2Mo',2000000,isset($_FILES['picture'])?$_FILES['picture']['size']:0),
+                    new PictureValidator('Extension autorisés = jpg, jpeg, bmp, png uniquement')
+                )
         ]));
-
     }
 }
