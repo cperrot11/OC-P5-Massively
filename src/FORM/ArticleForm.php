@@ -48,6 +48,11 @@ class ArticleForm extends FormBuilder
                     new PictureSizeValidator('Taille maximum 2Mo',2000000,isset($_FILES['picture'])?$_FILES['picture']['size']:0),
                     new PictureValidator('Extension autorisés = jpg, jpeg, bmp, png uniquement')
                 )
-        ]));
+        ]))
+            ->add(new StringField([
+                'label'=>'Fichier image',
+                'name'=>'picture_file',
+                'readonly' => true
+            ]));
     }
 }

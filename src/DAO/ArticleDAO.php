@@ -38,11 +38,11 @@ class ArticleDAO extends DAO
         $this->sql($sql, [$title, $content, $author, $picture]);
     }
 
-    public function updateArticle($idArt,$post)
+    public function updateArticle($idArt,$post,$picture)
     {
         extract($post);
-        $sql = 'UPDATE article set title=?,content=?,date_added=NOW() WHERE id= ?';
-        $this->sql($sql, [$title,$content,intval($idArt)]);
+        $sql = 'UPDATE article set title=?,content=?,date_added=NOW(),picture=? WHERE id= ?';
+        $this->sql($sql, [$title,$content,$picture,intval($idArt)]);
     }
     public function deleteArticle($idArt)
     {
@@ -60,6 +60,7 @@ class ArticleDAO extends DAO
         $article->setTitle($row['title']);
         $article->setContent($row['content']);
         $article->setPicture($row['picture']);
+        $article->setPicture_File($row['picture']);
         $article->setDateAdded($row['date_added']);
         $article->setAuthor($row['author']);
         return $article;

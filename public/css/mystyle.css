@@ -25,3 +25,56 @@
     flex-direction: column;
 
 }
+.cpAlert
+{
+    display: flex;
+}
+.cpClose
+{
+    margin-left: 2rem;
+}
+
+.icon.solo
+{
+    width: 4rem !important;
+    height: 2rem !important;
+    line-height: 2rem !important;
+    border-radius: 6rem !important;
+}
+
+.ligne
+{
+    display: flex;
+    text-align: center;
+}
+
+.boite
+{
+    border: solid;
+    margin: 0 10px 0 10px;
+    padding: 10px;
+}
+.boite .header {
+    color: darkred;
+    text-align: center;
+}
+.boite footer {
+    text-align: left;
+    font-style: italic;
+    line-height: 1.2em;
+}
+/*table*/
+.focus {
+    background-color: #18bfef !important;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+}
+.selected {
+    background-color: #18bfef !important;
+    color: #fff;
+    font-weight: bold;
+}
+.asc:after {content: "\25B2"; }
+.desc:after {content: "\25BC"; }
+.table th{border-top: none;}

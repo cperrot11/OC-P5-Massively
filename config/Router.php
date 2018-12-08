@@ -54,8 +54,7 @@ class Router
                 //              Liste Articles
                 else if ($_GET['route'] === 'articles'){
                     $this->frontController->articles();
-                    $this->frontController->addComment($_GET['idArt']);
-                }
+                 }
 //              Créer Article
                 else if($_GET['route'] === 'addArticle') {
                     $this->backController->addArticle($_POST);

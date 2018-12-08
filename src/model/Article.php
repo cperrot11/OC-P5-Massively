@@ -9,6 +9,23 @@ class Article extends Entity
     private $content;
     private $author;
     private $picture;
+    private $picture_file;
+
+    /**
+     * @return mixed
+     */
+    public function getPicture_file()
+    {
+        return $this->picture_file;
+    }
+
+    /**
+     * @param mixed $picture_file
+     */
+    public function setPicture_file($picture_file): void
+    {
+        $this->picture_file = $picture_file;
+    }
 
     /**
      * @return mixed

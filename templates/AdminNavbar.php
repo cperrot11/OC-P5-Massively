@@ -1,11 +1,11 @@
     <nav id="nav">
 <!--        <a class="navbar-brand" href="#"><img src="../public/img/reglages.jpg" height="100"/></a>-->
-        <ul class="links">
-                <li class=<?= ($_GET['route']==='accueil')?"active":"" ?>><a href="../public/index.php">Site</a></li>
-                <li class=<?= ($_GET['route']==='adminArticles')?"active":"" ?>><a href="../public/index.php?route=adminArticles">Articles</a></li>
-                <li class=<?= ($_GET['route']==='adminCommentaires')?"active":"" ?>><a href="../public/index.php?route=adminCommentaires">Commentaires</a></li>
-                <li class=<?= ($_GET['route']==='adminUsers')?"active":"" ?>><a href="../public/index.php?route=adminUsers">Membres</a></li>
-                <li class=<?= ($_GET['route']==='adminGestion')?"active":"" ?>><a href="index.php?route=adminGestion">Admin</a></li>
+        <ul class="links" id="begin">
+                <li class=<?= ($_GET['route']==='accueil')?"active":"" ?>><a href="../public/index.php#begin">Site</a></li>
+                <li class=<?= ($_GET['route']==='adminArticles')?"active":"" ?>><a href="../public/index.php?route=adminArticles#begin">Articles</a></li>
+                <li class=<?= ($_GET['route']==='adminCommentaires')?"active":"" ?>><a href="../public/index.php?route=adminCommentaires#begin">Commentaires</a></li>
+                <li class=<?= ($_GET['route']==='adminUsers')?"active":"" ?>><a href="../public/index.php?route=adminUsers#begin">Membres</a></li>
+                <li class=<?= ($_GET['route']==='adminGestion')?"active":"" ?>><a href="index.php?route=adminGestion#begin">Admin</a></li>
         </ul>
         <div class="">
             <a href="index.php?route=login">

@@ -6,11 +6,11 @@
                 else
                     {$route="accueil";}
         ?>
-        <ul class="links">
-            <li class=<?= ($route==='accueil')?"active":"" ?>><a href="index.php?route=accueil">Accueil</a></li>
-            <li class=<?= ($route==='articles')?"active":"" ?>><a href="index.php?route=articles">Blog</a></li>
-            <li class=<?= ($route==='contact')?"active":"" ?>><a href="index.php?route=contact">Contact</a></li>
-            <li class=<?= ($route==='adminGestion')?"active":"" ?>><a href="index.php?route=adminGestion">Admin</a></li>
+        <ul class="links" id="begin">
+            <li class=<?= ($route==='accueil')?"active":"" ?>><a href="index.php?route=accueil#begin">Accueil</a></li>
+            <li class=<?= ($route==='articles')?"active":"" ?>><a href="index.php?route=articles#begin">Blog</a></li>
+            <li class=<?= ($route==='contact')?"active":"" ?>><a href="index.php?route=contact#begin">Contact</a></li>
+            <li class=<?= ($route==='adminGestion')?"active":"" ?>><a href="index.php?route=adminGestion#begin">Admin</a></li>
         </ul>
         <div class="">
             <a href="index.php?route=login">

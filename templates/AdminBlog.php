@@ -1,28 +1,27 @@
 <?php
-    $this->title = "Admin articles";
+    $this->title = "Gestion des articles";
 ?>
 <div id="main">
     <section class="post">
-                <h2>Gestion des articles</h2>
-                <span class="subheading">Trier le listing en cliquant sur le titre des colonnes.</span><br/>
-                <span class="subheading">Vous pouvez modifier le contenu d'un article ou le supprimer.</span>
-            <br/>
-            <a class="button primary small" href="../public/index.php?route=addArticle">Ajouter un article</a>
-            <a class="button primary small" href="../public/index.php?route=adminGestion">Retour à l'administration du blog</a>
-
-        <hr>
+           <h2>Gestion des articles</h2>
+           <span class="subheading">Trier le listing en cliquant sur le titre des colonnes.</span><br/>
+           <span class="subheading">Vous pouvez modifier le contenu d'un article ou le supprimer.</span>
+           <br/>
+           <a class="button primary small" href="../public/index.php?route=addArticle">Ajouter un article</a>
+           <a class="button primary small" href="../public/index.php?route=adminGestion">Retour à l'administration du blog</a>
+           <hr>
         <div class="row">
             <?php
             if(isset($_SESSION['error'])) {?>
-                <div class="alert alert-dismissible alert-success">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong><?php echo '<p>'.$_SESSION['error'].'</p>';?> </strong>
+                <div class="cpAlert">
+                    <?php echo '<p>'.$_SESSION['error'].'</p>';?>
+                    <i class="cpClose button icon solo fa-bomb scrolly"></i>
                 </div>
                 <?php
                 unset($_SESSION['error']);
             }
             ?>
-            <table class="table table-hover">
+            <table class="alt">
                 <thead>
                 <tr>
                     <th scope="col">Num</th>
@@ -41,6 +40,7 @@
                                 <td><?= htmlspecialchars($article->getTitle());?></td>
                                 <td><?= htmlspecialchars($article->getAuthor());?></td>
                                 <td><?= htmlspecialchars($article->getDateAdded());?></td>
+                                <td><a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>">Lire</a></td>
                                 <td><a href="../public/index.php?route=updateArticle&idArt=<?= htmlspecialchars($article->getId());?>">Modifier</a></td>
                                 <td><a href="../public/index.php?route=deleteArticle&idArt=<?= htmlspecialchars($article->getId());?>">Supprimer</a> </td>
                             </tr>

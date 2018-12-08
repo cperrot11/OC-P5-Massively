@@ -48,7 +48,7 @@ class User extends Entity
     /**
      * @param mixed $route
      */
-    public function setRoute($route): void
+    public function setRoute($route)
     {
         $this->route = $route;
     }
@@ -64,7 +64,7 @@ class User extends Entity
     /**
      * @param mixed $login
      */
-    public function setLogin($login): void
+    public function setLogin($login)
     {
         $this->login = $login;
     }
@@ -80,7 +80,7 @@ class User extends Entity
     /**
      * @param mixed $pass
      */
-    public function setPass($pass): void
+    public function setPass($pass)
     {
         $this->pass = $pass;
     }
@@ -96,7 +96,7 @@ class User extends Entity
     /**
      * @param mixed $name
      */
-    public function setName($name): void
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -112,7 +112,7 @@ class User extends Entity
     /**
      * @param mixed $admin
      */
-    public function setAdmin($admin): void
+    public function setAdmin($admin)
     {
         if ($admin=="on"||$admin==1)
         {

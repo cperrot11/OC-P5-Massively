@@ -11,6 +11,7 @@ if(!isset($_SESSION))
         <title><?= $title ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="../assets/css/main.css" />
+        <link rel="stylesheet" href="../public/css/mystyle.css" />
         <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
     </head>
     <body class="is-preload">
@@ -22,7 +23,7 @@ if(!isset($_SESSION))
                     <p>La mise en place d'une application Web est subtil mélange de technique, <br />
                         de sensibilité et beaucoup de passion.</p>
                     <ul class="actions">
-                        <li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
+                        <li><a href="#begin" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
                     </ul>
                 </div>
                 <!-- Header -->
@@ -31,9 +32,7 @@ if(!isset($_SESSION))
                 </header>
                 <!-- Nav -->
                 <?php require_once ($admin)?"AdminNavbar.php":"Navbar.php" ?>
-<!--                <div id="main">-->
                     <?= $content ?>
-<!--                </div>-->
             </div>
         </div>
         <!-- Scripts -->

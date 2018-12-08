@@ -15,7 +15,8 @@ class PictureSizeValidator extends Validator
   
   public function isValid($file)
   {
-      return $this->actualSize <= $this->maxSize;
+      return ($this->actualSize <= $this->maxSize) and ($_FILES['picture']['error']===0);
+      //up_load_max_filesize = 2Mo php.ini (error=1)!!!
   }
   
   public function setMaxSize($maxSize)

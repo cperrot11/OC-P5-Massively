@@ -12,20 +12,25 @@ class PictureValidator extends Validator
   
   public function isValid($file)
   {
-    $infosfichier = pathinfo($_FILES['picture']['name']);
-    $extension_upload = $infosfichier['extension'];
-    $extension_upload = strtoupper($extension_upload);
-    $extensions_autorisees = array('JPG', 'JPEG', 'GIF', 'PNG', 'BMP');
-    if (in_array($extension_upload, $extensions_autorisees))
+      if(isset($_FILES))
       {
-          return true;
+          $infosfichier = pathinfo($_FILES['picture']['name']);
+          $extension_upload = $infosfichier['extension'];
+          $extension_upload = strtoupper($extension_upload);
+          $extensions_autorisees = array('JPG', 'JPEG', 'GIF', 'PNG', 'BMP');
+          if (in_array($extension_upload, $extensions_autorisees))
+          {
+              return true;
+          }
+          else
+          {
+              $_SESSION['error']="Extension non conforme";
+              return false;
+          }
       }
-      else
-      {
-          $_SESSION['error']="Extension non conforme";
-          return false;
-      }
+      return true;
   }
+
   
   public function setMaxSize($maxSize)
   {

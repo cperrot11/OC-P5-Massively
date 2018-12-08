@@ -31,16 +31,11 @@ $(document).ready(function() {
             });
         });
     });
-    $('.close').click(function () {
-        $('.alert').remove();
+    $('.cpClose').click(function () {
+        $('.cpAlert').remove();
     })
 
-
-    // var div = $('.alert');
-    // div.animate({height: '+=30px',width: '+=30px'}, "slow");
-    // div.animate({height: '-=30px',width: '-=30px'}, "slow");
-
-    $('.alert').effect( "shake", {times:4}, 1000 );
+    $('.cpAlert').effect( "shake", {times:4}, 1000 );
 
 
     $('.cpTremble').jrumble({
