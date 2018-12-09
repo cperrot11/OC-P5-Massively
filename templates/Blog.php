@@ -15,7 +15,7 @@ $this->title = "Blog";
                 unset($_SESSION['error']);
             }
             ?>
-            <a class="" href="../public/index.php?route=addArticle">Ajouter un article</a>
+            <a class="" href="../public/index.php?route=addArticle#begin">Ajouter un article</a>
             <?php
             if(isset($_SESSION['add_article'])) {?>
                 <div class="alert alert-dismissible alert-success">
@@ -36,7 +36,7 @@ $this->title = "Blog";
                 ?>
                     <article>
                         <ul class="actions special">
-                            <a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>">
+                            <a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin">
                                     <?= htmlspecialchars($article->getTitle());?>
                             </a>
                         </ul>
@@ -46,7 +46,7 @@ $this->title = "Blog";
                         <p class=""><?= htmlspecialchars($article->getAuthor());?></p>
                         <p class="date">Créé le : <?= htmlspecialchars($article->getDateAdded());?></p>
                         <ul class="actions special">
-                            <li><a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>" class="button">Lire la suite</a></li>
+                            <li><a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin" class="button">Lire la suite</a></li>
                         </ul>
                     </article>
                 <?php

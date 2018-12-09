@@ -69,11 +69,12 @@ class FrontController
             {$this->commentDAO->addComment($_GET['idArt'],$_POST);}
             //affiche single article
             $_SESSION['error']='Commentaire ajouté et en attente de validation';
-            $this->article($_GET['idArt']);
+            $url = "../public/index.php?route=article&idArt=".$_GET['idArt'];
+            header("location:".$url);
             return;
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
-        $this->view->render('AddComment', ['formulaire' => $data]);
+        $this->view->render('AddComment',true, ['formulaire' => $data]);
     }
 
     public function contact()
@@ -121,11 +122,11 @@ class FrontController
         $article = $this->articleDAO->getArticle($idArt);
         $comments = $this->commentDAO->getCommentsFromArticle($idArt);
 
-        $this->view->render('Single',true, [
+        $this->view->render('Single',false, [
             'article'=> $article,
             'comments' => $comments
         ]);
-//        $this->view->render('form_comment', []);
+//        $this->view->render('form_comment',true, []);
     }
 
     public function login(){

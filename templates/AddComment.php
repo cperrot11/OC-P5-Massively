@@ -1,16 +1,17 @@
-    <hr>
-<section id="main">
+<?php
+    $this->title = "Ajouter commentaire";
+?>
+<div id="main">
     <section class="post">
-        <div>
-            <h1 class="display-5">Ajouter votre commentaire</h1>
-            <p class="subheading">Attention : Les commentaires saisies doivent être validés avant publication.</p>
-        </div>
+        <h2>Ajouter un commentaire</h2>
+        <p class="subheading">Attention : Les commentaires saisies doivent être validés avant publication.</p>
+
         <form method="post" action="../public/index.php?route=addComment<?php
-         echo "&idArt=".$_GET['idArt'];?>">
+         echo "&idArt=".$_GET['idArt'];?>#begin">
             <?= $formulaire;?>
             <input class="btn btn-outline-success" type="submit" value="Envoyer" id="submit" name="submit">
             <input class="btn btn-outline-danger" type="reset" value="Annuler" id="reset" name="reset">
         </form>
     </section>
-</section>
+</div>>
 

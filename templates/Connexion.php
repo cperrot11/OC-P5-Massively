@@ -10,13 +10,13 @@
             <?php } ?>
             <div>
                 <br/>
-                <a class="button primary small" href="../public/index.php?route=addUser">Nouvel utilisateur</a>
-                <a class="button primary small" href="../public/index.php">Retour à l'accueil</a>
+                <a class="button primary small" href="../public/index.php?route=addUser#begin">Nouvel utilisateur</a>
+                <a class="button primary small" href="../public/index.php#begin">Retour à l'accueil</a>
             </div>
             <hr>
 
     <div class="row">
-        <form method="post" action="../public/index.php?route=checkLogin">
+        <form method="post" action="../public/index.php?route=checkLogin#begin">
                 <?php if (isset($_SESSION['error']))
                 {?>
                     <div class="alert alert-dismissible alert-success">
@@ -27,7 +27,7 @@
                 <?php echo $formulaire;?>
             <br/>
             <input class="button primary small" type="submit" value="Connecter" id="submit" name="submit">
-            <a class="button primary small" href="../public/index.php?route=logout">Déconnecter</a>
+            <a class="button primary small" href="../public/index.php?route=logout#begin">Déconnecter</a>
         </form>
     </div>
     </section>

@@ -28,7 +28,7 @@ if(!isset($_SESSION))
                 </div>
                 <!-- Header -->
                 <header id="header">
-                    <a href="index.html" class="logo">Bienvenue</a>
+                    <a href="#begin" class="logo">Bienvenue</a>
                 </header>
                 <!-- Nav -->
                 <?php require_once ($admin)?"AdminNavbar.php":"Navbar.php" ?>

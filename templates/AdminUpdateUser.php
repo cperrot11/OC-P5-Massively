@@ -4,7 +4,7 @@
             <h1 class="display-3">Modification utilisateur</h1>
         </div>
     </div>
-    <form method="post" action="../public/index.php?route=updateUser&appel=back">
+    <form method="post" action="../public/index.php?route=updateUser#begin&appel=back">
         <div class="text-danger">
             <?= isset($_SESSION['error'])? $_SESSION['error']:"" ?>
         </div>
@@ -12,5 +12,5 @@
         <input class="btn btn-outline-success" type="submit" value="Envoyer" id="submit" name="submit">
         <input class="btn btn-outline-danger" type="reset" value="Annuler" id="reset" name="reset">
     </form>
-    <a href="../public/index.php?route=adminUsers">Retour à l'administration des utilisateurs</a>
+    <a href="../public/index.php?route=adminUsers#begin">Retour à l'administration des utilisateurs</a>
 </div>

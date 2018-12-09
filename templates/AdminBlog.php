@@ -7,8 +7,8 @@
            <span class="subheading">Trier le listing en cliquant sur le titre des colonnes.</span><br/>
            <span class="subheading">Vous pouvez modifier le contenu d'un article ou le supprimer.</span>
            <br/>
-           <a class="button primary small" href="../public/index.php?route=addArticle">Ajouter un article</a>
-           <a class="button primary small" href="../public/index.php?route=adminGestion">Retour à l'administration du blog</a>
+           <a class="button primary small" href="../public/index.php?route=addArticle#begin">Ajouter un article</a>
+           <a class="button primary small" href="../public/index.php?route=adminGestion#begin">Retour à l'administration du blog</a>
            <hr>
         <div class="row">
             <?php
@@ -40,9 +40,9 @@
                                 <td><?= htmlspecialchars($article->getTitle());?></td>
                                 <td><?= htmlspecialchars($article->getAuthor());?></td>
                                 <td><?= htmlspecialchars($article->getDateAdded());?></td>
-                                <td><a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>">Lire</a></td>
-                                <td><a href="../public/index.php?route=updateArticle&idArt=<?= htmlspecialchars($article->getId());?>">Modifier</a></td>
-                                <td><a href="../public/index.php?route=deleteArticle&idArt=<?= htmlspecialchars($article->getId());?>">Supprimer</a> </td>
+                                <td><a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin">Lire</a></td>
+                                <td><a href="../public/index.php?route=updateArticle&idArt=<?= htmlspecialchars($article->getId());?>#begin">Modifier</a></td>
+                                <td><a href="../public/index.php?route=deleteArticle&idArt=<?= htmlspecialchars($article->getId());?>#begin">Supprimer</a> </td>
                             </tr>
                         <?php
                     }

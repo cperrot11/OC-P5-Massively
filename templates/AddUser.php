@@ -7,10 +7,10 @@
         </div>
     </div>
     <div>
-        <a class="btn btn-warning btn-sm" href="../public/index.php">Retour à l'accueil</a>
+        <a class="btn btn-warning btn-sm" href="../public/index.php#begin">Retour à l'accueil</a>
     </div>
     <hr class="my-4">
-    <form method="post" action="../public/index.php?route=addUser">
+    <form method="post" action="../public/index.php?route=addUser#begin">
         <div class="text-danger">
             <?= isset($_SESSION['error'])? $_SESSION['error']:"" ?>
         </div>

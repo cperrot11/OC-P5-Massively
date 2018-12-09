@@ -1,9 +1,9 @@
 <?php
 $this->title = "Article";
 ?>
-<section id="main">
+<div id="main">
     <section class="post">
-        <h2 <?= htmlspecialchars($article->getTitle());?></h2>
+        <h2 <?= htmlspecialchars($article->getTitle());?> </h2>
 
         <div>
             <h3><?= htmlspecialchars($article->getContent());?></h3>
@@ -17,7 +17,8 @@ $this->title = "Article";
 
         <div class="row">
             <?php
-            if(isset($_SESSION['error'])) {?>
+            if(isset($_SESSION['error']))
+            {?>
                 <div class="alert alert-dismissible alert-success">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong><?php echo '<p>'.$_SESSION['error'].'</p>';?> </strong>
@@ -30,7 +31,7 @@ $this->title = "Article";
 
         <div>
             <br/>
-            <a class="button" href="../public/index.php">Retour à la liste des articles</a>
+            <a class="button" href="../public/index.php?route=articles#begin">Retour à la liste des articles</a>
         </div>
         <hr>
 
@@ -40,7 +41,11 @@ $this->title = "Article";
                 {
                   echo count($comments)." Commentaires";
                 }
-                else {echo "Pas de commentaire pour l'instant, soignez le premier.";} ?></h3>
+                else
+                    {
+                        echo "Pas de commentaire pour l'instant, soignez le premier.";
+                     } ?>
+                </h3>
 
                 <?php
                 foreach ($comments as $comment)
@@ -63,6 +68,4 @@ $this->title = "Article";
             </div>
         </div>
     </section>
-</section>
-
-
+</div>

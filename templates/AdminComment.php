@@ -7,10 +7,6 @@ if(!isset($_SESSION))
 <?php
 $this->title = "Gestion commentaire";
 ?>
-<head>
-    <link rel="stylesheet" href="../public/css/bootstrap.css">
-    <link rel="stylesheet" href="../public/css/mystyle.css">
-</head>
 <body>
     <style>
         .focus {
@@ -38,7 +34,7 @@ $this->title = "Gestion commentaire";
         </div>
         <div>
             <br/>
-            <a class="btn btn-warning btn-sm" href="../public/index.php?route=adminGestion">Retour à l'administration du blog</a>
+            <a class="btn btn-warning btn-sm" href="../public/index.php?route=adminGestion#begin">Retour à l'administration du blog</a>
         </div>
         <hr class="my-4">
         <div class="row">

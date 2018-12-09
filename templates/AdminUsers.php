@@ -7,10 +7,6 @@ if(!isset($_SESSION))
 <?php
 $this->title = "Gestion des membres";
 ?>
-<head>
-    <link rel="stylesheet" href="../public/css/bootstrap.css">
-    <link rel="stylesheet" href="../public/css/mystyle.css">
-</head>
 <body>
     <style>
         .focus {
@@ -38,8 +34,8 @@ $this->title = "Gestion des membres";
         </div>
         <div>
             <br/>
-            <a class="btn btn-warning btn-sm" href="../public/index.php?route=addUser">Nouvel utilisateur</a>
-            <a class="btn btn-warning btn-sm" href="../public/index.php?route=adminGestion">Retour à l'administration du blog</a>
+            <a class="btn btn-warning btn-sm" href="../public/index.php?route=addUser#begin">Nouvel utilisateur</a>
+            <a class="btn btn-warning btn-sm" href="../public/index.php?route=adminGestion#begin">Retour à l'administration du blog</a>
         </div>
         <hr class="my-4">
         <div class="row">
@@ -72,8 +68,8 @@ $this->title = "Gestion des membres";
                                 <td><?= htmlspecialchars($user->getName());?></td>
                                 <td><?= htmlspecialchars($user->getEmail());?></td>
                                 <td><?= htmlspecialchars($user->getAdmin());?></td>
-                                <td><a href="../public/index.php?route=updateUser&login=<?= htmlspecialchars($user->getLogin());?>&appel=back">Modifier</a></td>
-                                <td><a href="../public/index.php?route=deleteUser&login=<?= htmlspecialchars($user->getLogin());?>">Supprimer</a> </td>
+                                <td><a href="../public/index.php?route=updateUser&login=<?= htmlspecialchars($user->getLogin());?>#begin&appel=back">Modifier</a></td>
+                                <td><a href="../public/index.php?route=deleteUser&login=<?= htmlspecialchars($user->getLogin());?>#begin">Supprimer</a> </td>
                             </tr>
                         <?php
                     }

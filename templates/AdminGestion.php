@@ -14,7 +14,7 @@ $this->title = "Gestion";
         <hr>
         <div class="ligne">
             <div class="boite">
-                    <a href="../public/index.php?route=adminArticles">
+                    <a href="../public/index.php?route=adminArticles#begin">
                         <h3 class="header">Articles</h3>
                         <div>
                             <H1 class="icon fa-newspaper-o"></H1>
@@ -23,7 +23,7 @@ $this->title = "Gestion";
                     </a>
             </div>
             <div class="boite">
-                    <a href="../public/index.php?route=adminCommentaires">
+                    <a href="../public/index.php?route=adminCommentaires#begin">
                         <h3 class="header">Commentaires</h3>
                         <div>
                             <H1 class="icon fa-comments"></H1>
@@ -32,7 +32,7 @@ $this->title = "Gestion";
                     </a>
             </div>
             <div class="boite">
-                    <a href="../public/index.php?route=adminUsers">
+                    <a href="../public/index.php?route=adminUsers#begin">
                         <h3 class="header">Membres</h3>
                         <div>
                             <H1 class="icon fa-user-plus"></H1>
