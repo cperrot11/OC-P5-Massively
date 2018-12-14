@@ -9,11 +9,11 @@ class File extends Field
 
     if (!empty($this->errorMessage))
     {
-      $widget .= '<div class="text-danger">'.$this->errorMessage.'</div>';
-      $widget .= '<input placeholder='.$this->label.' type="file" class="form-control is-invalid" name="'.$this->name.'"';
+      $widget .= '<div class="cpInvalid">'.$this->errorMessage.'</div>';
+      $widget .= '<input type="file" class="is-invalid" name="'.$this->name.'"';
     }
     else{
-        $widget .= '<input placeholder='.$this->label.' type="file" class="form-control" name="'.$this->name.'"';
+        $widget .= '<input type="file" name="'.$this->name.'"';
     }
     if (!empty($this->value))
     {

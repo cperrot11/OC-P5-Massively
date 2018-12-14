@@ -10,20 +10,23 @@
             <?php } ?>
             <div>
                 <br/>
-                <a class="button primary small" href="../public/index.php?route=addUser#begin">Nouvel utilisateur</a>
+                <a class="button primary small" href="../public/index.php?route=addUser&appel=front#begin">Nouvel utilisateur</a>
                 <a class="button primary small" href="../public/index.php#begin">Retour à l'accueil</a>
             </div>
             <hr>
 
     <div class="row">
         <form method="post" action="../public/index.php?route=checkLogin#begin">
-                <?php if (isset($_SESSION['error']))
-                {?>
-                    <div class="alert alert-dismissible alert-success">
-                        <?= $_SESSION['error']?>
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    </div>
-                <?php }?>
+            <?php
+            if(isset($_SESSION['error'])) {?>
+                <div class="cpAlert">
+                    <?php echo '<p>'.$_SESSION['error'].'</p>';?>
+                    <i class="cpClose button icon solo fa-bomb scrolly"></i>
+                </div>
+                <?php
+                unset($_SESSION['error']);
+            }
+            ?>
                 <?php echo $formulaire;?>
             <br/>
             <input class="button primary small" type="submit" value="Connecter" id="submit" name="submit">

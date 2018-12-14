@@ -64,14 +64,14 @@ class UserController
             }
             else
             {
-                $url = "../public/index.php";
+                $url = "../public/index.php?route=login#begin";
                 header("location:".$url);
             }
             return;
         }
         $this->view = new View();
         $data = $form->createView(); // On passe le formulaire généré à la vue.
-        $this->view->render('addUser', ['formulaire' => $data]);
+        $this->view->render('addUser',true, ['formulaire' => $data]);
     }
     public function updateUser()
     {
@@ -82,7 +82,8 @@ class UserController
         }
         $user = new User();
         // si retour de formulaire transfert vers $user
-        if (isset($_POST['submit'])) {
+        if (isset($_POST['submit']))
+        {
             //todo : rajouter une boucle pour tester et alimenter la présence des champs du post
             $user->setLogin($_POST['login']);
             $user->setName($_POST['name']);
@@ -90,7 +91,6 @@ class UserController
             $user->setEmail($_POST['email']);
             if (isset($_POST['admin'])){$_POST['admin']=($_POST['admin']=="on")?1:0;}
             else $_POST['admin']=0;
-
         }
         else{
             //récupère l'user a modifier.
@@ -105,8 +105,7 @@ class UserController
             $this->userDAO->updateUser($_POST);
             $_SESSION['error']='Données utilisateur "'.$user->getName().'" mises à jour !';
             if (isset($_GET['appel']) && $_GET['appel']==="front")
-            {
-                //affiche single article
+            {   //affiche single article
                 $this->frontController->article($_GET['idArt']);
             }
             if (isset($_GET['appel']) && $_GET['appel']==="back")
@@ -116,7 +115,7 @@ class UserController
             return;
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
-        $this->view->render('AdminUpdateUser', ['formulaire' => $data]);
+        $this->view->render('AdminUpdateUser', true,['formulaire' => $data]);
     }
     public function deleteUser($get)
     {
@@ -128,7 +127,7 @@ class UserController
     public function adminUsers()
     {
         $users = $this->userDAO->getUsers();
-        $this->view->render('AdminUsers',['users'=>$users]);
+        $this->view->render('AdminUsers',true,['users'=>$users]);
     }
     public function logout()
     {

@@ -15,19 +15,17 @@ $this->title = "Article";
             </div>
         </div>
 
-        <div class="row">
-            <?php
-            if(isset($_SESSION['error']))
-            {?>
-                <div class="alert alert-dismissible alert-success">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong><?php echo '<p>'.$_SESSION['error'].'</p>';?> </strong>
+        <?php
+            if(isset($_SESSION['error'])) {?>
+                <div class="cpAlert">
+                    <?php echo '<p>'.$_SESSION['error'].'</p>';?>
+                    <i class="cpClose button icon solo fa-bomb scrolly"></i>
                 </div>
                 <?php
                 unset($_SESSION['error']);
             }
-            ?>
-        </div>
+        ?>
+
 
         <div>
             <br/>

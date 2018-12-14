@@ -9,8 +9,8 @@
         <form method="post" action="../public/index.php?route=addComment<?php
          echo "&idArt=".$_GET['idArt'];?>#begin">
             <?= $formulaire;?>
-            <input class="btn btn-outline-success" type="submit" value="Envoyer" id="submit" name="submit">
-            <input class="btn btn-outline-danger" type="reset" value="Annuler" id="reset" name="reset">
+            <input class="button primary small" type="submit" value="Envoyer" id="submit" name="submit">
+            <input class="button primary small" type="reset" value="Annuler" id="reset" name="reset">
         </form>
     </section>
 </div>>

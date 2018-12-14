@@ -14,11 +14,11 @@ class StringField extends Field
 
     if (!empty($this->errorMessage))
     {
-        $widget .= '<div class="text-danger">'.$this->errorMessage.'</div>';
-        $widget .= '<input placeholder='.$this->label.' class="is-invalid" type="text" name="'.$this->name.'"';
+        $widget .= '<div class="cpInvalid">'.$this->errorMessage.'</div>';
+        $widget .= '<label>'.$this->label.'<input placeholder='.$this->label.' class="is-invalid" type="text" name="'.$this->name.'"';
     }
     else{
-        $widget .= '<input placeholder='.$this->label.' type='.$type.' name="'.$this->name.'"';
+        $widget .= '<label>'.$this->label.'<input placeholder='.$this->label.' type='.$type.' name="'.$this->name.'"';
     }
 
     
@@ -36,7 +36,7 @@ class StringField extends Field
         $widget.= 'readonly';
     }
 
-      return $widget .= ' />';
+      return $widget .= ' /></label>';
   }
   
   public function setMaxLength($maxLength)

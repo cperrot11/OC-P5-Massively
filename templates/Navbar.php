@@ -13,7 +13,7 @@
             <li class=<?= ($route==='adminGestion')?"active":"" ?>><a href="index.php?route=adminGestion#begin">Admin</a></li>
         </ul>
         <div class="">
-            <a href="index.php?route=login">
+            <a href="index.php?route=login#begin">
                 <?= isset($_SESSION['role']) ? 'Membre = '.$_SESSION['login']:'Connexion' ?>
             </a>
         </div>

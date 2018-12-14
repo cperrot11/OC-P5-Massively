@@ -6,14 +6,14 @@ $this->title = "Contact";
         <h2>CONTACTEZ-MOI</h2>
         <blockquote>Vos messages sont les bienvenus et je me ferais un plaisir d'y répondre.</blockquote>
         <?php
-            if(isset($_SESSION['error'])) {?>
-                <div class="alert alert-dismissible alert-success">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong><?php echo '<p>'.$_SESSION['error'].'</p>';?> </strong>
-                </div>
-                <?php
-                unset($_SESSION['error']);
-            }
+        if(isset($_SESSION['error'])) {?>
+            <div class="cpAlert">
+                <?php echo '<p>'.$_SESSION['error'].'</p>';?>
+                <i class="cpClose button icon solo fa-bomb scrolly"></i>
+            </div>
+            <?php
+            unset($_SESSION['error']);
+        }
         ?>
         <form method="post" action="../public/index.php?route=contact#begin">
             <?= $formulaire;?>

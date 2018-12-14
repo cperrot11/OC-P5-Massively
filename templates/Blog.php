@@ -5,16 +5,16 @@ $this->title = "Blog";
     <section class="post">
         <h2>Mon blog !</h2>
         <blockquote>Des articles sur les sujets passionnants</blockquote>
+        <?php
+        if(isset($_SESSION['error'])) {?>
+            <div class="cpAlert">
+                <?php echo '<p>'.$_SESSION['error'].'</p>';?>
+                <i class="cpClose button icon solo fa-bomb scrolly"></i>
+            </div>
             <?php
-            if(isset($_SESSION['error'])) {?>
-                <div class="">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong><?php echo '<p>'.$_SESSION['error'].'</p>';?> </strong>
-                </div>
-                <?php
-                unset($_SESSION['error']);
-            }
-            ?>
+            unset($_SESSION['error']);
+        }
+        ?>
             <a class="" href="../public/index.php?route=addArticle#begin">Ajouter un article</a>
             <?php
             if(isset($_SESSION['add_article'])) {?>

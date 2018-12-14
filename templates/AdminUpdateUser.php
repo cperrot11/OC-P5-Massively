@@ -1,16 +1,24 @@
-<div class="container">
-    <div class="row">
-        <div class="jumbotron-fluid">
-            <h1 class="display-3">Modification utilisateur</h1>
-        </div>
-    </div>
-    <form method="post" action="../public/index.php?route=updateUser#begin&appel=back">
-        <div class="text-danger">
-            <?= isset($_SESSION['error'])? $_SESSION['error']:"" ?>
-        </div>
-        <?php echo $formulaire;?>
-        <input class="btn btn-outline-success" type="submit" value="Envoyer" id="submit" name="submit">
-        <input class="btn btn-outline-danger" type="reset" value="Annuler" id="reset" name="reset">
-    </form>
-    <a href="../public/index.php?route=adminUsers#begin">Retour à l'administration des utilisateurs</a>
+<?php
+$this->title = "Gestion des articles";
+?>
+<div id="main">
+    <section class="post">
+        <h2>Modification utilisateur</h2>
+        <form method="post" action="../public/index.php?route=updateUser&appel=back#begin">
+            <?php
+            if(isset($_SESSION['error'])) {?>
+                <div class="cpAlert">
+                    <?php echo '<p>'.$_SESSION['error'].'</p>';?>
+                    <i class="cpClose button icon solo fa-bomb scrolly"></i>
+                </div>
+                <?php
+                unset($_SESSION['error']);
+            }
+            ?>
+            <?php echo $formulaire;?>
+            <input class="button primary small" type="submit" value="Envoyer" id="submit" name="submit">
+            <input class="button primary small" type="reset" value="Annuler" id="reset" name="reset">
+        </form>
+        <a href="../public/index.php?route=adminUsers#begin">Retour à l'administration des utilisateurs</a>
+    </section>
 </div>

@@ -1,21 +1,30 @@
-<div class="container">
-    <div class="row">
-        <div class="jumbotron-fluid">
-            <h1 class="display-3">Création utilisateur</h1>
-            <span class="subheading">Saisir vos coordonnées et votre mot de passe qui sera crypté sur nos serveurs</span>
-            <hr class="my-4">
-        </div>
-    </div>
-    <div>
+
+<?php
+$this->title = "Accueil";
+?>
+<div id="main">
+    <section class="post">
+        <h2>Création utilisateur</h2>
+        <span class="subheading">Saisir vos coordonnées et votre mot de passe qui sera crypté sur nos serveurs</span>
+        <hr>
+
         <a class="btn btn-warning btn-sm" href="../public/index.php#begin">Retour à l'accueil</a>
-    </div>
-    <hr class="my-4">
-    <form method="post" action="../public/index.php?route=addUser#begin">
-        <div class="text-danger">
-            <?= isset($_SESSION['error'])? $_SESSION['error']:"" ?>
-        </div>
-        <?php echo $formulaire;?>
-        <input class="btn btn-outline-success" type="submit" value="Valider" id="submit" name="submit">
-        <input class="btn btn-outline-danger" type="submit" value="Annuler" id="logout" name="logout">
-    </form>
+
+        <hr>
+        <form method="post" action="../public/index.php?route=addUser#begin">
+            <?php
+            if(isset($_SESSION['error'])) {?>
+                <div class="cpAlert">
+                    <?php echo '<p>'.$_SESSION['error'].'</p>';?>
+                    <i class="cpClose button icon solo fa-bomb scrolly"></i>
+                </div>
+                <?php
+                unset($_SESSION['error']);
+            }
+            ?>
+            <?php echo $formulaire;?>
+            <input class="button primary small" type="submit" value="Valider" id="submit" name="submit">
+            <input class="button primary small" type="submit" value="Annuler" id="logout" name="logout">
+        </form>
+    </section>
 </div>

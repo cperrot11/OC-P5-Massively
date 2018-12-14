@@ -14,7 +14,7 @@ class CheckboxField extends Field
         $widget .= '<input class="form-control is-invalid" type="text" name="'.$this->name.'"';
     }
     else{
-        $widget .= '<label>'.$this->label.'</label><input type="checkbox" name="'.$this->name.'"';
+        $widget .= '<span class="fred"> <label>'.$this->label.'</label><input type="checkbox" name="'.$this->name.'"';
     }
 
     
@@ -24,6 +24,6 @@ class CheckboxField extends Field
       $widget .= ' checked';
     }
 
-    return $widget .= ' />';
+    return $widget .= ' /></span>';
   }
 }

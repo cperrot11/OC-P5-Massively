@@ -190,10 +190,14 @@ class BackController
         $form = $formBuilder->form();
         if (isset($_POST['submit']) && $form->isValid() )
             {
-                move_uploaded_file($_FILES['picture']['tmp_name'], 'C:/wamp64/www/OC/P5-Blog PHP/3-POO/App/uploads/' . basename($_FILES['picture']['name']));
+                if (isset($_FILES) and !empty($_FILES))
+                {
+                    move_uploaded_file($_FILES['picture']['tmp_name'], 'C:/wamp64/www/OC/P5-Blog PHP/3-POO/App/uploads/' . basename($_FILES['picture']['name']));
+                }
                 $this->articleDAO->updateArticle($idArt,$_POST,$article->getPicture());
                 $_SESSION['error']='Modification effectuées sur l\'article '.$idArt ;
-                $this->adminArticles();
+                $url = "../public/index.php?route=adminArticles#begin";
+                header("location:".$url);
                 return;
             }
 
@@ -216,9 +220,4 @@ class BackController
         }
         $this->adminArticles();
     }
-
-
-
-
-
 }

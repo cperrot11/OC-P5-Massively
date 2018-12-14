@@ -1,11 +1,7 @@
 <?php
 
 namespace App\src\controller;
-//todo virer de là !!!
-if(!isset($_SESSION))
-{
-    session_start();
-}
+
 
 use App\src\DAO\ArticleDAO;
 use App\src\DAO\CommentDAO;
@@ -69,7 +65,7 @@ class FrontController
             {$this->commentDAO->addComment($_GET['idArt'],$_POST);}
             //affiche single article
             $_SESSION['error']='Commentaire ajouté et en attente de validation';
-            $url = "../public/index.php?route=article&idArt=".$_GET['idArt'];
+            $url = "../public/index.php?route=article&idArt=".$_GET['idArt']."#begin";
             header("location:".$url);
             return;
         }

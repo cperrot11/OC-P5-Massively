@@ -11,6 +11,6 @@ $this->title = "Admin articles";
             <input class="button primary small" type="submit" value="Envoyer" id="submit" name="submit">
             <input class="button primary small" type="reset" value="Annuler">
         </form>
-        <a href="../public/index.php?route=adminArticles">Retour à la gestion des articles</a>
+        <a href="../public/index.php?route=adminArticles#begin">Retour à la gestion des articles</a>
     </section>
 </div>

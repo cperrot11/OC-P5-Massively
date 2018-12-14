@@ -16,10 +16,10 @@ class ArticleForm extends FormBuilder
         $this->form->add(new StringField([
             'label' => 'Titre',
             'name' => 'title',
-            'maxLength' => 30,
+            'maxLength' => 25,
             'validators' => array(
                 new NotNullValidator('Merci de spécifier le titre'),
-                new MaxLengthValidator('Le titre spécifié est trop long 30 max', 30)
+                new MaxLengthValidator('Le titre spécifié est trop long 30 max', 20)
             )
         ]))
             ->add(new TextField([
@@ -40,19 +40,24 @@ class ArticleForm extends FormBuilder
             'label' => 'Date',
             'name' => 'DateAdded',
             'readonly' => true
-        ]))
-            ->add(new File([
+            ]))
+            ->add(new StringField([
+                'label'=>'Fichier image actuel',
+                'name'=>'picture_file',
+                'readonly' => true
+            ]))
+            ->add(new PictureField([
                 'label'=>'Fichier image',
+                'name'=>'picture_file'
+            ]))
+            ->add(new File([
+                'label'=>'Nouveau fichier image',
                 'name'=>'picture',
                 'validators' => array(
                     new PictureSizeValidator('Taille maximum 2Mo',2000000,isset($_FILES['picture'])?$_FILES['picture']['size']:0),
                     new PictureValidator('Extension autorisés = jpg, jpeg, bmp, png uniquement')
                 )
         ]))
-            ->add(new StringField([
-                'label'=>'Fichier image',
-                'name'=>'picture_file',
-                'readonly' => true
-            ]));
+;
     }
 }

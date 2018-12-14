@@ -12,11 +12,11 @@ class TextField extends Field
     
     if (!empty($this->errorMessage))
     {
-      $widget .= '<div class="text-danger">'.$this->errorMessage.'</div>';
-      $widget .= '<textarea placeholder='.$this->label.' class="is-invalid" name="'.$this->name.'"';
+      $widget .= '<div class="cpInvalid">'.$this->errorMessage.'</div>';
+      $widget .= '<label>'.$this->label.'<textarea placeholder='.$this->label.' class="is-invalid" name="'.$this->name.'"';
     }
     else{
-        $widget .= '<textarea placeholder='.$this->label.' name="'.$this->name.'"';
+        $widget .= '<label>'.$this->label.'<textarea placeholder='.$this->label.' name="'.$this->name.'"';
     }
 
     
@@ -37,7 +37,7 @@ class TextField extends Field
       $widget .= htmlspecialchars($this->value);
     }
     
-    return $widget.'</textarea>';
+    return $widget.'</textarea></label>';
   }
   
   public function setCols($cols)

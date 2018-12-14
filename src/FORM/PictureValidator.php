@@ -12,7 +12,9 @@ class PictureValidator extends Validator
   
   public function isValid($file)
   {
-      if(isset($_FILES))
+      if (!isset($_FILES) or $_FILES['picture']['error']===4) {return true;}
+
+      else
       {
           $infosfichier = pathinfo($_FILES['picture']['name']);
           $extension_upload = $infosfichier['extension'];
@@ -28,9 +30,7 @@ class PictureValidator extends Validator
               return false;
           }
       }
-      return true;
   }
-
   
   public function setMaxSize($maxSize)
   {

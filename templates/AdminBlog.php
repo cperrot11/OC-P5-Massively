@@ -31,6 +31,7 @@
                 </tr>
                 </thead>
                 <tbody>
+
                 <?php
                     foreach ($articles as $article)
                     {
@@ -42,7 +43,7 @@
                                 <td><?= htmlspecialchars($article->getDateAdded());?></td>
                                 <td><a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin">Lire</a></td>
                                 <td><a href="../public/index.php?route=updateArticle&idArt=<?= htmlspecialchars($article->getId());?>#begin">Modifier</a></td>
-                                <td><a href="../public/index.php?route=deleteArticle&idArt=<?= htmlspecialchars($article->getId());?>#begin">Supprimer</a> </td>
+                                <td><a href="../public/index.php?route=deleteArticle&idArt=<?= htmlspecialchars($article->getId());?>#begin" onclick="return confirm('Confirmer suppression ?')">Supprimer</a> </td>
                             </tr>
                         <?php
                     }

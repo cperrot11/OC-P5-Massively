@@ -23,7 +23,6 @@
 .colonne
 {
     flex-direction: column;
-
 }
 .cpAlert
 {
@@ -46,6 +45,11 @@
 {
     display: flex;
     text-align: center;
+}
+input[type="checkbox"], input[type="radio"]
+{
+    -webkit-appearance: checkbox !important;
+    opacity: 1;
 }
 
 .boite
@@ -78,3 +82,11 @@
 .asc:after {content: "\25B2"; }
 .desc:after {content: "\25BC"; }
 .table th{border-top: none;}
+
+.is-invalid  {
+    border-color: #d23430 !important;
+}
+.cpInvalid {
+    color: #d23430 !important;
+    font-style: italic;
+}
