@@ -1,6 +1,5 @@
 
     <nav id="nav">
-<!--        <a class="" href="#"><img src="../public/img/avatar.jpg" height="100"/></a>-->
         <?php if (isset($_GET['route']) and $_GET['route']<>'')
                     {$route=$_GET['route'];}
                 else
@@ -8,7 +7,7 @@
         ?>
         <ul class="links" id="begin">
             <li class=<?= ($route==='accueil')?"active":"" ?>><a href="index.php?route=accueil#begin">Accueil</a></li>
-            <li class=<?= ($route==='articles')?"active":"" ?>><a href="index.php?route=articles#begin">Blog</a></li>
+            <li class=<?= stristr($_GET['route'],'Article')?"active":"" ?>><a href="index.php?route=articles#begin">Blog</a></li>
             <li class=<?= ($route==='contact')?"active":"" ?>><a href="index.php?route=contact#begin">Contact</a></li>
             <li class=<?= ($route==='adminGestion')?"active":"" ?>><a href="index.php?route=adminGestion#begin">Admin</a></li>
         </ul>

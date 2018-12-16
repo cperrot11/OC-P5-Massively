@@ -11,7 +11,7 @@
         </div>
         <div>
             <a class="button" href="../public/index.php?route=adminGestion#begin">Retour à l'administration du blog</a>
-            <a class="button" href="../public/index.php">Retour à l'acceuil du blog</a>
+            <a class="button" href="../public/index.php?route=accueil#begin">Retour à l'acceuil du blog</a>
         </div>
     </section>
 </div>

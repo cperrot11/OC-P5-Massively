@@ -49,7 +49,4 @@ $(document).ready(function() {
     }, function(){
         $(this).trigger('stopRumble');
     });
-
-
-
 });

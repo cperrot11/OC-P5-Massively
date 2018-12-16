@@ -79,9 +79,9 @@ class Article extends Entity
     /**
      * @return mixed
      */
-    public function getContent()
+    public function getContent($length=0)
     {
-        return $this->content;
+        return ($length===0)?$this->content:substr($this->content,0,$length);
     }
 
     /**

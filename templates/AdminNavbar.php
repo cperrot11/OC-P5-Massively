@@ -1,10 +1,15 @@
+
     <nav id="nav">
-<!--        <a class="navbar-brand" href="#"><img src="../public/img/reglages.jpg" height="100"/></a>-->
+        <?php if (isset($_GET['route']) and $_GET['route']<>'')
+            {$route=$_GET['route'];}
+        else
+            {$route="accueil";}
+        ?>
         <ul class="links" id="begin">
-                <li class=<?= ($_GET['route']==='accueil')?"active":"" ?>><a href="../public/index.php#begin">Site</a></li>
-                <li class=<?= ($_GET['route']==='adminArticles')?"active":"" ?>><a href="../public/index.php?route=adminArticles#begin">Articles</a></li>
-                <li class=<?= ($_GET['route']==='adminCommentaires')?"active":"" ?>><a href="../public/index.php?route=adminCommentaires#begin">Commentaires</a></li>
-                <li class=<?= ($_GET['route']==='adminUsers')?"active":"" ?>><a href="../public/index.php?route=adminUsers#begin">Membres</a></li>
+                <li class=<?= ($_GET['route']==='accueil')?"active":"" ?>><a href="../public/index.php?route=accueil#begin">Site</a></li>
+                <li class=<?= stristr($_GET['route'],'Article')?"active":"" ?>><a href="../public/index.php?route=adminArticles#begin">Articles</a></li>
+                <li class=<?= stristr($_GET['route'],'comment')?"active":"" ?>><a href="../public/index.php?route=adminCommentaires#begin">Commentaires</a></li>
+                <li class=<?= stristr($_GET['route'],'User')?"active":"" ?>><a href="../public/index.php?route=adminUsers#begin">Membres</a></li>
                 <li class=<?= ($_GET['route']==='adminGestion')?"active":"" ?>><a href="index.php?route=adminGestion#begin">Admin</a></li>
         </ul>
         <div class="">

@@ -10,8 +10,8 @@
             <?php } ?>
             <div>
                 <br/>
-                <a class="button primary small" href="../public/index.php?route=addUser&appel=front#begin">Nouvel utilisateur</a>
-                <a class="button primary small" href="../public/index.php#begin">Retour à l'accueil</a>
+                <a class="button" href="../public/index.php?route=addUser&appel=front#begin">Nouvel utilisateur</a>
+                <a class="button" href="../public/index.php#begin">Retour à l'accueil</a>
             </div>
             <hr>
 

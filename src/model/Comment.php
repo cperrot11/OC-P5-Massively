@@ -78,9 +78,17 @@ class Comment extends Entity
     /**
      * @return mixed
      */
-    public function getContent()
+    public function getContent($length=0)
     {
-        return $this->content;
+        if ($length===0 or strlen($this->content)<$length)
+        {
+            return $this->content;
+        }
+        else
+        {
+            return substr($this->content,0,$length).'...';
+        }
+
     }
 
     /**

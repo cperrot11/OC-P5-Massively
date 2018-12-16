@@ -90,3 +90,9 @@ input[type="checkbox"], input[type="radio"]
     color: #d23430 !important;
     font-style: italic;
 }
+#content {
+    margin-bottom: 100px;
+}
+.no-wrap{
+    white-space: nowrap;
+}

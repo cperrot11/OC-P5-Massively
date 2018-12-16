@@ -41,5 +41,8 @@ $this->title = "Gestion";
                     </a>
             </div>
         </div>
+        <p>
+        <blockquote> <u>Attention </u>: Les modifications apportés içi ont des interractions. Si vous supprimer un article, les commentaires associétés seront également supprimés.</blockquote>
+        </p>
     </section>
 </div>
