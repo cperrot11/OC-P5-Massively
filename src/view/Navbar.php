@@ -7,7 +7,7 @@
         ?>
         <ul class="links" id="begin">
             <li class=<?= ($route==='accueil')?"active":"" ?>><a href="index.php?route=accueil#begin">Accueil</a></li>
-            <li class=<?= stristr($_GET['route'],'Article')?"active":"" ?>><a href="index.php?route=articles#begin">Blog</a></li>
+            <li class=<?= stristr($route,'Article')?"active":"" ?>><a href="index.php?route=articles#begin">Blog</a></li>
             <li class=<?= ($route==='contact')?"active":"" ?>><a href="index.php?route=contact#begin">Contact</a></li>
             <li class=<?= ($route==='adminGestion')?"active":"" ?>><a href="index.php?route=adminGestion#begin">Admin</a></li>
         </ul>

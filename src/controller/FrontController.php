@@ -122,7 +122,6 @@ class FrontController
             'article'=> $article,
             'comments' => $comments
         ]);
-//        $this->view->render('form_comment',true, []);
     }
 
     public function login(){

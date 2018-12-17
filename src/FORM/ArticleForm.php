@@ -16,10 +16,9 @@ class ArticleForm extends FormBuilder
         $this->form->add(new StringField([
             'label' => 'Titre',
             'name' => 'title',
-            'maxLength' => 25,
             'validators' => array(
                 new NotNullValidator('Merci de spécifier le titre'),
-                new MaxLengthValidator('Le titre spécifié est trop long 30 max', 20)
+                new MaxLengthValidator('Le titre spécifié est trop long 50 max', 50)
             )
         ]))
             ->add(new TextField([

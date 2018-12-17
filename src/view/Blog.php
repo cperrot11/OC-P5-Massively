@@ -16,16 +16,6 @@ $this->title = "Blog";
         }
         ?>
             <a class="button" href="../public/index.php?route=addArticle#begin">Ajouter un article</a>
-            <?php
-            if(isset($_SESSION['add_article'])) {?>
-                <div class="alert alert-dismissible alert-success">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>Félicitation!</strong> <?php echo '<p>'.$_SESSION['add_article'].'</p>';?>
-                </div>
-                <?php
-                unset($_SESSION['add_article']);
-            }
-            ?>
     </section>
 
             <?php
@@ -37,16 +27,16 @@ $this->title = "Blog";
                     <article class="post featured">
                         <header class="major">
                             <span class="date">Créé le : <?= htmlspecialchars($article->getDateAdded());?></span>
+                            <h2 class="actions special">
+                                <a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin">
+                                    <?= htmlspecialchars($article->getTitle());?>
+                                </a>
+                            </h2>
                         </header>
-                        <ul class="actions special">
-                            <a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin">
-                                <?= htmlspecialchars($article->getTitle());?>
-                            </a>
-                        </ul>
                         <p>
                             <span class="image main"><img src=<?= "../uploads/".htmlspecialchars($article->getPicture());?> alt="" /></span>
                             <?= htmlspecialchars(substr($article->getContent(),0,200).'...');?></p>
-                        <p class=""><?= htmlspecialchars($article->getAuthor());?></p>
+                        <p>Auteur : <span class="auteur"><?= htmlspecialchars($article->getAuthor());?></span></p>
                         <ul class="actions special">
                             <li><a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin" class="button">Lire la suite</a></li>
                         </ul>
@@ -57,19 +47,19 @@ $this->title = "Blog";
                 else
                 {
                     ?>
-                    <article>
+                    <article class="cpTremble">
                         <header>
                             <span class="date">Créé le : <?= htmlspecialchars($article->getDateAdded());?></span>
                         </header>
-                        <ul class="actions special">
+                        <h3 class="actions special">
                             <a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin">
                                 <?= htmlspecialchars($article->getTitle());?>
                             </a>
-                        </ul>
+                        </h3>
                         <p>
                             <span class="image left"><img src=<?= "../uploads/".htmlspecialchars($article->getPicture());?> alt="" /></span>
                             <?= htmlspecialchars(substr($article->getContent(),0,200).'...');?></p>
-                        <p class=""><?= htmlspecialchars($article->getAuthor());?></p>
+                        <p>Auteur : <span class="auteur"><?= htmlspecialchars($article->getAuthor());?></span></p>
                         <ul class="actions special">
                             <li><a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin" class="button">Lire la suite</a></li>
                         </ul>

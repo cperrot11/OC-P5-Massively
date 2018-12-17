@@ -71,7 +71,7 @@ class BackController
             move_uploaded_file($_FILES['picture']['tmp_name'], 'C:/wamp64/www/OC/P5-Blog PHP/3-POO/App/uploads/' . basename($_FILES['picture']['name']));
             $articleDAO = new ArticleDAO();
             $articleDAO->saveArticle($post,$article->getPicture());
-            $_SESSION['add_article'] = 'Le nouvel article a bien été ajouté';
+            $_SESSION['error'] = 'Le nouvel article a bien été ajouté';
             header('Location: ../public/index.php?route=articles');
             return true;
         }
@@ -106,7 +106,6 @@ class BackController
         $comment = new Comment();
         // si retour de formulaire transfert vers $comment
         if (isset($_POST['submit'])) {
-            //todo : rajouter une boucle pour tester et alimenter la présence des champs du post
             $comment->setPseudo($_POST['pseudo']);
             $comment->setContent($_POST['content']);
         }
@@ -126,6 +125,7 @@ class BackController
             {
                 //affiche single article
                 $this->frontController->article($_GET['idArt']);
+                $this->frontController->addComment($_GET['idArt']);
             }
             if (isset($_GET['appel']) && $_GET['appel']==="back")
             {

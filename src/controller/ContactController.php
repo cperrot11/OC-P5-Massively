@@ -37,7 +37,7 @@ class ContactController
             $this->mail->addReplyTo('c.perrotin@mecanicsud.com', 'Blog');
 
             //Attachments
-            $this->mail->addAttachment('../public/img/avatar.jpg', 'new.jpg');    // Optional name
+            //$this->mail->addAttachment('../public/img/avatar.jpg', 'new.jpg');    // Optional name
 
             //Content
             $this->mail->isHTML(true);                                  // Set email format to HTML

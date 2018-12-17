@@ -13,7 +13,7 @@ $this->title = "Accueil";
             <p>
                 Depuis bientôt 1 an, je m'éclate en découvrant la programmation PHP-Symfony, cette formation trés complète permet de voir énormément de technologie et surtout de mettre en pratique à travers des projets concrets
             </p>
-            <a class="button" href="../public/cv.pdf" target="_blank">Télcharger CV</a>
+            <a class="button" href="../images/cv.pdf" target="_blank">Télcharger CV</a>
             <a class="button" href="../public/index.php?route=articles#begin">Visitez mon blog</a>
         </section>
 </div>
