@@ -49,4 +49,25 @@ $(document).ready(function() {
     }, function(){
         $(this).trigger('stopRumble');
     });
+    $('.validate').click(function () {
+        swal({
+            title: "Etes vous sur ?",
+            text: "Après suppression, il sera impossible de revenir en arrière !",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    var rowToDelete = $(this).parents('tr');
+                    idToDelete = rowToDelete.children('td:first').text();
+                    swal("La suppression a été réalisée", {
+                        icon: "success"
+                    });
+                    window.location.href = $('#path').val()+idToDelete + ' &appel=back#begin';
+                } else {
+                    swal("Suppression annulée");
+                }
+            });
+    })
 });

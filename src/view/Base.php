@@ -46,5 +46,6 @@ if(!isset($_SESSION))
         <script src="../assets/js/main.js"></script>
         <script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"> </script>
         <script src="../assets/js/myJs.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </body>
 </html>

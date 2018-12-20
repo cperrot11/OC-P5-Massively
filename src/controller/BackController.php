@@ -94,7 +94,7 @@ class BackController
     public function adminCommentaires()
     {
         $comments = $this->commentDAO->getCommentAll();
-        $this->view->render('AdminComment',true, ['comments'=> $comments]);
+        return $this->view->render('AdminComment',true, ['comments'=> $comments]);
     }
     public function updateComment()
     {
@@ -130,9 +130,11 @@ class BackController
             if (isset($_GET['appel']) && $_GET['appel']==="back")
             {
                 //affiche single article
-                $this->adminCommentaires();
+                $url = "../public/index.php?route=adminCommentaires#begin";
+                header("location:".$url);
+                return;
             }
-            return;
+
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('AdminUpdateComment',true, ['formulaire' => $data]);
