@@ -43,11 +43,13 @@ $this->title = "Article";
                                 <span> Posté le : <?= htmlspecialchars($comment->getDateAdded());?></span>
                             </div>
                             <p><?= htmlspecialchars($comment->getContent());?></p>
+                            <?php $path = "../public/index.php?route=deleteComment&appel=front&idComment=" ?>
+                            <input type="hidden" id="path" value="<?php echo $path; ?>">
                             <?php if(isset($_SESSION['role']) && $_SESSION['role']==="admin")
                             { ?>
                                 <footer>
                                     <a title="Modifier" class="icon fa-edit" href="../public/index.php?route=updateComment&idArt=<?= htmlspecialchars($article->getId());?>&idComment=<?= htmlspecialchars($comment->getId());?>&appel=front#begin"> Modifier</a>
-                                    <a title="Supprimer" class="icon fa-trash" href="../public/index.php?route=deleteComment&idArt=<?= htmlspecialchars($article->getId());?>&idComment=<?= htmlspecialchars($comment->getId());?>&appel=front#begin" onclick="return confirm('Confirmer suppression ?')"> Supprimer</a>
+                                    <a title="Supprimer" class="icon fa-trash validate" href="../public/index.php?route=deleteComment&idArt=<?= htmlspecialchars($article->getId());?>&idComment=<?= htmlspecialchars($comment->getId());?>&appel=front#begin"> Supprimer</a>
                                 </footer>
                                 <?php
                             } ?>

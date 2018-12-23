@@ -61,10 +61,7 @@ $(document).ready(function() {
                 if (willDelete) {
                     var rowToDelete = $(this).parents('tr');
                     idToDelete = rowToDelete.children('td:first').text();
-                    swal("La suppression a été réalisée", {
-                        icon: "success"
-                    });
-                    window.location.href = $('#path').val()+idToDelete + ' &appel=back#begin';
+                    window.location.href = $('#path').val()+idToDelete + '#begin';
                 } else {
                     swal("Suppression annulée");
                 }
