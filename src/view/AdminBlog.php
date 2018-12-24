@@ -43,7 +43,9 @@
                                 <td class="no-wrap"><?= htmlspecialchars($article->getDateAdded());?></td>
                                 <td><a title="Lire" class="icon fa-book" href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin"></a></td>
                                 <td><a title="Modifier" class="icon fa-edit" href="../public/index.php?route=updateArticle&idArt=<?= htmlspecialchars($article->getId());?>#begin"></a></td>
-                                <td><a title="Supprimer" class="icon fa-trash" href="../public/index.php?route=deleteArticle&idArt=<?= htmlspecialchars($article->getId());?>#begin" onclick="return confirm('Confirmer suppression ?')"></a> </td>
+                                <?php $path = "../public/index.php?route=deleteArticle&idArt=" ?>
+                                <input type="hidden" id="path" value="<?php echo $path; ?>">
+                                <td><a title="Supprimer" class="icon fa-trash validate"></a> </td>
                             </tr>
                         <?php
                     }
