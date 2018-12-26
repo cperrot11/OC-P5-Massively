@@ -122,3 +122,6 @@ input[type="checkbox"], input[type="radio"]
 .connexion{
     margin-right: 3em;
 }
+img{
+    max-width: -webkit-fill-available;
+}

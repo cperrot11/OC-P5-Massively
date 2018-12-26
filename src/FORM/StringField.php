@@ -11,7 +11,7 @@ class StringField extends Field
   {
     $widget = '';
     $type = !($this->password)? '"text"' : '"password"';
-    $widget.= ($this->open)?"<div class='fields'>":"";
+    $widget.= ($this->open)=='open'?"<div class='fields'>":"";
 
     if (!empty($this->errorMessage))
     {
@@ -37,7 +37,7 @@ class StringField extends Field
         $widget.= 'readonly';
     }
     $widget .= ' /></label>';
-    $widget.= ($this->open)?"":"</div>";
+    $widget.= ($this->open)=='close'?"</div>":"";
 
     return $widget;
   }
