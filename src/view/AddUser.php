@@ -6,9 +6,6 @@ $this->title = "Accueil";
     <section class="post">
         <h2>Création utilisateur</h2>
         <span class="subheading">Saisir vos coordonnées et votre mot de passe qui sera crypté sur nos serveurs</span>
-        <hr>
-
-        <a class="btn btn-warning btn-sm" href="../public/index.php#begin">Retour à l'accueil</a>
 
         <hr>
         <form method="post" action="../public/index.php?route=addUser#begin">
@@ -26,5 +23,6 @@ $this->title = "Accueil";
             <input class="button primary small" type="submit" value="Valider" id="submit" name="submit">
             <input class="button primary small" type="submit" value="Annuler" id="logout" name="logout">
         </form>
+        <a class="button" href="../public/index.php#begin">Retour à l'accueil</a>
     </section>
 </div>

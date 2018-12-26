@@ -13,7 +13,7 @@ class File extends Field
       $widget .= '<input type="file" class="is-invalid" name="'.$this->name.'"';
     }
     else{
-        $widget .= '<input type="file" name="'.$this->name.'"';
+        $widget .= '<input type="file" class="field" name="'.$this->name.'"';
     }
     if (!empty($this->value))
     {

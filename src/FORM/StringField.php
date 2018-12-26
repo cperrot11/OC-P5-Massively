@@ -11,14 +11,15 @@ class StringField extends Field
   {
     $widget = '';
     $type = !($this->password)? '"text"' : '"password"';
+    $widget.= ($this->open)?"<div class='fields'>":"";
 
     if (!empty($this->errorMessage))
     {
         $widget .= '<div class="cpInvalid">'.$this->errorMessage.'</div>';
-        $widget .= '<label>'.$this->label.'<input placeholder='.$this->label.' class="is-invalid" type="text" name="'.$this->name.'"';
+        $widget .= '<label class="field half">'.$this->label.'<input placeholder='.$this->label.' class="is-invalid" type="text" name="'.$this->name.'"';
     }
     else{
-        $widget .= '<label>'.$this->label.'<input placeholder='.$this->label.' type='.$type.' name="'.$this->name.'"';
+        $widget .= '<label class="field half">'.$this->label.'<input placeholder='.$this->label.' type='.$type.' name="'.$this->name.'"';
     }
 
     
@@ -35,8 +36,10 @@ class StringField extends Field
     {
         $widget.= 'readonly';
     }
+    $widget .= ' /></label>';
+    $widget.= ($this->open)?"":"</div>";
 
-      return $widget .= ' /></label>';
+    return $widget;
   }
   
   public function setMaxLength($maxLength)

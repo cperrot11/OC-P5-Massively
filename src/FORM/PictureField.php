@@ -10,7 +10,7 @@ class PictureField extends Field
     if (!empty($this->errorMessage))
     {
       $widget .= '<div class="text-danger">'.$this->errorMessage.'</div>';
-      $widget .= '<label>'.$this->label.'<textarea placeholder='.$this->label.' class="is-invalid" name="'.$this->name.'"';
+      $widget .= '<label class="field">'.$this->label.'<textarea placeholder='.$this->label.' class="is-invalid" name="'.$this->name.'"';
     }
     else{
         $widget .= '<span class="image left"><img src="../uploads/'.$this->value.'" alt=""></span>';

@@ -16,11 +16,18 @@ class ArticleForm extends FormBuilder
         $this->form->add(new StringField([
             'label' => 'Titre',
             'name' => 'title',
+            'open' => true,
             'validators' => array(
                 new NotNullValidator('Merci de spécifier le titre'),
                 new MaxLengthValidator('Le titre spécifié est trop long 50 max', 50)
             )
         ]))
+            ->add(new StringField([
+                'label' => 'Date',
+                'name' => 'DateAdded',
+                'open' => false,
+                'readonly' => true
+            ]))
             ->add(new TextField([
                 'label' => 'Contenu',
                 'name' => 'content',
@@ -33,16 +40,14 @@ class ArticleForm extends FormBuilder
             ->add(new StringField([
                 'label' => 'Auteur',
                 'name' => 'author',
+                'open' => true,
                 'readonly' => true
         ]))
-            ->add(new StringField([
-            'label' => 'Date',
-            'name' => 'DateAdded',
-            'readonly' => true
-            ]))
+
             ->add(new StringField([
                 'label'=>'Fichier image actuel',
                 'name'=>'picture_file',
+                'open' => false,
                 'readonly' => true
             ]))
             ->add(new PictureField([

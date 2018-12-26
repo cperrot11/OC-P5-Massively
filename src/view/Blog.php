@@ -3,8 +3,12 @@ $this->title = "Blog";
 ?>
 <div id="main">
     <section class="post">
-        <h2>Mon blog !</h2>
-        <blockquote>Des articles sur les sujets passionnants</blockquote>
+        <h2>Bienvenue sur mon blog !</h2>
+        <blockquote>
+            <span>Ci dessous des articles sur des sujets passionnants.<br></span>
+            <span>Vous êtes invité à participer et donner votre avis.<br></span>
+            <span> Merci pour votre collaboration.</span>
+        </blockquote>
         <?php
         if(isset($_SESSION['error'])) {?>
             <div class="cpAlert">

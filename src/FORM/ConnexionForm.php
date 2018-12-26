@@ -19,7 +19,7 @@ class ConnexionForm extends FormBuilder
             'maxLength' => 50,
             'validators' => array(
                 new NotNullValidator('Merci de spécifier votre pseudo'),
-                new MaxLengthValidator('pseudo spécifié est trop long 10 max', 10)
+                new MaxLengthValidator('pseudo spécifié est trop long 50 max', 50)
             )
             ]))
             ->add(new StringField([
@@ -29,7 +29,7 @@ class ConnexionForm extends FormBuilder
                 'maxLength' => 20,
                 'validators' => array(
                     new NotNullValidator('Merci de saisir un mot de passe'),
-                    new MaxLengthValidator('mot de passe trop long 10 max', 20)
+                    new MaxLengthValidator('mot de passe trop long 20 max', 20)
                 )
             ]))
         ;

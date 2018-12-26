@@ -42,10 +42,14 @@ $(document).ready(function() {
         x: 2,
         y: 2,
         rotation: 1,
-        speed: 100
+        speed: 50
     });
+    var demoTimeout;
     $('.cpTremble').hover(function(){
+        $this = $(this);
+        clearTimeout(demoTimeout);
         $(this).trigger('startRumble');
+        demoTimeout = setTimeout(function(){$this.trigger('stopRumble');}, 600);
     }, function(){
         $(this).trigger('stopRumble');
     });
@@ -62,6 +66,7 @@ $(document).ready(function() {
                     var rowToDelete = $(this).parents('tr');
                     idToDelete = rowToDelete.children('td:first').text();
                     window.location.href = $('#path').val()+idToDelete + '#begin';
+                    swal("Suppression réussie");
                 } else {
                     swal("Suppression annulée");
                 }

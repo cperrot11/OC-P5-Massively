@@ -51,7 +51,7 @@ class UserDAO extends DAO
     {
         extract($user);
         //vériif si utilisateur existant
-        if ($this->CheckUser($login,$pass)<>false)
+        if ($this->getUser($login))
         {
             $_SESSION['error'] = "L'utilisateur existe déjà";
             return false;
