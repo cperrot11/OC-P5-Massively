@@ -188,6 +188,9 @@ class BackController
             if (isset($_POST['title']) && !empty($_POST['title'])) {
                 $article->setTitle($_POST['title']);
             }
+            if (isset($_POST['chapo']) && !empty($_POST['chapo'])) {
+                $article->setChapo($_POST['chapo']);
+            }
             if (isset($_POST['content']) && !empty($_POST['content'])) {
                 $article->setContent($_POST['content']);
             }

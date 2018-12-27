@@ -36,6 +36,12 @@
 {
     margin-left: 2rem;
 }
+header>blockquote
+{
+    text-align: left;
+    font-weight: bold;
+    font-style: italic;
+}
 
 .icon.solo
 {
@@ -85,6 +91,10 @@ input[type="checkbox"], input[type="radio"]
     font-style: italic;
     line-height: 1.2em;
 }
+.posts footer {
+    display: flex;
+    justify-content: space-between;
+}
 /*table*/
 .focus {
     background-color: #18bfef !important;
@@ -116,6 +126,7 @@ input[type="checkbox"], input[type="radio"]
     font-weight: bold;
     text-transform: capitalize;
 }
+
 .no-wrap{
     white-space: nowrap;
 }

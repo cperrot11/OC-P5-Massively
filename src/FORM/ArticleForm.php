@@ -28,6 +28,14 @@ class ArticleForm extends FormBuilder
                 'open' => 'close',
                 'readonly' => true
             ]))
+            ->add(new StringField([
+                'label' => 'Chapô',
+                'name' => 'chapo',
+                'validators' => array(
+                    new NotNullValidator('Merci de spécifier le chapô'),
+                    new MaxLengthValidator('Le chapô spécifié est trop long 512 max', 512)
+                )
+            ]))
             ->add(new TextField([
                 'label' => 'Contenu',
                 'name' => 'content',

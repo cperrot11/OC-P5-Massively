@@ -14,9 +14,11 @@ $this->title = "Article";
     ?>
     <article class="post featured">
         <header class="major">
-            <span class="date">Créé le : <?= htmlspecialchars($article->getDateAdded());?></span>
+            <span class="date">Modifié le : <?= htmlspecialchars($article->getDateAdded());?></span>
             <h2> <?= htmlspecialchars($article->getTitle());?> </h2>
+            <blockquote> <?= htmlspecialchars($article->getChapo());?></blockquote>
         </header>
+
         <div class="image main"><img src=<?= "../uploads/".htmlspecialchars($article->getPicture());?> alt="" /></div>
         <p><?= htmlspecialchars($article->getContent());?></p>
 
