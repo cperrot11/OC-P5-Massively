@@ -52,6 +52,10 @@ class BackController
             {
                 $article->setTitle($_POST['title']);
             }
+            if (isset($_POST['chapo']) && !empty($_POST['chapo']))
+            {
+                $article->setChapo($_POST['chapo']);
+            }
             if (isset($_POST['content']) && !empty($_POST['content']))
             {
                 $article->setContent($_POST['content']);
@@ -70,14 +74,19 @@ class BackController
         {
             move_uploaded_file($_FILES['picture']['tmp_name'], 'C:/wamp64/www/OC/P5-Blog PHP/3-POO/App/uploads/' . basename($_FILES['picture']['name']));
             $articleDAO = new ArticleDAO();
-            $articleDAO->saveArticle($post,$article->getPicture());
-            $_SESSION['error'] = 'Le nouvel article a bien été ajouté';
+            if ($articleDAO->saveArticle($post,$article->getPicture())!='false')
+            {
+                $_SESSION['error'] = 'Le nouvel article a bien été ajouté';
+            }
+            else
+            {
+                $_SESSION['error'] = 'Création article impossible : '.$_SESSION['error'];
+            }
             header('Location: ../public/index.php?route=articles');
             return true;
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('AdminAddArticle',true, ['formulaire' => $data]);
-
     }
     public function adminGestion()
     {
@@ -124,12 +133,15 @@ class BackController
             if (isset($_GET['appel']) && $_GET['appel']==="front")
             {
                 //affiche single article
-                $this->frontController->article($_GET['idArt']);
-                $this->frontController->addComment($_GET['idArt']);
+//                $this->frontController->article($_GET['idArt']);
+//                $this->frontController->addComment($_GET['idArt']);
+                $url = "../public/index.php?route=article&idArt=".$_GET['idArt']."#begin";
+                header("location:".$url);
+                return;
+
             }
             if (isset($_GET['appel']) && $_GET['appel']==="back")
             {
-                //affiche single article
                 $url = "../public/index.php?route=adminCommentaires#begin";
                 header("location:".$url);
                 return;
@@ -233,6 +245,7 @@ class BackController
         {
             $_SESSION['error'] = 'Suppression impossible';
         }
-        $this->adminArticles();
+        $url = "../public/index.php?route=adminArticles#begin";
+        header("location:".$url);
     }
 }

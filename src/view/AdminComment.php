@@ -47,10 +47,9 @@ $this->title = "Gestion commentaire";
                                     </a>
                                 </td>
                                 <td><a title="Modifier" class="icon fa-edit" href="../public/index.php?route=updateComment&idArt=<?= htmlspecialchars($comment->getArticleId());?>&idComment=<?= htmlspecialchars($comment->getId());?>&appel=back#begin"></a></td>
-                                <?php $path = "../public/index.php?route=deleteComment&appel=back&idComment=" ?>
                                 <td>
                                     <form id="deleteform<?= $comment->getId();?>" method="post" action="../public/index.php?route=deleteComment&appel=back&idComment=<?= $comment->getId();?>">
-                                        <a class="icon fa-trash delete" type="submit"/>
+                                        <a class="icon fa-trash delete" title="Supprimer" type="submit"/>
                                     </form>
                                 </td>
                             </tr>
