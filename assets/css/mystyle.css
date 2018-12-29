@@ -95,6 +95,17 @@ input[type="checkbox"], input[type="radio"]
     display: flex;
     justify-content: space-between;
 }
+.posts p {
+    text-align: justify;
+    line-height: 1.6;
+    margin: 1rem 0 1rem 0;
+}
+#main > .posts > * {
+    padding: 1rem 3rem 2rem 3rem  !important;
+}
+.posts footer p {
+    margin: 0 !important;
+}
 /*table*/
 .focus {
     background-color: #18bfef !important;
@@ -134,5 +145,5 @@ input[type="checkbox"], input[type="radio"]
     margin-right: 3em;
 }
 img{
-    max-width: -webkit-fill-available;
+    max-width: initial;
 }

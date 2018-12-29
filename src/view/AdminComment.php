@@ -48,8 +48,11 @@ $this->title = "Gestion commentaire";
                                 </td>
                                 <td><a title="Modifier" class="icon fa-edit" href="../public/index.php?route=updateComment&idArt=<?= htmlspecialchars($comment->getArticleId());?>&idComment=<?= htmlspecialchars($comment->getId());?>&appel=back#begin"></a></td>
                                 <?php $path = "../public/index.php?route=deleteComment&appel=back&idComment=" ?>
-                                <input type="hidden" id="path" value="<?php echo $path; ?>">
-                                <td><a title="Supprimer" class="icon fa-trash validate"></a> </td>
+                                <td>
+                                    <form id="deleteform<?= $comment->getId();?>" method="post" action="../public/index.php?route=deleteComment&appel=back&idComment=<?= $comment->getId();?>">
+                                        <a class="icon fa-trash delete" type="submit"/>
+                                    </form>
+                                </td>
                             </tr>
                         <?php
                     }

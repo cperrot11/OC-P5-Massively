@@ -55,7 +55,6 @@ $this->title = "Blog";
                     ?>
                     <article class="cpTremble">
                         <header>
-                            <span class="date">Modifié le : <?= htmlspecialchars($article->getDateAdded());?></span>
                             <a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin">
                                 <?= htmlspecialchars($article->getTitle());?>
                             </a>
@@ -65,7 +64,10 @@ $this->title = "Blog";
                             <?= htmlspecialchars($article->getChapo(250))."...";?>
                         </p>
                         <footer>
-                            <span>Auteur : <span class="auteur"><?= htmlspecialchars($article->getAuthor());?></span></span>
+                            <div>
+                                <p>Auteur : <span class="auteur"><?= htmlspecialchars($article->getAuthor());?></span></p>
+                                <p class="date">Modifié le : <?= htmlspecialchars($article->getDateAdded());?></p>
+                            </div>
                             <a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin" class="button">Lire la suite</a>
                         </footer>
                     </article>
