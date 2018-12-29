@@ -8,7 +8,7 @@ class ArticleDAO extends DAO
 {
     public function getArticles()
     {
-        $sql = 'SELECT id, title, content, author, date_added, picture FROM article ORDER BY id DESC';
+        $sql = 'SELECT id, title, chapo, content, author, date_added, picture FROM article ORDER BY date_added DESC';
         $result = $this->sql($sql);
         $articles = [];
         foreach ($result as $row) {
@@ -20,7 +20,7 @@ class ArticleDAO extends DAO
 
     public function getArticle($idArt)
     {
-        $sql = 'SELECT id, title, content, author, date_added, picture FROM article WHERE id = ?';
+        $sql = 'SELECT id, title, chapo, content, author, date_added, picture FROM article WHERE id = ?';
         $result = $this->sql($sql, [$idArt]);
         $row = $result->fetch();
         if($row) {
@@ -34,15 +34,15 @@ class ArticleDAO extends DAO
     {
         //Permet de récupérer les variables $title, $content et $author
         extract($article);
-        $sql = 'INSERT INTO article (title, content, author, picture, date_added) VALUES (?, ?, ?, ?,NOW())';
-        $this->sql($sql, [$title, $content, $author, $picture]);
+        $sql = 'INSERT INTO article (title, chapo, content, author, picture, date_added) VALUES (?, ?, ?, ?, ?,NOW())';
+        $this->sql($sql, [$title, $chapo, $content, $author, $picture]);
     }
 
     public function updateArticle($idArt,$post,$picture)
     {
         extract($post);
-        $sql = 'UPDATE article set title=?,content=?,date_added=NOW(),picture=? WHERE id= ?';
-        $this->sql($sql, [$title,$content,$picture,intval($idArt)]);
+        $sql = 'UPDATE article set title=?,chapo=?, content=?,date_added=NOW(),picture=? WHERE id= ?';
+        $this->sql($sql, [$title,$chapo,$content,$picture,intval($idArt)]);
     }
     public function deleteArticle($idArt)
     {
@@ -57,6 +57,7 @@ class ArticleDAO extends DAO
     {
         $article = new Article();
         $article->setId($row['id']);
+        $article->setChapo($row['chapo']);
         $article->setTitle($row['title']);
         $article->setContent($row['content']);
         $article->setPicture($row['picture']);

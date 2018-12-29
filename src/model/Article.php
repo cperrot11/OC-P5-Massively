@@ -6,6 +6,7 @@ class Article extends Entity
 {
     private $id;
     private $title;
+    private $chapo;
     private $content;
     private $author;
     private $picture;
@@ -74,6 +75,21 @@ class Article extends Entity
     public function setTitle($title)
     {
         $this->title = $title;
+    }
+    /**
+     * @return mixed
+     */
+    public function getChapo($length=0)
+    {
+        return ($length===0)?$this->chapo:substr($this->chapo,0,$length);
+    }
+
+    /**
+     * @param mixed $chapo
+     */
+    public function setChapo($chapo): void
+    {
+        $this->chapo = $chapo;
     }
 
     /**

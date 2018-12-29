@@ -20,6 +20,7 @@ $this->title = "Blog";
         }
         ?>
             <a class="button" href="../public/index.php?route=addArticle#begin">Ajouter un article</a>
+            <a class="button" href="../public/index.php?route=articles#first">Entrez...</a>
     </section>
 
             <?php
@@ -28,14 +29,15 @@ $this->title = "Blog";
             {
                 if ($cpt===0)
                 {?>
-                    <article class="post featured">
+                    <article id="first" class="post featured">
                         <header class="major">
-                            <span class="date">Créé le : <?= htmlspecialchars($article->getDateAdded());?></span>
+                            <span class="date">Modifié le : <?= htmlspecialchars($article->getDateAdded());?></span>
                             <h2 class="actions special">
                                 <a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin">
                                     <?= htmlspecialchars($article->getTitle());?>
                                 </a>
                             </h2>
+                            <blockquote><?= htmlspecialchars($article->getChapo(200))."...";?></blockquote>
                         </header>
                         <p>
                             <span class="image main"><img src=<?= "../uploads/".htmlspecialchars($article->getPicture());?> alt="" /></span>
@@ -53,20 +55,21 @@ $this->title = "Blog";
                     ?>
                     <article class="cpTremble">
                         <header>
-                            <span class="date">Créé le : <?= htmlspecialchars($article->getDateAdded());?></span>
-                        </header>
-                        <h3 class="actions special">
                             <a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin">
                                 <?= htmlspecialchars($article->getTitle());?>
                             </a>
-                        </h3>
+                        </header>
                         <p>
                             <span class="image left"><img src=<?= "../uploads/".htmlspecialchars($article->getPicture());?> alt="" /></span>
-                            <?= htmlspecialchars(substr($article->getContent(),0,200).'...');?></p>
-                        <p>Auteur : <span class="auteur"><?= htmlspecialchars($article->getAuthor());?></span></p>
-                        <ul class="actions special">
-                            <li><a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin" class="button">Lire la suite</a></li>
-                        </ul>
+                            <?= htmlspecialchars($article->getChapo(250))."...";?>
+                        </p>
+                        <footer>
+                            <div>
+                                <p>Auteur : <span class="auteur"><?= htmlspecialchars($article->getAuthor());?></span></p>
+                                <p class="date">Modifié le : <?= htmlspecialchars($article->getDateAdded());?></p>
+                            </div>
+                            <a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin" class="button">Lire la suite</a>
+                        </footer>
                     </article>
                     <?php
                 }

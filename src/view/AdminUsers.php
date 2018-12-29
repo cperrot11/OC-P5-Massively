@@ -41,9 +41,11 @@
                                     <td><?= htmlspecialchars($user->getEmail());?></td>
                                     <td><?= htmlspecialchars($user->getAdmin());?></td>
                                     <td><a title="Modifier" class="icon fa-edit" href="../public/index.php?route=updateUser&login=<?= htmlspecialchars($user->getLogin());?>&appel=back#begin"></a></td>
-                                    <?php $path = "../public/index.php?route=deleteUser&login=" ?>
-                                    <input type="hidden" id="path" value="<?php echo $path; ?>">
-                                    <td><a title="Supprimer" class="icon fa-trash validate"></a> </td>
+                                    <td>
+                                        <form id="deleteform<?= $user->getLogin();?>" method="post" action="../public/index.php?route=deleteUser&login=<?= htmlspecialchars($user->getLogin());?>">
+                                            <a title="Supprimer" class="icon fa-trash delete" type="submit"/>
+                                        </form>
+                                    </td>
                                 </tr>
                             <?php
                         }

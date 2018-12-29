@@ -53,23 +53,25 @@ $(document).ready(function() {
     }, function(){
         $(this).trigger('stopRumble');
     });
-    $('.validate').click(function () {
+   $('.delete').click(function (e) {
+        e.preventDefault();
+        console.log($(this).parent());
+
         swal({
-            title: "Etes vous sur ?",
-            text: "Après suppression, il sera impossible de revenir en arrière !",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-            .then((willDelete) => {
-                if (willDelete) {
-                    var rowToDelete = $(this).parents('tr');
-                    idToDelete = rowToDelete.children('td:first').text();
-                    window.location.href = $('#path').val()+idToDelete + '#begin';
-                    swal("Suppression réussie");
-                } else {
-                    swal("Suppression annulée");
-                }
-            });
+                    title: "Etes vous sur ?",
+                    text: "Après suppression, il sera impossible de revenir en arrière !",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            var parent = $(this).parent();
+                            var form = parent[0].id;
+                            $('#'+form).submit();
+                        } else {
+                            swal("Suppression annulée");
+                        }
+                    });
     })
 });
