@@ -13,7 +13,7 @@ $this->title = "Gestion commentaire";
             <?php
             if(isset($_SESSION['error'])) {?>
                 <div class="cpAlert">
-                    <?php echo '<p>'.$_SESSION['error'].'</p>';?>
+                    <?= '<p>'.$_SESSION['error'].'</p>';?>
                     <i class="cpClose button icon solo fa-bomb scrolly"></i>
                 </div>
                 <?php
@@ -40,13 +40,16 @@ $this->title = "Gestion commentaire";
                                 <td><?= htmlspecialchars($comment->getPseudo());?></td>
                                 <td><?= htmlspecialchars($comment->getContent(80));?></td>
                                 <td class="no-wrap"><?= htmlspecialchars($comment->getDateAdded());?></td>
-                                <td><?= htmlspecialchars($comment->getArticleId());?></td>
-                                <td><a title="Valider O/N" class=<?= ($comment->getValide()==="1")?'"icon fa-check-square"':'"icon fa-square"'?>
-                                       href="../public/index.php?route=valideComment&idComment=<?= htmlspecialchars($comment->getId());?>&valide=<?= htmlspecialchars($comment->getValide());?>#begin">
+                                <td><a title="Lire article" href="../public/index.php?route=article&idArt=<?= htmlspecialchars($comment->getArticleId());?>#begin">
+                                    <?= htmlspecialchars($comment->getArticleId());?>
+                                </td></a>
+                                <td><a title="Valider O/N" class=<?= ($comment->getValide()==="1")?'"icon fa-check-square"':'"icon fa-square"' ?> href="../public/index.php?route=valideComment&idComment=<?= htmlspecialchars($comment->getId());?>&valide=<?= htmlspecialchars($comment->getValide());?>#begin">
                                     </a>
                                 </td>
                                 <td><a title="Modifier" class="icon fa-edit" href="../public/index.php?route=updateComment&idArt=<?= htmlspecialchars($comment->getArticleId());?>&idComment=<?= htmlspecialchars($comment->getId());?>&appel=back#begin"></a></td>
-                                <td><a title="Supprimer" class="icon fa-trash" href="../public/index.php?route=deleteComment&idComment=<?= htmlspecialchars($comment->getId());?>&appel=back#begin" onclick="return confirm('Confirmer suppression ?')"></a> </td>
+                                <?php $path = "../public/index.php?route=deleteComment&appel=back&idComment=" ?>
+                                <input type="hidden" id="path" value="<?php echo $path; ?>">
+                                <td><a title="Supprimer" class="icon fa-trash validate"></a> </td>
                             </tr>
                         <?php
                     }
@@ -55,6 +58,6 @@ $this->title = "Gestion commentaire";
             </table>
 
         </div>
-    </section>>
+    </section>
 </div>
 

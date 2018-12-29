@@ -12,6 +12,23 @@ abstract class Field
   protected $value;
   protected $password=false;
   protected $readonly=false;
+  protected $open;
+
+    /**
+     * @return mixed
+     */
+    public function getOpen()
+    {
+        return $this->open;
+    }
+
+    /**
+     * @param mixed $open
+     */
+    public function setOpen($open): void
+    {
+        $this->open = $open;
+    }
   
   public function __construct(array $options = [])
   {

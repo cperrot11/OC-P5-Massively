@@ -94,7 +94,7 @@ class BackController
     public function adminCommentaires()
     {
         $comments = $this->commentDAO->getCommentAll();
-        $this->view->render('AdminComment',true, ['comments'=> $comments]);
+        return $this->view->render('AdminComment',true, ['comments'=> $comments]);
     }
     public function updateComment()
     {
@@ -130,20 +130,28 @@ class BackController
             if (isset($_GET['appel']) && $_GET['appel']==="back")
             {
                 //affiche single article
-                $this->adminCommentaires();
+                $url = "../public/index.php?route=adminCommentaires#begin";
+                header("location:".$url);
+                return;
             }
-            return;
+
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('AdminUpdateComment',true, ['formulaire' => $data]);
     }
-    public  function valideComment($get)
+    public function valideComment($get)
     {
         if (!$this->commentDAO->valideComment($get))
         {
-            $_SESSION['error'] = 'Validation impossible';
+            $_SESSION['error'] = 'Modification impossible';
         }
-        $this->adminCommentaires();
+        else
+        {
+            $_SESSION['error'] = 'Modification effectuée.';
+        }
+        $url = "../public/index.php?route=adminCommentaires#begin";
+        header("location:".$url);
+        return;
 
     }
     public function deleteComment($get)
@@ -152,12 +160,16 @@ class BackController
         $this->commentDAO->deleteComment($get['idComment']);
         if (isset($_GET['appel']) && $_GET['appel']==="front")
         {
-            $this->frontController->article($get['idArt']);
+            $url = "../public/index.php?route=article&idArt=".$get['idArt']."#begin";
+            header("location:".$url);
         }
         if (isset($_GET['appel']) && $_GET['appel']==="back")
         {
-            $this->adminCommentaires();
+            $url = "../public/index.php?route=adminCommentaires#begin";
+            header("location:".$url);
         }
+        $_SESSION['error']="Commentaire supprimé";
+        return;
     }
 
     public function adminArticles()

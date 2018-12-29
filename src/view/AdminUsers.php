@@ -41,7 +41,9 @@
                                     <td><?= htmlspecialchars($user->getEmail());?></td>
                                     <td><?= htmlspecialchars($user->getAdmin());?></td>
                                     <td><a title="Modifier" class="icon fa-edit" href="../public/index.php?route=updateUser&login=<?= htmlspecialchars($user->getLogin());?>&appel=back#begin"></a></td>
-                                    <td><a title="Supprimer" class="icon fa-trash" href="../public/index.php?route=deleteUser&login=<?= htmlspecialchars($user->getLogin());?>#begin" onclick="return confirm('Confirmer suppression ?')"></a> </td>
+                                    <?php $path = "../public/index.php?route=deleteUser&login=" ?>
+                                    <input type="hidden" id="path" value="<?php echo $path; ?>">
+                                    <td><a title="Supprimer" class="icon fa-trash validate"></a> </td>
                                 </tr>
                             <?php
                         }

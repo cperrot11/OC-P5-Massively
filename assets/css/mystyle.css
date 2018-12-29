@@ -119,3 +119,9 @@ input[type="checkbox"], input[type="radio"]
 .no-wrap{
     white-space: nowrap;
 }
+.connexion{
+    margin-right: 3em;
+}
+img{
+    max-width: -webkit-fill-available;
+}

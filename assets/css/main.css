@@ -2277,6 +2277,7 @@ input, select, textarea {
 					width: calc(50% - 0.75rem);
 				}
 
+
 				form > .fields > .field.third {
 					width: calc(100%/3 - 0.5rem);
 				}

@@ -6,21 +6,21 @@ class File extends Field
   public function buildWidget()
   {
     $widget = '';
-
+    $widget.= ($this->open)=='open'?"<div class='fields'>":"";
     if (!empty($this->errorMessage))
     {
       $widget .= '<div class="cpInvalid">'.$this->errorMessage.'</div>';
-      $widget .= '<input type="file" class="is-invalid" name="'.$this->name.'"';
+      $widget .= '<label class="field half">Nouveau fichier<input type="file" class="is-invalid" name="'.$this->name.'"';
     }
     else{
-        $widget .= '<input type="file" name="'.$this->name.'"';
+        $widget .= '<label class="field half">Nouveau fichier<input type="file" class="field half" name="'.$this->name.'"';
     }
     if (!empty($this->value))
     {
         $widget .= htmlspecialchars($this->value);
     }
-    $widget .= '>';
-
-    return $widget.'</input>';
+    $widget.= '></input></label>';
+    $widget.= ($this->open)=='close'?"</div>":"";
+    return $widget;
   }
 }

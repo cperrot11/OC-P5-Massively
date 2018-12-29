@@ -50,7 +50,7 @@ class UserController
                 {
                     $_SESSION['login']= $_POST['login'];
                     $_SESSION['role'] = "membre";
-                    $_SESSION['error']="<p>L'utilisateur '".$this->user->getName()."' a été créé en tant que membre !</p><p>Pour devenir administrateur, voir avec un administrateur en place</p>";
+                    $_SESSION['error']="<p>L'utilisateur '".$this->user->getName()."' a été créé en tant que membre, pour devenir administrateur, voir avec un administrateur déjà en place</p>";
                 }
             else
                 {
@@ -84,7 +84,6 @@ class UserController
         // si retour de formulaire transfert vers $user
         if (isset($_POST['submit']))
         {
-            //todo : rajouter une boucle pour tester et alimenter la présence des champs du post
             $user->setLogin($_POST['login']);
             $user->setName($_POST['name']);
             $user->setPass($_POST['pass']);
@@ -121,7 +120,10 @@ class UserController
     {
         extract($get);
         $this->userDAO->deleteUser($get['login']);
-        $this->adminUsers();
+        $_SESSION['error']="Utilisateurs + ses articles supprimés.";
+        $url = "../public/index.php?route=adminUsers#begin";
+        header("location:".$url);
+        return;
     }
 
     public function adminUsers()

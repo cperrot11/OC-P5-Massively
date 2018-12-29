@@ -152,7 +152,8 @@ class FrontController
             {
                 $_SESSION['login']= $test->getLogin();
                 $_SESSION['role'] = ($test->getAdmin())? "admin":"membre";
-                $url = "../public/index.php";
+                $_SESSION['error']= "Vous êtes à présent connecté et pouvez commenter les articles.";
+                $url = "../public/index.php?route=articles#begin";
             }
             else
             {

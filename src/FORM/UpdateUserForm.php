@@ -17,9 +17,10 @@ class UpdateUserForm extends FormBuilder
             'label' => 'Pseudo ',
             'name' => 'login',
             'maxLength' => 50,
+            'readonly' => true,
             'validators' => array(
                 new NotNullValidator('Merci de spécifier votre pseudo'),
-                new MaxLengthValidator('pseudo spécifié est trop long 10 max', 10)
+                new MaxLengthValidator('pseudo spécifié est trop long 50 max', 50)
             )
             ]))
             ->add(new StringField([
