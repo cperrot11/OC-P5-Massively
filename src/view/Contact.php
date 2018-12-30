@@ -3,7 +3,7 @@ $this->title = "Contact";
 ?>
 <div id="main">
     <section class="post">
-        <h2>CONTACTEZ-MOI</h2>
+        <h2 id="contact">CONTACTEZ-MOI</h2>
         <blockquote>Vos messages sont les bienvenus et je me ferais un plaisir d'y répondre.</blockquote>
         <?php
         if(isset($_SESSION['error'])) {?>

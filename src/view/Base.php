@@ -35,6 +35,14 @@ if(!isset($_SESSION))
                     <?= $content ?>
             </div>
         </div>
+        <!-- Copyright -->
+        <div id="copyright">
+            <ul>
+                <li>&copy; C.PERROTIN</li>
+                <li><a href="../public/index.php?route=adminGestion#begin">Administration</a></li>
+                <li><a href="#begin">Retour menu</a></li>
+            </ul>
+        </div>
         <!-- Scripts -->
         <script src="../assets/js/jquery.js"></script>
         <script src="../assets/js/jquery.jrumble.1.3.min.js"></script>
