@@ -75,7 +75,7 @@ input[type="checkbox"], input[type="radio"]
     margin: 1rem 0 1rem 0;
 }
 #main > .posts > * {
-    padding: 1rem 3rem 2rem 3rem  !important;
+    padding: 1rem 3rem 2rem 3rem ;
 }
 .posts footer p {
     margin: 0 !important;
