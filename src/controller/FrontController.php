@@ -6,7 +6,7 @@ namespace App\src\controller;
 use App\src\DAO\ArticleDAO;
 use App\src\DAO\CommentDAO;
 use App\src\DAO\UserDAO;
-use App\src\controller\ContactController;
+use App\src\controller\MessageController;
 use App\src\FORM\CommentForm;
 use App\src\FORM\ConnexionForm;
 use App\src\FORM\ContactForm;
@@ -76,7 +76,7 @@ class FrontController
     public function contact()
     {
         $message = new Message();
-        $contact = new ContactController();
+        $contact = new MessageController();
         if (isset($_POST['submit'])) {
             $message->setNom($_POST['nom']);
             $message->setMail($_POST['mail']);

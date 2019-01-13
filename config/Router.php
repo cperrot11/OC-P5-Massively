@@ -1,127 +1,140 @@
 <?php
+/**
+ * Use for autoload class without declaration
+ *
+ * PHP version 7.2
+ *
+ * @category Routeur
+ * @package config
+ * @author Christophe PERROTIN
+ * @copyright 2018
+ * @license MIT License
+ * @link http://wwww.perrotin.eu
+ */
 
 namespace App\config;
 
 use App\src\controller\BackController;
 use App\src\controller\ErrorController;
 use App\src\controller\FrontController;
-//use App\src\controller\ConnexionController;
 use App\src\controller\UserController;
 
+/**
+ * Class Router
+ * @package App\config
+ */
 class Router
 {
-    private $frontController;
-    private $backController;
-    private $userController;
-    private $errorController;
-//    private $connexionController;
-    private $get;
+    private $_frontController;
+    private $_backController;
+    private $_userController;
+    private $_errorController;
+    private $_request;
 
+    /**
+     * Router constructor.
+     */
     public function __construct()
     {
-        $this->backController = new BackController();
-        $this->frontController = new FrontController();
-        $this->errorController = new ErrorController();
+        $this->_backController = new BackController();
+        $this->_frontController = new FrontController();
+        $this->_errorController = new ErrorController();
 //        $this->connexionController = new ConnexionController();
-        $this->userController = new UserController();
+        $this->_userController = new UserController();
     }
 
+    /**
+     * Analyze url and redirect to the concerned controller
+     */
     public function run()
     {
+        $_request = new Request($_GET, $_POST, $_SESSION, $_COOKIE);
+        $route = $_request->get["route"];
         try{
-            if(isset($_GET['route']))
-            {
-//Accueil & Connexion
-                if($_GET['route'] === 'accueil'){
-                    $this->frontController->accueil();
+            if(isset($route)) {
+                //Accueil & Connexion
+                if($route === 'accueil') {
+                    $this->_frontController->accueil();
                 }
-                if($_GET['route'] === 'login'){
-                    $this->frontController->login();
+                if($route === 'login') {
+                    $this->_frontController->login();
                 }
-                if($_GET['route'] === 'logout'){
-                    $this->userController->logout();
+                if($route === 'logout') {
+                    $this->_userController->logout();
                 }
-                else if ($_GET['route'] === 'contact'){
-                    $this->frontController->contact();
+                else if ($route === 'contact') {
+                    $this->_frontController->contact();
                 }
-//Région Article
-
-//              Article précis
-                else if ($_GET['route'] === 'article'){
-                    $this->frontController->article($_GET['idArt']);
-                    $this->frontController->addComment($_GET['idArt']);
+                //Zone article
+                else if ($route === 'article') {
+                    $this->_frontController->article($_GET['idArt']);
+                    $this->_frontController->addComment($_GET['idArt']);
                 }
-                //              Liste Articles
-                else if ($_GET['route'] === 'articles'){
-                    $this->frontController->articles();
+                else if ($route === 'articles') {
+                    $this->_frontController->articles();
                  }
-//              Créer Article
-                else if($_GET['route'] === 'addArticle') {
-                    $this->backController->addArticle($_POST);
+                else if ($route === 'addArticle') {
+                    $this->_backController->addArticle($_POST);
                 }
-                else if($_GET['route'] === 'adminArticles') {
-                    $this->backController ->adminArticles();
+                else if ($route === 'adminArticles') {
+                    $this->_backController ->adminArticles();
                 }
-                else if($_GET['route'] === 'updateArticle') {
-                    $this->backController ->updateArticle($_GET['idArt']);
+                else if ($route === 'updateArticle') {
+                    $this->_backController ->updateArticle($_GET['idArt']);
                 }
-                else if($_GET['route'] === 'deleteArticle') {
-                    $this->backController ->deleteArticle($_GET['idArt']);
+                else if ($route === 'deleteArticle') {
+                    $this->_backController ->deleteArticle($_GET['idArt']);
                 }
-//Région Commentaire
-                //              3-Créer commentaire
-                else if($_GET['route'] === 'addComment') {
-                    $this->frontController->addComment($_GET);
+                //Zone Comment
+                else if ($route === 'addComment') {
+                    $this->_frontController->addComment($_GET);
                 }
-//              4-Modifier commentaire
-                else if($_GET['route'] === 'updateComment') {
-                    $this->backController->updateComment();
+                else if ($route === 'updateComment') {
+                    $this->_backController->updateComment();
                  }
-//              Supprimer commentaire
-                else if($_GET['route'] === 'deleteComment') {
-                    $this->backController->deleteComment($_GET);
+                else if ($route === 'deleteComment') {
+                    $this->_backController->deleteComment($_GET);
                 }
-//              Valider commentaire
-                else if($_GET['route'] === 'valideComment') {
-                    $this->backController->valideComment($_GET);
+                else if ($route === 'valideComment') {
+                    $this->_backController->valideComment($_GET);
                 }
-                else if($_GET['route'] === 'adminCommentaires') {
-                    $this->backController ->adminCommentaires();
+                else if ($route === 'adminCommentaires') {
+                    $this->_backController ->adminCommentaires();
                 }
-
-                else if($_GET['route'] === 'checkLogin') {
-                    $this->frontController->checkLogin();
+                //Zone connexion
+                else if ($route === 'checkLogin') {
+                    $this->_frontController->checkLogin();
                 }
-                else if($_GET['route'] === 'adminGestion') {
-                    $this->backController ->adminGestion();
+                else if ($route === 'adminGestion') {
+                    $this->_backController ->adminGestion();
                 }
-//Région User
-                else if($_GET['route'] === 'adminUsers') {
-                    $this->userController->adminUsers();
+                //zone User
+                else if ($route === 'adminUsers') {
+                    $this->_userController->adminUsers();
                 }
-                else if($_GET['route'] === 'addUser') {
-                    $this->userController ->addUser();
+                else if ($route === 'addUser') {
+                    $this->_userController ->addUser();
                 }
-                else if($_GET['route'] === 'checkUser') {
-                    $this->userController ->checkUser();
+                else if ($route === 'checkUser') {
+                    $this->_userController ->checkUser();
                 }
-                else if($_GET['route'] === 'updateUser') {
-                    $this->userController->updateUser();
+                else if ($route === 'updateUser') {
+                    $this->_userController->updateUser();
                 }
-                else if($_GET['route'] === 'deleteUser') {
-                    $this->userController->deleteUser($_GET);
+                else if ($route === 'deleteUser') {
+                    $this->_userController->deleteUser($_GET);
                 }
                 else{
-                    $this->errorController->unknown();
+                    $this->_errorController->unknown();
                 }
             }
             else{
-                $this->frontController->accueil();
+                $this->_frontController->accueil();
             }
         }
         catch (Exception $e)
         {
-            $this->errorController->error();
+            $this->_errorController->error();
         }
     }
 }

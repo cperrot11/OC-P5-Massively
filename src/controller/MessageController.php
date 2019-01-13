@@ -10,7 +10,7 @@ namespace App\src\controller;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-class ContactController
+class MessageController
 {
     private $mail;
 
