@@ -49,7 +49,7 @@ class Router
     public function run()
     {
         $_request = new Request($_GET, $_POST, $_SESSION, $_COOKIE);
-        $route = $_request->get["route"];
+        $route = isset($_request->get["route"])?$_request->get["route"]:null;
         try{
             if(isset($route)) {
                 //Accueil & Connexion
