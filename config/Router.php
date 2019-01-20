@@ -1,7 +1,6 @@
 <?php
 /**
  * Use for autoload class without declaration
- *
  */
 
 namespace App\config;

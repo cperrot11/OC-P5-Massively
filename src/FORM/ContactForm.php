@@ -11,6 +11,9 @@ namespace App\src\FORM;
 
 class ContactForm extends FormBuilder
 {
+    /**
+     * fields required for the form
+     */
     public function build()
     {
         $this->form->add(new StringField([

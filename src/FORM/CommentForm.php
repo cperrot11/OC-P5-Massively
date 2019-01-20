@@ -8,6 +8,9 @@ namespace App\src\FORM;
 
 class CommentForm extends FormBuilder
 {
+    /**
+     * fields required for the form
+     */
     public function build()
     {
         $texte1 = 'Merci de spécifier l\'auteur ';

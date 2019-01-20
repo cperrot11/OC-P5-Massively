@@ -1,77 +1,109 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: c.perrotin
- * Date: 26/09/2018
- * Time: 16:14
+ * Field required in article form
+ *
+ * @link http://wwww.perrotin.eu
  */
+
 
 namespace App\src\FORM;
 
 
+/**
+ * Class ArticleForm
+ * @package App\src\FORM
+ */
 class ArticleForm extends FormBuilder
 {
+    /**
+     * fields required for the form
+     */
     public function build()
     {
-        $this->form->add(new StringField([
+        $texte1 = 'Le titre spécifié est trop long 50 max';
+        $texte2= 'Le chapô spécifié est trop long 512 max';
+        $actualsize = isset($_FILES['picture'])?$_FILES['picture']['size']:0;
+        $this->form->add(new StringField(
+            [
             'label' => 'Titre',
             'name' => 'title',
             'open' => 'open',
             'validators' => array(
                 new NotNullValidator('Merci de spécifier le titre'),
-                new MaxLengthValidator('Le titre spécifié est trop long 50 max', 50)
-            )
-        ]))
-            ->add(new StringField([
+                new MaxLengthValidator($texte1, 50)
+                )
+            ]
+        )
+        )
+            ->add(new StringField(
+                [
                 'label' => 'Date',
                 'name' => 'DateAdded',
                 'open' => 'close',
                 'readonly' => true
-            ]))
-            ->add(new StringField([
+                ]
+            )
+            )
+            ->add(new StringField(
+                [
                 'label' => 'Chapô',
                 'name' => 'chapo',
                 'validators' => array(
                     new NotNullValidator('Merci de spécifier le chapô'),
-                    new MaxLengthValidator('Le chapô spécifié est trop long 512 max', 512)
-                )
-            ]))
-            ->add(new TextField([
+                    new MaxLengthValidator($texte2, 512)
+                    )
+                ]
+            )
+            )
+            ->add(new TextField(
+                [
                 'label' => 'Contenu',
                 'name' => 'content',
                 'rows' => 5,
                 'cols' => 50,
                 'validators' => array(
                     new NotNullValidator('Contenu vide impossible')
-                )
-        ]))
-            ->add(new StringField([
+                    )
+                ]
+            )
+            )
+            ->add(new StringField(
+                [
                 'label' => 'Auteur',
                 'name' => 'author',
                 'open' => 'open',
                 'readonly' => true
-        ]))
-
-            ->add(new StringField([
+                ]
+            )
+            )
+            ->add(new StringField(
+                [
                 'label'=>'Fichier image actuel',
                 'name'=>'picture_file',
                 'open' => 'close',
                 'readonly' => true
-            ]))
-            ->add(new PictureField([
+                ]
+            )
+            )
+            ->add(new PictureField(
+                [
                 'label'=>'Fichier image',
                 'name'=>'picture_file',
                 'open' => 'open'
-            ]))
-            ->add(new File([
+                ]
+            )
+            )
+            ->add(new File(
+                [
                 'label'=>'Nouveau fichier image',
                 'name'=>'picture',
                 'open' => 'close',
                 'validators' => array(
-                    new PictureSizeValidator('Taille maximum 2Mo',2000000,isset($_FILES['picture'])?$_FILES['picture']['size']:0),
+                    new PictureSizeValidator('Taille maximum 2Mo',2000000, $actualsize),
                     new PictureValidator('Extension autorisés = jpg, jpeg, bmp, png uniquement')
-                )
-        ]))
-;
+                    )
+                ]
+            )
+            );
     }
 }
