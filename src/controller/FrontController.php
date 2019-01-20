@@ -2,13 +2,6 @@
 /**
  * Display List blog, display blog and login
  *
- * PHP version 7.2
- *
- * @category FrontController
- * @package App\src\controller
- * @author Christophe PERROTIN
- * @copyright 2018
- * @license MIT License
  * @link http://wwww.perrotin.eu
  */
 
@@ -35,6 +28,7 @@ use App\src\FORM\TextField;
 
 /**
  * Class FrontController
+ *
  * @package App\src\controller
  */
 class FrontController
@@ -44,8 +38,12 @@ class FrontController
     private $user;
     private $userDAO;
     private $view;
-    private $contact;
 
+    /**
+     * FrontController constructor.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->articleDAO = new ArticleDAO();
@@ -55,20 +53,23 @@ class FrontController
         $this->view = new View();
     }
 
-    //3- Création commentaire
+
+
+    /**
+     * New comment
+     *
+     * @param $get
+     */
     public function addComment($get)
     {
-        if (!isset($_SESSION['role']))
-        {
-            $_SESSION['error']= "Attention : L'ajout de commentaire est réservé aux membres";
+        $text1 = "Attention : L'ajout de commentaire est réservé aux membres";
+        if (!isset($_SESSION['role'])){
+            $_SESSION['error']= $text1;
             $_SESSION['login']="";
-
-//            echo "<a class='btn btn-warning btn-sm' href='../public/index.php?route=login'>Connexion</a>";            
         }
         $comment = new Comment();
         $comment->setPseudo($_SESSION['login']);
         // si retour de formulaire transfert vers $comment
-        //todo : rajouter une boucle pour tester et alimenter la présence des champs du post
         if (isset($_POST['submit'])) {
             $comment->setPseudo($_POST['pseudo']);
             $comment->setContent($_POST['content']);
@@ -79,17 +80,23 @@ class FrontController
 
         if (isset($_POST['submit']) && $form->isValid() && !isset($_SESSION['role'])){
             //enregistrement en base
-            {$this->commentDAO->addComment($_GET['idArt'],$_POST);}
+            {$this->commentDAO->addComment($_GET['idArt'], $_POST);}
             //affiche single article
             $_SESSION['error']='Commentaire ajouté et en attente de validation';
-            $url = "../public/index.php?route=article&idArt=".$_GET['idArt']."#begin";
+            $url = "../public/index.php?route=article&idArt=";
+            $url.=$_GET['idArt']."#begin";
             header("location:".$url);
             return;
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
-        $this->view->render('AddComment',true, ['formulaire' => $data]);
+        $this->view->render('AddComment', true, ['formulaire' => $data]);
     }
 
+    /**
+     * Send message
+     *
+     * @return void
+     */
     public function contact()
     {
         $message = new Message();
@@ -103,50 +110,75 @@ class FrontController
         $formBuilder->build();
         $form = $formBuilder->form();
 
-        if (isset($_POST['submit']) && $form->isValid())
-        {
+        if (isset($_POST['submit']) && $form->isValid()) {
             $contact->envoi($_POST);
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('contact', true,['formulaire' => $data]);
     }
+
+    /**
+     * Display enter page
+     */
     public function accueil()
     {
-        $this->view->render('accueil',false);
+        $this->view->render('accueil', false);
         $this->contact();
     }
 
-    //5- Supprimer commentaire
+
+
+    /**
+     * Delete comment
+     *
+     * @param $get
+     * @return void
+     */
     public function deleteComment($get)
     {
         extract($get);
         $this->commentDAO->deleteComment($get['idComment']);
         $this->article($get['idArt']);
     }
-    //6-Afficher liste article
+
+    /**
+     * Display blog list
+     *
+     * @return void
+     */
     public function articles()
     {
         $articles = $this->articleDAO->getArticles();
-        $this->view->render('blog',true,['articles'=> $articles]);
+        $this->view->render('blog', true, ['articles'=> $articles]);
     }
-    //7-Afficher 1 article
+
+    /**
+     * Display single post
+     *
+     * @param $idArt
+     * @return void
+     */
     public function article($idArt)
     {
         $article = $this->articleDAO->getArticle($idArt);
         $comments = $this->commentDAO->getCommentsFromArticle($idArt);
 
-        $this->view->render('Single',false, [
+        $this->view->render('Single', false, [
             'article'=> $article,
             'comments' => $comments
-        ]);
+            ]
+        );
     }
 
+    /**
+     * Use to connect user
+     *
+     * @return bool
+     */
     public function login(){
-        if (isset($_SESSION['login'])&&($_SESSION['login']<>""))
-        {
+        if (isset($_SESSION['login'])&&($_SESSION['login']<>"")) {
             $user = $this->userDAO->getUser($_SESSION['login']);
-        }
-        else {
+        } else {
             $user = $this->user;
         }
         $formBuilder = new ConnexionForm($user);
@@ -155,34 +187,42 @@ class FrontController
 
         $this->view = new View();
         $data = $form->createView(); // On passe le formulaire généré à la vue.
-        $this->view->render('Connexion',true , ['formulaire' => $data]);
+        $this->view->render('Connexion', true, ['formulaire' => $data]);
         unset($_SESSION['error']);
 
         return false;
     }
+
+    /**
+     * Check the user password
+     *
+     * @return void
+     */
     public function checkLogin()
     {
-        if (isset($_POST['submit']))
-        {
+        if (isset($_POST['submit'])) {
             $test = $this->userDAO->CheckUser($_POST['login'],$_POST['pass']);
-            if ($test<>false)
-            {
+            if ($test<>false) {
                 $_SESSION['login']= $test->getLogin();
                 $_SESSION['role'] = ($test->getAdmin())? "admin":"membre";
                 $_SESSION['error']= "Vous êtes à présent connecté et pouvez commenter les articles.";
                 $url = "../public/index.php?route=articles#begin";
-            }
-            else
-            {
+            } else {
                 $_SESSION['error']="pseudo ou mot de passe incorrect";
                 $url = "../public/index.php?route=login";
             }
             header("location:".$url);
         }
     }
+
+    /**
+     *  Display error page
+     *
+     * @return void
+     */
     public function page404()
     {
-        $this->view->render('error',true);
+        $this->view->render('error', true);
     }
 
 }
