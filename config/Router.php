@@ -2,14 +2,6 @@
 /**
  * Use for autoload class without declaration
  *
- * PHP version 7.2
- *
- * @category Routeur
- * @package App\config
- * @author Christophe PERROTIN
- * @copyright 2018
- * @license MIT License
- * @link http://wwww.perrotin.eu
  */
 
 namespace App\config;
