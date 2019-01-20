@@ -4,10 +4,10 @@
  *
  * PHP version 7.2
  *
- * @category request
- * @package config
- * @author Christophe PERROTIN
- * @copyright 2018
+ * @category Request
+ * @package Config
+ * @author Christophe PERROTIN <christophe@perrotin.eu>
+ * @copyright 2018 c.perrotin
  * @license MIT License
  * @link http://wwww.perrotin.eu
  */
