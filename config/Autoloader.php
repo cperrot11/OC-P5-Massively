@@ -2,15 +2,9 @@
 /**
  * Use for autoload class without declaration
  *
- * PHP version 7.2
- *
- * @category Autoloader
- * @package config
- * @author Christophe PERROTIN
- * @copyright 2018
- * @license MIT License
  * @link http://wwww.perrotin.eu
  */
+
 namespace App\config;
 
 /**
@@ -20,7 +14,7 @@ namespace App\config;
 class Autoloader
 {
     /**
-     *
+     * Register 'autoload' as __autoload() implementation
      */
     public static function register()
     {
@@ -28,7 +22,7 @@ class Autoloader
     }
 
     /**
-     * @param $class
+     * @param $class class parameter
      */
     public static function autoload($class)
     {

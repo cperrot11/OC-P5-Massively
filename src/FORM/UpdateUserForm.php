@@ -12,7 +12,9 @@ namespace App\src\FORM;
 class UpdateUserForm extends FormBuilder
 {
     /**
-     * fields required for the form
+     * Fields required for the form
+     *
+     * @return void
      */
     public function build()
     {

@@ -11,19 +11,23 @@ namespace App\src\FORM;
 
 /**
  * Class ArticleForm
+ *
  * @package App\src\FORM
  */
 class ArticleForm extends FormBuilder
 {
     /**
-     * fields required for the form
+     * Fields required for the form
+     *
+     * @return void
      */
     public function build()
     {
         $texte1 = 'Le titre spécifié est trop long 50 max';
         $texte2= 'Le chapô spécifié est trop long 512 max';
         $actualsize = isset($_FILES['picture'])?$_FILES['picture']['size']:0;
-        $this->form->add(new StringField(
+        $this->form->add(
+            new StringField(
             [
             'label' => 'Titre',
             'name' => 'title',
@@ -35,7 +39,8 @@ class ArticleForm extends FormBuilder
             ]
         )
         )
-            ->add(new StringField(
+            ->add(
+                new StringField(
                 [
                 'label' => 'Date',
                 'name' => 'DateAdded',
@@ -44,7 +49,8 @@ class ArticleForm extends FormBuilder
                 ]
             )
             )
-            ->add(new StringField(
+            ->add(
+                new StringField(
                 [
                 'label' => 'Chapô',
                 'name' => 'chapo',
@@ -55,7 +61,8 @@ class ArticleForm extends FormBuilder
                 ]
             )
             )
-            ->add(new TextField(
+            ->add(
+                new TextField(
                 [
                 'label' => 'Contenu',
                 'name' => 'content',
@@ -67,7 +74,8 @@ class ArticleForm extends FormBuilder
                 ]
             )
             )
-            ->add(new StringField(
+            ->add(
+                new StringField(
                 [
                 'label' => 'Auteur',
                 'name' => 'author',
@@ -76,7 +84,8 @@ class ArticleForm extends FormBuilder
                 ]
             )
             )
-            ->add(new StringField(
+            ->add(
+                new StringField(
                 [
                 'label'=>'Fichier image actuel',
                 'name'=>'picture_file',
@@ -85,7 +94,8 @@ class ArticleForm extends FormBuilder
                 ]
             )
             )
-            ->add(new PictureField(
+            ->add(
+                new PictureField(
                 [
                 'label'=>'Fichier image',
                 'name'=>'picture_file',
@@ -93,7 +103,8 @@ class ArticleForm extends FormBuilder
                 ]
             )
             )
-            ->add(new File(
+            ->add(
+                new File(
                 [
                 'label'=>'Nouveau fichier image',
                 'name'=>'picture',

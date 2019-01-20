@@ -10,6 +10,8 @@ class CommentForm extends FormBuilder
 {
     /**
      * fields required for the form
+     *
+     * @return void
      */
     public function build()
     {
