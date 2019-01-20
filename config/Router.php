@@ -46,7 +46,10 @@ class Router
     public function run()
     {
         $this->_request = new Request();
-        $route = isset($this->_request->get["route"])?$this->_request->get["route"]:null;
+        $route=null;
+        if(isset($this->_request->get["route"])){
+            $route =$this->_request->get["route"];
+        }
         try{
             if(isset($route)) {
                 //Accueil & Connexion

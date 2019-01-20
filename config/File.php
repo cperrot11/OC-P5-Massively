@@ -6,8 +6,8 @@
  *
  *  @category File
  *  @package App\config
- *  @author Christophe PERROTIN
- *  @copyright 2018
+ *  @author Christophe PERROTIN <christophe@perrotin.eu>
+ *  @copyright 2018 c.perrotin *  @license MIT License
  *  @license MIT License
  *  @link http://wwww.perrotin.eu
  */

@@ -6,8 +6,8 @@
  *
  * @category BackController
  * @package App\src\controller
- * @author Christophe PERROTIN
- * @copyright 2018
+ * @author Christophe PERROTIN <christophe@perrotin.eu>
+ * @copyright 2018 c.perrotin
  * @license MIT License
  * @link http://wwww.perrotin.eu
  */
@@ -54,7 +54,7 @@ class BackController
     public function addArticle($post)
     {
 
-        if ($this->request->checkSession($this->frontController)){
+        if ($this->request->checkSession($this->frontController)) {
             $article = new Article();
             $article->setDateAdded(date("d-m-Y"));
             $article->setAuthor($_SESSION['login']);
@@ -64,7 +64,9 @@ class BackController
             $formBuilder->build();
             $form = $formBuilder->form();
             if (isset($post['submit']) && $form->isValid()) {
-                move_uploaded_file($_FILES['picture']['tmp_name'], 'C:/wamp64/www/OC/P5-Blog PHP/3-POO/App/uploads/' . basename($_FILES['picture']['name']));
+                $destination = 'C:/wamp64/www/OC/P5-Blog PHP/3-POO/App/uploads/';
+                $destination.= basename($_FILES['picture']['name']);
+                move_uploaded_file($_FILES['picture']['tmp_name'], $destination );
                 $_articleDAO = new ArticleDAO();
                 if ($_articleDAO->saveArticle($post, $article->getPicture())!='false') {
                     $_SESSION['error'] = 'Le nouvel article a bien été ajouté';
@@ -92,9 +94,6 @@ class BackController
             }
     }
 
-    /**
-     *
-     */
     public function adminCommentaires()
     {
         $comments = $this->commentDAO->getCommentAll();
@@ -182,19 +181,6 @@ class BackController
         $article = $this->articleDAO->getArticle($idArt);
         //reprends les données ayant pu être modifiées
         $article->hydrate($this->request->post, $this->request->file);
-//            if (isset($_POST['title']) && !empty($_POST['title'])) {
-//                $article->setTitle($_POST['title']);
-//            }
-//            if (isset($_POST['chapo']) && !empty($_POST['chapo'])) {
-//                $article->setChapo($_POST['chapo']);
-//            }
-//            if (isset($_POST['content']) && !empty($_POST['content'])) {
-//                $article->setContent($_POST['content']);
-//            }
-//            if (isset($_FILES['picture']) && !empty($_FILES['picture']['name'])) {
-//                $article->setPicture($_FILES['picture']['name']);
-//                $article->setPicture_file($_FILES['picture']['name']);
-//            }
         $formBuilder = new ArticleForm($article);
         $formBuilder->build();
         $form = $formBuilder->form();

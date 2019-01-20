@@ -4,17 +4,21 @@
  *
  * PHP version 7.2
  *
- * @category Request
- * @package Config
- * @author Christophe PERROTIN <christophe@perrotin.eu>
- * @copyright 2018 c.perrotin
- * @license MIT License
- * @link http://wwww.perrotin.eu
+ *  @category Request
+ *  @package Config
+ *  @author Christophe PERROTIN <christophe@perrotin.eu>
+ *  @copyright 2018 c.perrotin
+ *  @license MIT License
+ *  @link http://wwww.perrotin.eu
  */
 namespace App\config;
 
 use App\src\controller\FrontController;
 
+/**
+ * Class Request
+ * @package App\config
+ */
 class Request
 {
     public $get;
@@ -39,10 +43,16 @@ class Request
         $this->cookie = $_COOKIE;
         $this->file = $_FILES;
     }
+
+    /**
+     * @param $frontController
+     * @return bool
+     */
     public function checkSession($frontController)
     {
         if (!isset($this->session['role']) or $this->session['role']<>'admin') {
-            $_SESSION['error']='Création d\'article réservé aux utilisateurs inscrits';
+            $texte = 'Création d\'article réservé aux utilisateurs inscrits';
+            $_SESSION['error']=$texte;
             $this->frontcontroller = $frontController;
             $this->frontcontroller->login();
             return false;
