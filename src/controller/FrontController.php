@@ -1,4 +1,16 @@
 <?php
+/**
+ * Display List blog, display blog and login
+ *
+ * PHP version 7.2
+ *
+ * @category FrontController
+ * @package App\src\controller
+ * @author Christophe PERROTIN
+ * @copyright 2018
+ * @license MIT License
+ * @link http://wwww.perrotin.eu
+ */
 
 namespace App\src\controller;
 
@@ -21,6 +33,10 @@ use App\src\FORM\Form;
 use App\src\FORM\StringField;
 use App\src\FORM\TextField;
 
+/**
+ * Class FrontController
+ * @package App\src\controller
+ */
 class FrontController
 {
     private $articleDAO;
@@ -44,9 +60,10 @@ class FrontController
     {
         if (!isset($_SESSION['role']))
         {
-            echo "<p>L'ajout de commentaire est réservé aux membres</p>";
-            echo "<a class='btn btn-warning btn-sm' href='../public/index.php?route=login'>Connexion</a>";
-            return false;
+            $_SESSION['error']= "Attention : L'ajout de commentaire est réservé aux membres";
+            $_SESSION['login']="";
+
+//            echo "<a class='btn btn-warning btn-sm' href='../public/index.php?route=login'>Connexion</a>";            
         }
         $comment = new Comment();
         $comment->setPseudo($_SESSION['login']);
@@ -60,7 +77,7 @@ class FrontController
         $formBuilder->build();
         $form = $formBuilder->form();
 
-        if (isset($_POST['submit']) && $form->isValid()){
+        if (isset($_POST['submit']) && $form->isValid() && !isset($_SESSION['role'])){
             //enregistrement en base
             {$this->commentDAO->addComment($_GET['idArt'],$_POST);}
             //affiche single article
@@ -125,7 +142,7 @@ class FrontController
     }
 
     public function login(){
-        if (isset($_SESSION['login']))
+        if (isset($_SESSION['login'])&&($_SESSION['login']<>""))
         {
             $user = $this->userDAO->getUser($_SESSION['login']);
         }
@@ -162,6 +179,10 @@ class FrontController
             }
             header("location:".$url);
         }
+    }
+    public function page404()
+    {
+        $this->view->render('error',true);
     }
 
 }

@@ -10,7 +10,7 @@ $this->title = "Gestion";
 <div id="main">
     <section class="post">
         <h2>Administration du blog</h2>
-        <span class="subheading">Accéder à la gestion des articles, des commentaires et des membres</span>
+        <span class="subheading">Accéder à la gestion des articles, des commentaires et des membres.</span>
         <hr>
         <div class="ligne">
             <div class="boite">

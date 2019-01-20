@@ -2,6 +2,8 @@
 
 namespace App\src\model;
 
+use App\config\File;
+
 class Article extends Entity
 {
     private $id;
@@ -11,6 +13,7 @@ class Article extends Entity
     private $author;
     private $picture;
     private $picture_file;
+    private $file;
 
     /**
      * @return mixed
@@ -138,5 +141,21 @@ class Article extends Entity
     public function setDateAdded($date_added)
     {
         $this->date_added = $date_added;
+    }
+
+    public function hydrate($post, $picture)
+    {
+        $file = new File();
+        if (isset($post['submit'])) {
+            foreach ($post as $field => $val) {
+                if (isset($field) && !empty($val)) {
+                    $set = 'set' . ucfirst($field);
+                    if (method_exists($this, $set)) {
+                        $this->$set($val);
+                    }
+                }
+            }
+            $file->addPicture($picture['picture'],$this);
+        }
     }
 }

@@ -1,4 +1,17 @@
 <?php
+/**
+ * Display single blog
+ *
+ * PHP version 7.2
+ *
+ * @category Single
+ * @package App\src\view
+ * @author Christophe PERROTIN
+ * @copyright 2018
+ * @license MIT License
+ * @link http://wwww.perrotin.eu
+ */
+
 $this->title = "Article";
 ?>
 <div id="main">
@@ -26,14 +39,18 @@ $this->title = "Article";
         <a class="button" href="../public/index.php?route=articles#begin">Retour à la liste des articles</a>
     </article>
     <div id="comments" class="text-left" style="margin-left: 50px">
-                <h3><?php if (count($comments)>0)
+                <h3><?php switch (count($comments))
                 {
-                  echo count($comments)." Commentaires";
-                }
-                else
-                    {
-                        echo "Pas de commentaire pour l'instant, soignez le premier.";
-                     } ?>
+                  case (1) :
+                      echo count($comments)." Commentaire";
+                      break;
+                  case (0) :
+                      echo "Pas de commentaire pour l'instant, soignez le premier.";
+                      break;
+                  default :
+                      echo count($comments)." Commentaires";
+                      break;
+                }?>
                 </h3>
 
                 <?php

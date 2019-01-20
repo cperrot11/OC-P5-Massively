@@ -1,46 +1,58 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: c.perrotin
- * Date: 16/11/2018
- * Time: 20:28
+ * Manage contact mail
+ *
+ * PHP version 7.2
+ *
+ * @category MessageController
+ * @package App\src\controller
+ * @author Christophe PERROTIN
+ * @copyright 2018
+ * @license MIT License
+ * @link http://wwww.perrotin.eu
  */
+
 namespace App\src\controller;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+/**
+ * Class MessageController
+ * @package App\src\controller
+ */
 class MessageController
 {
-    private $mail;
-
+    /**
+     * MessageController constructor.
+     */
     public function __construct()
     {
-        $this->mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+        $this->mail = new PHPMailer(true);
         //Server settings
-        $this->mail->SMTPDebug = 0;                                 // Enable verbose debug output
-        $this->mail->isSMTP();                                      // Set mailer to use SMTP
-        $this->mail->Host = 'SSL0.OVH.NET';  // Specify main and backup SMTP servers
-        $this->mail->SMTPAuth = true;                               // Enable SMTP authentication
-        $this->mail->Username = 'contact@perrotin.eu';                 // SMTP username
-        $this->mail->Password = 'Mecani4306';                           // SMTP password
-        $this->mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-        $this->mail->Port = 587;                                    // TCP port to connect to
+        $this->mail->SMTPDebug = 0;
+        $this->mail->isSMTP();
+        $this->mail->Host = 'SSL0.OVH.NET';
+        $this->mail->SMTPAuth = true;
+        $this->mail->Username = 'contact@perrotin.eu';
+        $this->mail->Password = 'Mecani4306';
+        $this->mail->SMTPSecure = 'tls';
+        $this->mail->Port = 587;
     }
     public function envoi($post)
     {
         extract($post);
         try
         {
-            $this->mail->setFrom($mail,$nom);
-            $this->mail->addAddress('c.perrotin@mecanicsud.com', 'Blog');     // Add a recipient
+            $this->mail->setFrom($mail, $nom);
+            $this->mail->addAddress('c.perrotin@mecanicsud.com', 'Blog');
             $this->mail->addReplyTo('c.perrotin@mecanicsud.com', 'Blog');
 
             //Attachments
-            //$this->mail->addAttachment('../public/img/avatar.jpg', 'new.jpg');    // Optional name
+            //$this->mail->addAttachment('../public/img/avatar.jpg', 'new.jpg');
 
             //Content
-            $this->mail->isHTML(true);                                  // Set email format to HTML
+            $this->mail->isHTML(true);
             $this->mail->Subject = 'Message du blog';
             $this->mail->Body    = $content;
 

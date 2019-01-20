@@ -6,7 +6,10 @@
                 <span class="subheading">Vous êtes déjà connecté</span>
             <?php }
             else { ?>
-                <span class="subheading">Saisir votre identifiant et votre mot de passe</span>
+                <span class="subheading">
+                    Saisir votre identifiant et votre mot de passe.<br/>
+                    Vous devez vous inscrire, pour pouvoir participer au forum.
+                </span>
             <?php } ?>
             <div>
                 <br/>

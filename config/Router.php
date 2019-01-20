@@ -5,7 +5,7 @@
  * PHP version 7.2
  *
  * @category Routeur
- * @package config
+ * @package App\config
  * @author Christophe PERROTIN
  * @copyright 2018
  * @license MIT License
@@ -15,9 +15,9 @@
 namespace App\config;
 
 use App\src\controller\BackController;
-use App\src\controller\ErrorController;
 use App\src\controller\FrontController;
 use App\src\controller\UserController;
+use App\config\request;
 
 /**
  * Class Router
@@ -28,7 +28,6 @@ class Router
     private $_frontController;
     private $_backController;
     private $_userController;
-    private $_errorController;
     private $_request;
 
     /**
@@ -38,8 +37,6 @@ class Router
     {
         $this->_backController = new BackController();
         $this->_frontController = new FrontController();
-        $this->_errorController = new ErrorController();
-//        $this->connexionController = new ConnexionController();
         $this->_userController = new UserController();
     }
 
@@ -48,93 +45,94 @@ class Router
      */
     public function run()
     {
-        $_request = new Request($_GET, $_POST, $_SESSION, $_COOKIE);
-        $route = isset($_request->get["route"])?$_request->get["route"]:null;
+        $this->_request = new Request();
+        $route = isset($this->_request->get["route"])?$this->_request->get["route"]:null;
         try{
             if(isset($route)) {
                 //Accueil & Connexion
-                if($route === 'accueil') {
-                    $this->_frontController->accueil();
+                switch ($route)
+                {
+                    case 'accueil' :
+                        $this->_frontController->accueil();
+                        break;
+                    case 'login' :
+                        $this->_frontController->login();
+                        break;
+                    case 'logout' :
+                        $this->_userController->logout();
+                        break;
+                    case 'contact' :
+                        $this->_frontController->contact();
+                        break;
+                    //Zone article
+                    case 'article' :
+                        $this->_frontController->article($_GET['idArt']);
+                        $this->_frontController->addComment($_GET['idArt']);
+                        break;
+                    case 'articles' :
+                        $this->_frontController->articles();
+                        break;
+                    case 'addArticle' :
+                        $this->_backController->addArticle($_POST);
+                        break;
+                    case 'adminArticles' :
+                        $this->_backController ->adminArticles();
+                        break;
+                    case 'updateArticle' :
+                        $this->_backController ->updateArticle($_GET['idArt']);
+                        break;
+                    case 'deleteArticle' :
+                        $this->_backController ->deleteArticle($_GET['idArt']);
+                        break;
+                    case 'addComment' :
+                        $this->_frontController->addComment($_GET);
+                        break;
+                    case 'updateComment' :
+                        $this->_backController->updateComment();
+                        break;
+                    case 'deleteComment' :
+                        $this->_backController->deleteComment($_GET);
+                        break;
+                    case 'valideComment' :
+                        $this->_backController->valideComment($_GET);
+                        break;
+                    case 'adminCommentaires' :
+                        $this->_backController ->adminCommentaires();
+                        break;
+                    //Zone connexion
+                    case 'checkLogin' :
+                        $this->_frontController->checkLogin();
+                        break;
+                    case 'adminGestion' :
+                        $this->_backController ->adminGestion();
+                        break;
+                    //zone User
+                    case 'adminUsers' :
+                        $this->_userController->adminUsers();
+                        break;
+                    case 'addUser' :
+                        $this->_userController ->addUser();
+                        break;
+                    case 'checkUser' :
+                        $this->_userController ->checkUser();
+                        break;
+                    case 'updateUser' :
+                        $this->_userController->updateUser();
+                        break;
+                    case 'deleteUser' :
+                        $this->_userController->deleteUser($_GET);
+                        return;
+                    default :
+                        $this->_frontController->page404();
                 }
-                if($route === 'login') {
-                    $this->_frontController->login();
-                }
-                if($route === 'logout') {
-                    $this->_userController->logout();
-                }
-                else if ($route === 'contact') {
-                    $this->_frontController->contact();
-                }
-                //Zone article
-                else if ($route === 'article') {
-                    $this->_frontController->article($_GET['idArt']);
-                    $this->_frontController->addComment($_GET['idArt']);
-                }
-                else if ($route === 'articles') {
-                    $this->_frontController->articles();
-                 }
-                else if ($route === 'addArticle') {
-                    $this->_backController->addArticle($_POST);
-                }
-                else if ($route === 'adminArticles') {
-                    $this->_backController ->adminArticles();
-                }
-                else if ($route === 'updateArticle') {
-                    $this->_backController ->updateArticle($_GET['idArt']);
-                }
-                else if ($route === 'deleteArticle') {
-                    $this->_backController ->deleteArticle($_GET['idArt']);
-                }
-                //Zone Comment
-                else if ($route === 'addComment') {
-                    $this->_frontController->addComment($_GET);
-                }
-                else if ($route === 'updateComment') {
-                    $this->_backController->updateComment();
-                 }
-                else if ($route === 'deleteComment') {
-                    $this->_backController->deleteComment($_GET);
-                }
-                else if ($route === 'valideComment') {
-                    $this->_backController->valideComment($_GET);
-                }
-                else if ($route === 'adminCommentaires') {
-                    $this->_backController ->adminCommentaires();
-                }
-                //Zone connexion
-                else if ($route === 'checkLogin') {
-                    $this->_frontController->checkLogin();
-                }
-                else if ($route === 'adminGestion') {
-                    $this->_backController ->adminGestion();
-                }
-                //zone User
-                else if ($route === 'adminUsers') {
-                    $this->_userController->adminUsers();
-                }
-                else if ($route === 'addUser') {
-                    $this->_userController ->addUser();
-                }
-                else if ($route === 'checkUser') {
-                    $this->_userController ->checkUser();
-                }
-                else if ($route === 'updateUser') {
-                    $this->_userController->updateUser();
-                }
-                else if ($route === 'deleteUser') {
-                    $this->_userController->deleteUser($_GET);
-                }
-                else{
-                    $this->_errorController->unknown();
-                }
+                return;
             }
-            else{
-                $this->_frontController->accueil();
-            }
+            $this->_frontController->accueil();
         }
         catch (Exception $e)
         {
-            $this->_errorController->error();
+            $this->_frontController->page404();
         }
+
     }
 }
