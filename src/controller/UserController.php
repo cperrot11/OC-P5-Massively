@@ -14,39 +14,41 @@ use App\src\FORM\UpdateUserForm;
 use App\src\model\User;
 use App\src\DAO\UserDAO;
 use App\src\FORM\ConnexionForm;
+use App\config\Request;
 
 class UserController
 {
     private $view;
     private $user;
     private $userDAO;
+    private $request;
 
     public function __construct()
     {
         $this->user = new User();
         $this->userDAO = new UserDAO();
-        $this->view =new View();
+        $this->view = new View();
+        $this->request = new Request();
     }
 
     public function addUser()
     {
         $this->user = new User();
         // si retour de formulaire transfert vers $user
-        if (isset($_POST['submit']))
-            {
-                //todo : rajouter une boucle pour tester et alimenter la présence des champs du post
-                $this->user->setLogin($_POST['login']);
-                $this->user->setName($_POST['name']);
-                $this->user->setPass($_POST['pass']);
-                $this->user->setEmail($_POST['email']);
+        if ($this->request->get( 'post', 'submit')) {
+                $this->user->setLogin($this->request->get( 'post', 'login'));
+                $this->user->setName($this->request->get( 'post', 'name'));
+                $this->user->setPass($this->request->get( 'post', 'pass'));
+                $this->user->setEmail($this->request->get( 'post', 'mail'));
             }
         $formBuilder = new AddUserForm($this->user);
         $formBuilder->build();
         $form = $formBuilder->form();
-        if (isset($_POST['submit']) && $form->isValid()){
+        if ($this->request->get('submit', 'post') && $form->isValid()){
             //enregistrement en base
             $_POST['admin']=0;
-            if($this->userDAO->saveUser($_POST))
+            $this->request->set('admin', 0, 'post');
+            if($this->userDAO->saveUser($this->request->get('post')))
                 {
                     $_SESSION['login']= $_POST['login'];
                     $_SESSION['role'] = "membre";

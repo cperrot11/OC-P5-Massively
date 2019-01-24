@@ -2,13 +2,6 @@
 /**
  * Avoid using directly super global variables
  *
- * PHP version 7.2
- *
- *  @category Request
- *  @package Config
- *  @author Christophe PERROTIN <christophe@perrotin.eu>
- *  @copyright 2018 c.perrotin
- *  @license MIT License
  *  @link http://wwww.perrotin.eu
  */
 namespace App\config;
@@ -21,27 +14,54 @@ use App\src\controller\FrontController;
  */
 class Request
 {
-    public $get;
-    public $post;
-    public $session;
-    public $cookie;
-    public $frontcontroller;
-    public $file;
+    private $query;
+    private $post;
+    private $session;
+    private $frontcontroller;
+    private $file;
 
     /**
-     * request constructor.
-     * @param $get
+     * Request constructor.
+     *
+     * @param $query
      * @param $post
      * @param $session
      * @param $cookie
      */
     public function __construct()
     {
-        $this->get = $_GET;
+        $this->query = $_GET;
         $this->post = $_POST;
         $this->session = $_SESSION;
-        $this->cookie = $_COOKIE;
         $this->file = $_FILES;
+    }
+
+    /**
+     * Return the value if exist
+     *
+     * @param $name
+     * @param $type
+     * @return object or string
+     */
+    public function get($type, $name= null){
+        if (!isset($name)){
+            return $this->$type;
+        }
+        if (isset($this->$type[$name])){
+            return htmlspecialchars($this->$type[$name]);
+        }
+        return null;
+    }
+
+    /**
+     * Affect the global variable
+     *
+     * @param $name
+     * @param $value
+     * @param $type
+     */
+    public function set($type, $name, $value){
+        $this->$type[$name]=$value;
     }
 
     /**
@@ -58,5 +78,51 @@ class Request
             return false;
         }
     }
+
+    /**
+     * User is Membre ?
+     *
+     * @return bool
+     */
+    public function isMember()
+    {
+        if (isset($this->session['role'])){
+            return $this->session['role']==="Membre";
+        }
+        return false;
+    }
+
+    /**
+     * User is Admin ?
+     *
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        if (isset($this->session['role'])) {
+            return $this->session['role'] === "Admin";
+        }
+        return false;
+    }
+
+    /**
+     * Check if form is posted
+     *
+     * @return bool
+     */
+    public function isPostSubmit(){
+        return isset($this->post['submit']);
+    }
+    /**
+     * User is loged ?
+     *
+     * @return bool
+     */
+    public function isLoged()
+    {
+        return (isset($this->session['login']) && $this->session['login']<>"");
+    }
+
+
 }
 

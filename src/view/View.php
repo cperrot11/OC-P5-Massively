@@ -1,13 +1,14 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: c.perrotin
- * Date: 23/08/2018
- * Time: 13:22
+ * Display 'Base' template with specific content
+ *
+ * @link http://wwww.perrotin.eu
  */
 
 namespace App\src\view;
 
+
+use App\config\Request;
 
 class View
 {
@@ -15,7 +16,23 @@ class View
     private $title;
     private $admin;
     private $content;
+    protected $request;
 
+    /**
+     * View constructor.
+     */
+    public function __construct()
+    {
+        $this->request = New Request();
+    }
+
+    /**
+     * Construct the structure of the display final page
+     *
+     * @param $template
+     * @param $display
+     * @param array $data
+     */
     public function render($template, $display, $data = [])
     {
         $this->admin = (substr($template,0,5)=="Admin")?true:false;
@@ -33,6 +50,13 @@ class View
         }
     }
 
+    /**
+     * Extrat the content of the page
+     *
+     * @param $file
+     * @param $data
+     * @return string
+     */
     private function renderFile($file, $data)
     {
         if(file_exists($file)){
@@ -47,6 +71,12 @@ class View
             echo 'Fichier inexistant';
         }
     }
+
+    /**
+     * Title
+     *
+     * @param $title
+     */
     public function setTitle($title){
             $this->title=$title;
     }

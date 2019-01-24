@@ -11,20 +11,14 @@ namespace App\src\controller;
 use App\src\DAO\ArticleDAO;
 use App\src\DAO\CommentDAO;
 use App\src\DAO\UserDAO;
-use App\src\controller\MessageController;
 use App\src\FORM\CommentForm;
 use App\src\FORM\ConnexionForm;
 use App\src\FORM\ContactForm;
-use App\src\FORM\MaxLengthValidator;
-use App\src\FORM\NotNullValidator;
 use App\src\model\Comment;
 use App\src\model\Message;
 use App\src\view\View;
 use App\src\model\user;
-use Zend\Validator\StringLength;
-use App\src\FORM\Form;
-use App\src\FORM\StringField;
-use App\src\FORM\TextField;
+use App\config\Request;
 
 /**
  * Class FrontController
@@ -38,6 +32,7 @@ class FrontController
     private $user;
     private $userDAO;
     private $view;
+    private $request;
 
     /**
      * FrontController constructor.
@@ -51,6 +46,7 @@ class FrontController
         $this->user = new User();
         $this->userDAO = new UserDAO();
         $this->view = new View();
+        $this->request = new Request();
     }
 
 
@@ -63,28 +59,29 @@ class FrontController
     public function addComment($get)
     {
         $text1 = "Attention : L'ajout de commentaire est réservé aux membres";
-        if (!isset($_SESSION['role'])){
-            $_SESSION['error']= $text1;
-            $_SESSION['login']="";
+        if (!$this->request->isMember() and !$this->request->isAdmin()){
+            $this->request->set('session', 'error', $text1);
+            $this->request->set('session', 'login', "");
         }
         $comment = new Comment();
-        $comment->setPseudo($_SESSION['login']);
+        $comment->setPseudo($this->request->get('session', 'login'));
         // si retour de formulaire transfert vers $comment
-        if (isset($_POST['submit'])) {
-            $comment->setPseudo($_POST['pseudo']);
-            $comment->setContent($_POST['content']);
+        if ($this->request->isPostSubmit()) {
+            $comment->setPseudo($this->request->get('post', 'pseudo'));
+            $comment->setPseudo($this->request->get('post', 'content'));
         }
         $formBuilder = new CommentForm($comment);
         $formBuilder->build();
         $form = $formBuilder->form();
 
-        if (isset($_POST['submit']) && $form->isValid() && !isset($_SESSION['role'])){
+        if ($this->request->isPostSubmit() && $form->isValid()) {
             //enregistrement en base
-            {$this->commentDAO->addComment($_GET['idArt'], $_POST);}
+            {$this->commentDAO->addComment($get['idArt'], $this->request->get('post'));}
             //affiche single article
-            $_SESSION['error']='Commentaire ajouté et en attente de validation';
+            $text2='Commentaire ajouté et en attente de validation';
+            $this->request->set('session', 'error', $text2);
             $url = "../public/index.php?route=article&idArt=";
-            $url.=$_GET['idArt']."#begin";
+            $url.=$get['idArt']."#begin";
             header("location:".$url);
             return;
         }
@@ -101,17 +98,17 @@ class FrontController
     {
         $message = new Message();
         $contact = new MessageController();
-        if (isset($_POST['submit'])) {
-            $message->setNom($_POST['nom']);
-            $message->setMail($_POST['mail']);
-            $message->setContent($_POST['content']);
+        if ($this->request->isPostSubmit()) {
+            $message->setNom($this->request->get('post', 'nom'));
+            $message->setContent($this->request->get('post', 'content'));
+            $message->setMail($this->request->get('post', 'mail'));
         }
         $formBuilder = new ContactForm($message);
         $formBuilder->build();
         $form = $formBuilder->form();
 
-        if (isset($_POST['submit']) && $form->isValid()) {
-            $contact->envoi($_POST);
+        if ($this->request->isPostSubmit() && $form->isValid()) {
+            $contact->envoi($this->request->get('form'));
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('contact', true,['formulaire' => $data]);
@@ -176,8 +173,9 @@ class FrontController
      * @return bool
      */
     public function login(){
-        if (isset($_SESSION['login'])&&($_SESSION['login']<>"")) {
-            $user = $this->userDAO->getUser($_SESSION['login']);
+        $user_log = $this->request->get('login','session');
+        if ($user_log<>"") {
+            $user = $user_log;
         } else {
             $user = $this->user;
         }
@@ -188,7 +186,7 @@ class FrontController
         $this->view = new View();
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('Connexion', true, ['formulaire' => $data]);
-        unset($_SESSION['error']);
+        $this->request->set('session', 'error', null);
 
         return false;
     }
@@ -201,14 +199,16 @@ class FrontController
     public function checkLogin()
     {
         if (isset($_POST['submit'])) {
-            $test = $this->userDAO->CheckUser($_POST['login'],$_POST['pass']);
+            $test = $this->userDAO->CheckUser($this->request->get('post', 'login'), $this->request->get('post', 'pass'));
             if ($test<>false) {
-                $_SESSION['login']= $test->getLogin();
-                $_SESSION['role'] = ($test->getAdmin())? "admin":"membre";
-                $_SESSION['error']= "Vous êtes à présent connecté et pouvez commenter les articles.";
+                $this->request->set('session', 'login', $test->getLogin());
+                $this->request->set('session', 'role', ($test->getAdmin())? "admin":"membre");
+                $text1 = "Vous êtes à présent connecté et pouvez commenter les articles.";
+                $this->request->set('session', 'error', $text1);
                 $url = "../public/index.php?route=articles#begin";
             } else {
-                $_SESSION['error']="pseudo ou mot de passe incorrect";
+                $text1 = "pseudo ou mot de passe incorrect";
+                $this->request->set('session', 'error', $text1);
                 $url = "../public/index.php?route=login";
             }
             header("location:".$url);

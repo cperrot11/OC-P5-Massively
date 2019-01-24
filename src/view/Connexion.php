@@ -1,7 +1,7 @@
 <div id="main">
     <section class="post">
     <h2>Connexion</h2>
-            <?php if (isset($_SESSION['login']))
+            <?php if ($this->request->isloged())
             {?>
                 <span class="subheading">Vous êtes déjà connecté</span>
             <?php }

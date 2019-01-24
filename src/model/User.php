@@ -102,12 +102,21 @@ class User extends Entity
     }
 
     /**
-     * @return mixed
+     * @return true flase
      */
     public function getAdmin()
     {
+        return ($this->admin)==1?true:false;
+    }
+
+    /**
+     * @return true flase
+     */
+    public function getAdminBool()
+    {
         return ($this->admin)==1?'Oui':'Non';
     }
+
 
     /**
      * @param mixed $admin

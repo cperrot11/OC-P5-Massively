@@ -39,7 +39,7 @@
                                     <td scope="row"><?= htmlspecialchars($user->getLogin());?></td>
                                     <td><?= htmlspecialchars($user->getName());?></td>
                                     <td><?= htmlspecialchars($user->getEmail());?></td>
-                                    <td><?= htmlspecialchars($user->getAdmin());?></td>
+                                    <td><?= htmlspecialchars($user->getAdminBool());?></td>
                                     <td><a title="Modifier" class="icon fa-edit" href="../public/index.php?route=updateUser&login=<?= htmlspecialchars($user->getLogin());?>&appel=back#begin"></a></td>
                                     <td>
                                         <form id="deleteform<?= $user->getLogin();?>" method="post" action="../public/index.php?route=deleteUser&login=<?= htmlspecialchars($user->getLogin());?>">

@@ -37,10 +37,8 @@ class Router
     public function run()
     {
         $this->_request = new Request();
-        $route=null;
-        if(isset($this->_request->get["route"])){
-            $route =$this->_request->get["route"];
-        }
+        $route =$this->_request->get("query", "route");
+
         try{
             if(isset($route)) {
                 //Accueil & Connexion
@@ -60,35 +58,35 @@ class Router
                         break;
                     //Zone article
                     case 'article' :
-                        $this->_frontController->article($_GET['idArt']);
-                        $this->_frontController->addComment($_GET['idArt']);
+                        $this->_frontController->article($this->_request->get('query', 'idArt'));
+                        $this->_frontController->addComment($this->_request->get('query', 'idArt'));
                         break;
                     case 'articles' :
                         $this->_frontController->articles();
                         break;
                     case 'addArticle' :
-                        $this->_backController->addArticle($_POST);
+                        $this->_backController->addArticle($this->_request->get('post'));
                         break;
                     case 'adminArticles' :
                         $this->_backController ->adminArticles();
                         break;
                     case 'updateArticle' :
-                        $this->_backController ->updateArticle($_GET['idArt']);
+                        $this->_backController ->updateArticle($this->_request->get('query', 'idArt'));
                         break;
                     case 'deleteArticle' :
-                        $this->_backController ->deleteArticle($_GET['idArt']);
+                        $this->_backController ->deleteArticle($this->_request->get('query', 'idArt'));
                         break;
                     case 'addComment' :
-                        $this->_frontController->addComment($_GET);
+                        $this->_frontController->addComment($this->_request->get('query'));
                         break;
                     case 'updateComment' :
                         $this->_backController->updateComment();
                         break;
                     case 'deleteComment' :
-                        $this->_backController->deleteComment($_GET);
+                        $this->_backController->deleteComment($this->_request->get('query'));
                         break;
                     case 'valideComment' :
-                        $this->_backController->valideComment($_GET);
+                        $this->_backController->valideComment($this->_request->get('query'));
                         break;
                     case 'adminCommentaires' :
                         $this->_backController ->adminCommentaires();
@@ -114,7 +112,7 @@ class Router
                         $this->_userController->updateUser();
                         break;
                     case 'deleteUser' :
-                        $this->_userController->deleteUser($_GET);
+                        $this->_userController->deleteUser($this->_request->get('query'));
                         return;
                     default :
                         $this->_frontController->page404();

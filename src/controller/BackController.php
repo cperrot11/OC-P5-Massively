@@ -22,7 +22,6 @@ use App\src\FORM\CommentForm;
 use App\src\model\Article;
 use App\src\view\View;
 use App\src\model\Comment;
-use App\src\controller\FrontController;
 use App\config\Request;
 use App\config\File;
 
