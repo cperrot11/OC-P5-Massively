@@ -10,7 +10,7 @@
             <?php
             if(isset($_SESSION['error'])) {?>
                 <div class="cpAlert">
-                    <?php echo '<p>'.$_SESSION['error'].'</p>';?>
+                    <?php echo '<p>'.$this->request->get('session', 'error').'</p>';?>
                     <i class="cpClose button icon solo fa-bomb scrolly"></i>
                 </div>
                 <?php

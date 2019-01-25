@@ -36,6 +36,7 @@ class Request
         $this->file = $_FILES;
     }
 
+
     /**
      * Return the value if exist
      *
@@ -122,6 +123,11 @@ class Request
     {
         return (isset($this->session['login']) && $this->session['login']<>"");
     }
+    public function getRequest(){
+        return $this;
+    }
+
+
 
 
 }

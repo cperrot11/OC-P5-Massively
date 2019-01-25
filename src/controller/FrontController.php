@@ -86,6 +86,7 @@ class FrontController
             return;
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
+        $this->view->request->set('session', 'error', $this->request->get('session', 'error'));
         $this->view->render('AddComment', true, ['formulaire' => $data]);
     }
 

@@ -16,7 +16,7 @@ class View
     private $title;
     private $admin;
     private $content;
-    protected $request;
+    public $request;
 
     /**
      * View constructor.
