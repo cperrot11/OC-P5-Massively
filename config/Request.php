@@ -72,6 +72,10 @@ class Request
         }
     }
 
+    public function unsetSession($name){
+        unset($_SESSION[$name]);
+    }
+
     /**
      * @param $frontController
      * @return bool
@@ -86,6 +90,9 @@ class Request
             return false;
         }
         return true;
+    }
+    public function isError(){
+        return (isset($this->session['error']));
     }
 
     /**
@@ -109,7 +116,7 @@ class Request
     public function isAdmin()
     {
         if (isset($this->session['role'])) {
-            return $this->session['role'] === "Admin";
+            return $this->session['role'] === "admin";
         }
         return false;
     }

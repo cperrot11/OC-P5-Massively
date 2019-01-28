@@ -18,11 +18,11 @@ $this->title = "Article";
     <?php
     if(isset($_SESSION['error'])) {?>
         <div class="cpAlert">
-            <?php echo '<p>'.$_SESSION['error'].'</p>';?>
+            <?php echo '<p>'.$this->request->get('session', 'error').'</p>';?>
             <i class="cpClose button icon solo fa-bomb scrolly"></i>
         </div>
         <?php
-        unset($_SESSION['error']);
+        $this->request->unsetSession('error');
     }
     ?>
     <article class="post featured">
@@ -64,7 +64,7 @@ $this->title = "Article";
                             <p><?= htmlspecialchars($comment->getContent());?></p>
                             <?php $path = "../public/index.php?route=deleteComment&appel=front&idComment=" ?>
                             <input type="hidden" id="path" value="<?php echo $path; ?>">
-                            <?php if(isset($_SESSION['role']) && $_SESSION['role']==="admin")
+                            <?php if($this->request->isAdmin())
                             { ?>
                                 <footer>
                                     <a title="Modifier" class="icon fa-edit" href="../public/index.php?route=updateComment&idArt=<?= htmlspecialchars($article->getId());?>&idComment=<?= htmlspecialchars($comment->getId());?>&appel=front#begin"> Modifier</a>

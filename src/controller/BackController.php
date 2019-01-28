@@ -105,36 +105,40 @@ class BackController
     }
     public function updateComment()
     {
-        if (!isset($_SESSION['role']) or $_SESSION['role']<>'admin') {
-            $this->frontController->login($_GET);
-            $_SESSION['error']='modification impossible';
+        $post = $this->request->get('post');
+        $get = $this->request->get('get');
+        if ($this->request->isAdmin()) {
+            $this->frontController->login($get);
+            $text1 = 'modification impossible';
+            $this->request->set('session', 'error', $text1);
             return false;
         }
         $comment = new Comment();
         // si retour de formulaire transfert vers $comment
-        if (isset($_POST['submit'])) {
-            $comment->setPseudo($_POST['pseudo']);
-            $comment->setContent($_POST['content']);
+        if ($this->request->isPostSubmit()) {
+            $comment->setPseudo($post['pseudo']);
+            $comment->setContent($post['content']);
         }
         else {
             //récupère le commentaire a modifier.
-            $comment = $this->commentDAO->getComment($_GET['idComment']);
+            $comment = $this->commentDAO->getComment($get['idComment']);
         }
         $formBuilder = new CommentForm($comment);
         $formBuilder->build();
         $form = $formBuilder->form();
 
-        if (isset($_POST['submit']) && $form->isValid()) {
+        if ($this->request->isPostSubmit() && $form->isValid()) {
             //enregistrement en base
-            $this->commentDAO->updateComment($_GET['idComment'], $_POST);
-            $_SESSION['error']="Commentaire mis à jour !";
-            if (isset($_GET['appel']) && $_GET['appel']==="front") {
-                $url = "../public/index.php?route=article&idArt=".$_GET['idArt']."#begin";
+            $this->commentDAO->updateComment($get['idComment'], $post);
+            $text1 = "Commentaire mis à jour !";
+            $this->request->set('session', 'error', $text1);
+            if (isset($get['appel']) && $get['appel']==="front") {
+                $url = "../public/index.php?route=article&idArt=".$get['idArt']."#begin";
                 header("location:".$url);
                 return;
 
             }
-            if (isset($_GET['appel']) && $_GET['appel']==="back") {
+            if (isset($get['appel']) && $get['appel']==="back") {
                 $url = "../public/index.php?route=adminCommentaires#begin";
                 header("location:".$url);
                 return;
@@ -146,12 +150,12 @@ class BackController
     }
     public function valideComment($get)
     {
-        if (!$this->commentDAO->valideComment($get)) {
-            $_SESSION['error'] = 'Modification impossible';
-        }
-        else {
-            $_SESSION['error'] = 'Modification effectuée.';
-        }
+        $texta = 'Modification impossible';
+        $textb = 'Modification effectuée.';
+        $text1 = (!$this->commentDAO->valideComment($get)) ? $texta : $textb;
+        $this->request->set('session', 'error', $text1);
+
+
         $url = "../public/index.php?route=adminCommentaires#begin";
         header("location:".$url);
         return;
