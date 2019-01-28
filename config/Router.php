@@ -29,6 +29,7 @@ class Router
         $this->_backController = new BackController();
         $this->_frontController = new FrontController();
         $this->_userController = new UserController();
+        $this->_request = new Request();
     }
 
     /**
@@ -36,7 +37,7 @@ class Router
      */
     public function run()
     {
-        $this->_request = new Request();
+
         $route =$this->_request->get("query", "route");
 
         try{

@@ -5,6 +5,7 @@ class PictureSizeValidator extends Validator
 {
   protected $maxSize;
   protected $actualSize;
+
   
   public function __construct($errorMessage, $maxSize, $actualSize)
   {
@@ -15,10 +16,11 @@ class PictureSizeValidator extends Validator
   
   public function isValid($file)
   {
-      if (!isset($_FILES)) {return true;}
-      $erreurs = array(0,4);//ok ou pas de fichier
-      return ($this->actualSize <= $this->maxSize) and (in_array($_FILES['picture']['error'],$erreurs));
-      //up_load_max_filesize = 2Mo php.ini (error=1)!!!
+      $file = $this->request->get('file');
+      if (!isset($file)) {return true;}
+      $tab_error = array(0,4);//ok ou pas de fichier
+      $error = in_array($file['picture']['error'],$tab_error);
+      return ($this->actualSize <= $this->maxSize) and $error;
   }
   
   public function setMaxSize($maxSize)

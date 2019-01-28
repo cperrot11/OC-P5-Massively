@@ -52,26 +52,31 @@ class BackController
     //1- Création article
     public function addArticle($post)
     {
-
         if ($this->request->checkSession($this->frontController)) {
             $article = new Article();
             $article->setDateAdded(date("d-m-Y"));
-            $article->setAuthor($_SESSION['login']);
-            $article->hydrate($this->request->post, $this->request->file);
+            $article->setAuthor($this->request->get('session', 'login'));
+            $post = $this->request->get('post');
+            $file = $this->request->get('file');
+            $article->hydrate($post, $file);
 
             $formBuilder = new ArticleForm($article);
             $formBuilder->build();
             $form = $formBuilder->form();
-            if (isset($post['submit']) && $form->isValid()) {
+            if ($this->request->isPostSubmit() && $form->isValid()) {
                 $destination = 'C:/wamp64/www/OC/P5-Blog PHP/3-POO/App/uploads/';
-                $destination.= basename($_FILES['picture']['name']);
-                move_uploaded_file($_FILES['picture']['tmp_name'], $destination );
+                $destination.= basename($file['picture']['name']);
+                $fileName = $file['picture']['tmp_name'];
+                move_uploaded_file($fileName, $destination );
                 $_articleDAO = new ArticleDAO();
                 if ($_articleDAO->saveArticle($post, $article->getPicture())!='false') {
-                    $_SESSION['error'] = 'Le nouvel article a bien été ajouté';
+                    $text1 = 'Le nouvel article a bien été ajouté';
+                    $this->request->set('session', 'error', $text1);
                 }
                 else {
-                    $_SESSION['error'] = 'Création article impossible : '.$_SESSION['error'];
+                    $text1 = 'Création article impossible : ';
+                    $text1 = $text1.$this->request->get('session', 'error');
+                    $this->request->set('session', 'error', $text1);
                 }
                 header('Location: ../public/index.php?route=articles');
                 return;

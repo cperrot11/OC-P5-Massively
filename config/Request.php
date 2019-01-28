@@ -14,7 +14,7 @@ use App\src\controller\FrontController;
  */
 class Request
 {
-    private $query;
+    private $get;
     private $post;
     private $session;
     private $frontcontroller;
@@ -28,14 +28,17 @@ class Request
      * @param $session
      * @param $cookie
      */
-    public function __construct()
+    public  function __construct()
     {
+        $this->update();
+    }
+
+    public function update(){
         $this->query = $_GET;
         $this->post = $_POST;
         $this->session = $_SESSION;
         $this->file = $_FILES;
     }
-
 
     /**
      * Return the value if exist
@@ -45,11 +48,12 @@ class Request
      * @return object or string
      */
     public function get($type, $name= null){
+        $this->update();
         if (!isset($name)){
             return $this->$type;
         }
         if (isset($this->$type[$name])){
-            return htmlspecialchars($this->$type[$name]);
+            return ($this->$type[$name]);
         }
         return null;
     }
@@ -63,6 +67,9 @@ class Request
      */
     public function set($type, $name, $value){
         $this->$type[$name]=$value;
+        if ($type==='session'){
+            $_SESSION[$name]=$value;
+        }
     }
 
     /**
@@ -78,6 +85,7 @@ class Request
             $this->frontcontroller->login();
             return false;
         }
+        return true;
     }
 
     /**

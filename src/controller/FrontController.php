@@ -68,7 +68,7 @@ class FrontController
         // si retour de formulaire transfert vers $comment
         if ($this->request->isPostSubmit()) {
             $comment->setPseudo($this->request->get('post', 'pseudo'));
-            $comment->setPseudo($this->request->get('post', 'content'));
+            $comment->setContent($this->request->get('post', 'content'));
         }
         $formBuilder = new CommentForm($comment);
         $formBuilder->build();
@@ -86,7 +86,7 @@ class FrontController
             return;
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
-        $this->view->request->set('session', 'error', $this->request->get('session', 'error'));
+//        $this->view->request->set('session', 'error', $this->request->get('session', 'error'));
         $this->view->render('AddComment', true, ['formulaire' => $data]);
     }
 
@@ -199,11 +199,13 @@ class FrontController
      */
     public function checkLogin()
     {
-        if (isset($_POST['submit'])) {
-            $test = $this->userDAO->CheckUser($this->request->get('post', 'login'), $this->request->get('post', 'pass'));
-            if ($test<>false) {
-                $this->request->set('session', 'login', $test->getLogin());
-                $this->request->set('session', 'role', ($test->getAdmin())? "admin":"membre");
+        if ($this->request->isPostSubmit()) {
+            $login = $this->request->get('post', 'login');
+            $pass = $this->request->get('post', 'pass');
+            $surfer = $this->userDAO->CheckUser($login, $pass);
+            if ($surfer<>false) {
+                $this->request->set('session', 'login', $login);
+                $this->request->set('session', 'role', ($surfer->getAdmin())? "admin":"membre");
                 $text1 = "Vous êtes à présent connecté et pouvez commenter les articles.";
                 $this->request->set('session', 'error', $text1);
                 $url = "../public/index.php?route=articles#begin";

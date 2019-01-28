@@ -1,9 +1,11 @@
 <?php
 namespace App\src\FORM;
 
+
 class PictureValidator extends Validator
 {
     protected $extension;
+
 
     public function __construct($errorMessage)
       {
@@ -12,24 +14,20 @@ class PictureValidator extends Validator
   
   public function isValid($file)
   {
-      if (!isset($_FILES) or $_FILES['picture']['error']===4) {return true;}
+      $file = $this->request->get('file');
+      if (!isset($file) or $file['picture']['error']===4) {return true;}
 
-      else
-      {
-          $infosfichier = pathinfo($_FILES['picture']['name']);
-          $extension_upload = $infosfichier['extension'];
-          $extension_upload = strtoupper($extension_upload);
-          $extensions_autorisees = array('JPG', 'JPEG', 'GIF', 'PNG', 'BMP');
-          if (in_array($extension_upload, $extensions_autorisees))
+      $infosfichier = pathinfo($file['picture']['name']);
+      $extension_upload = $infosfichier['extension'];
+      $extension_upload = strtoupper($extension_upload);
+      $extensions = array('JPG', 'JPEG', 'GIF', 'PNG', 'BMP');
+      if (in_array($extension_upload, $extensions))
           {
               return true;
           }
-          else
-          {
-              $_SESSION['error']="Extension non conforme";
-              return false;
-          }
-      }
+      $text1="Extension non conforme";
+      $this->request->set('session', 'error', text1);
+      return false;
   }
   
   public function setMaxSize($maxSize)
@@ -38,12 +36,10 @@ class PictureValidator extends Validator
     
     if ($maxSize > 0)
     {
-      $this->maxSize = $maxSize;
+      return $this->maxSize = $maxSize;
     }
-    else
-    {
-      throw new \RuntimeException('La taille maximale doit être un nombre supérieur à 0');
-    }
+    $text1 = 'La taille maximale doit être un nombre supérieur à 0';
+    throw new \RuntimeException($text1);
   }
     /**
      * @return mixed
