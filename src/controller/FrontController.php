@@ -33,6 +33,9 @@ class FrontController
     private $userDAO;
     private $view;
     private $request;
+    private $get;
+    private $post;
+    private $session;
 
     /**
      * FrontController constructor.
@@ -47,8 +50,10 @@ class FrontController
         $this->userDAO = new UserDAO();
         $this->view = new View();
         $this->request = new Request();
+        $this->get = $this->request->get('query');
+        $this->post = $this->request->get('post');
+        $this->session = $this->request->get('session');
     }
-
 
 
     /**
@@ -64,11 +69,11 @@ class FrontController
             $this->request->set('session', 'login', "");
         }
         $comment = new Comment();
-        $comment->setPseudo($this->request->get('session', 'login'));
+        $comment->setPseudo($this->session['login']);
         // si retour de formulaire transfert vers $comment
         if ($this->request->isPostSubmit()) {
-            $comment->setPseudo($this->request->get('post', 'pseudo'));
-            $comment->setContent($this->request->get('post', 'content'));
+            $comment->setPseudo($this->post['pseudo']);
+            $comment->setContent($this->post['content']);
         }
         $formBuilder = new CommentForm($comment);
         $formBuilder->build();
@@ -76,7 +81,7 @@ class FrontController
 
         if ($this->request->isPostSubmit() && $form->isValid()) {
             //enregistrement en base
-            {$this->commentDAO->addComment($get['idArt'], $this->request->get('post'));}
+            {$this->commentDAO->addComment($get['idArt'], $this->post);}
             //affiche single article
             $text2='Commentaire ajouté et en attente de validation';
             $this->request->set('session', 'error', $text2);
@@ -100,16 +105,16 @@ class FrontController
         $message = new Message();
         $contact = new MessageController();
         if ($this->request->isPostSubmit()) {
-            $message->setNom($this->request->get('post', 'nom'));
-            $message->setContent($this->request->get('post', 'content'));
-            $message->setMail($this->request->get('post', 'mail'));
+            $message->setNom($this->post['nom']);
+            $message->setContent($this->post['content']);
+            $message->setMail($this->post['mail']);
         }
         $formBuilder = new ContactForm($message);
         $formBuilder->build();
         $form = $formBuilder->form();
 
         if ($this->request->isPostSubmit() && $form->isValid()) {
-            $contact->envoi($this->request->get('form'));
+            $contact->envoi($this->form);
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('contact', true,['formulaire' => $data]);
@@ -174,9 +179,9 @@ class FrontController
      * @return bool
      */
     public function login(){
-        $user_log = $this->request->get('login','session');
-        if ($user_log<>"") {
-            $user = $user_log;
+
+        if ($this->session['login']<>"") {
+            $user = $this->userDAO->getUser($this->session['login']);
         } else {
             $user = $this->user;
         }
@@ -188,7 +193,6 @@ class FrontController
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('Connexion', true, ['formulaire' => $data]);
         $this->request->set('session', 'error', null);
-
         return false;
     }
 
@@ -200,8 +204,8 @@ class FrontController
     public function checkLogin()
     {
         if ($this->request->isPostSubmit()) {
-            $login = $this->request->get('post', 'login');
-            $pass = $this->request->get('post', 'pass');
+            $login = $this->post['login'];
+            $pass = $this->post['pass'];
             $surfer = $this->userDAO->CheckUser($login, $pass);
             if ($surfer<>false) {
                 $this->request->set('session', 'login', $login);

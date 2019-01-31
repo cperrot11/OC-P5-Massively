@@ -37,6 +37,9 @@ class BackController
     private $view;
     private $frontController;
     private $request;
+    private $get;
+    private $post;
+    private $session;
     private $file;
 
     public function __construct()
@@ -47,6 +50,9 @@ class BackController
         $this->view = new View();
         $this->frontController = new FrontController();
         $this->request = new Request();
+        $this->get = $this->request->get('query');
+        $this->post = $this->request->get('post');
+        $this->session = $this->request->get('session');
         $this->file = new File();
     }
     //1- Création article
@@ -55,9 +61,9 @@ class BackController
         if ($this->request->checkSession($this->frontController)) {
             $article = new Article();
             $article->setDateAdded(date("d-m-Y"));
-            $article->setAuthor($this->request->get('session', 'login'));
-            $post = $this->request->get('post');
-            $file = $this->request->get('file');
+            $article->setAuthor($this->session[login]);
+
+            $file = $this->get['file'];
             $article->hydrate($post, $file);
 
             $formBuilder = new ArticleForm($article);
@@ -75,7 +81,7 @@ class BackController
                 }
                 else {
                     $text1 = 'Création article impossible : ';
-                    $text1 = $text1.$this->request->get('session', 'error');
+                    $text1 = $text1.$this->session['error'];
                     $this->request->set('session', 'error', $text1);
                 }
                 header('Location: ../public/index.php?route=articles');
@@ -88,7 +94,7 @@ class BackController
     }
     public function adminGestion()
     {
-        if (!isset($_SESSION['role']) or $_SESSION['role']<>'admin') {
+        if ($this->request->isAdmin()) {
             $_SESSION['error']="L'accès réservé aux administrateurs";
             $this->frontController->login();
             return false;
@@ -105,10 +111,8 @@ class BackController
     }
     public function updateComment()
     {
-        $post = $this->request->get('post');
-        $get = $this->request->get('get');
         if ($this->request->isAdmin()) {
-            $this->frontController->login($get);
+            $this->frontController->login($this->get);
             $text1 = 'modification impossible';
             $this->request->set('session', 'error', $text1);
             return false;
@@ -116,12 +120,12 @@ class BackController
         $comment = new Comment();
         // si retour de formulaire transfert vers $comment
         if ($this->request->isPostSubmit()) {
-            $comment->setPseudo($post['pseudo']);
-            $comment->setContent($post['content']);
+            $comment->setPseudo($this->post['pseudo']);
+            $comment->setContent($this->post['content']);
         }
         else {
             //récupère le commentaire a modifier.
-            $comment = $this->commentDAO->getComment($get['idComment']);
+            $comment = $this->commentDAO->getComment($this->get['idComment']);
         }
         $formBuilder = new CommentForm($comment);
         $formBuilder->build();
@@ -129,16 +133,16 @@ class BackController
 
         if ($this->request->isPostSubmit() && $form->isValid()) {
             //enregistrement en base
-            $this->commentDAO->updateComment($get['idComment'], $post);
+            $this->commentDAO->updateComment($this->get['idComment'], $this->post);
             $text1 = "Commentaire mis à jour !";
             $this->request->set('session', 'error', $text1);
-            if (isset($get['appel']) && $get['appel']==="front") {
-                $url = "../public/index.php?route=article&idArt=".$get['idArt']."#begin";
+            if ($this->request->isFront()) {
+                $url = "../public/index.php?route=article&idArt=".$this->get['idArt']."#begin";
                 header("location:".$url);
                 return;
 
             }
-            if (isset($get['appel']) && $get['appel']==="back") {
+            if ($this->request->isBack()) {
                 $url = "../public/index.php?route=adminCommentaires#begin";
                 header("location:".$url);
                 return;
@@ -165,15 +169,16 @@ class BackController
     {
         extract($get);
         $this->commentDAO->deleteComment($get['idComment']);
-        if (isset($_GET['appel']) && $_GET['appel']==="front") {
+        if ($this->request->isFront()) {
             $url = "../public/index.php?route=article&idArt=".$get['idArt']."#begin";
             header("location:".$url);
         }
-        if (isset($_GET['appel']) && $_GET['appel']==="back") {
+        if ($this->request->isback()) {
             $url = "../public/index.php?route=adminCommentaires#begin";
             header("location:".$url);
         }
-        $_SESSION['error']="Commentaire supprimé";
+        $text1 = "Commentaire supprimé";
+        $this->request->set('session', 'error', $text1);
         return;
     }
 
@@ -188,14 +193,15 @@ class BackController
         $article = new Article();
         $article = $this->articleDAO->getArticle($idArt);
         //reprends les données ayant pu être modifiées
-        $article->hydrate($this->request->post, $this->request->file);
+        $article->hydrate($this->post, $this->file);
         $formBuilder = new ArticleForm($article);
         $formBuilder->build();
         $form = $formBuilder->form();
-        if (isset($_POST['submit']) && $form->isValid()) {
-                $this->file->movePicture($this->request->file);
-                $this->articleDAO->updateArticle($idArt, $_POST,$article->getPicture());
-                $_SESSION['error']='Modification effectuées sur l\'article '.$idArt ;
+        if ($this->request->isPostSubmit() && $form->isValid()) {
+                $this->file->movePicture($this->file);
+                $this->articleDAO->updateArticle($idArt, $this->post,$article->getPicture());
+                $text1 = 'Modification effectuées sur l\'article '.$idArt ;
+                $this->request->set('session', 'error', $text1);
                 $url = "../public/index.php?route=adminArticles#begin";
                 header("location:".$url);
                 return;
@@ -211,11 +217,12 @@ class BackController
     public function deleteArticle($idArt)
     {
         if ($this->articleDAO->deleteArticle($idArt)) {
-            $_SESSION['error'] = 'Article + commentaires correspondants effacés';
+            $text1 = 'Article + commentaires correspondants effacés';
         }
         else {
-            $_SESSION['error'] = 'Suppression impossible';
+            $text1 = 'Suppression impossible';
         }
+        $this->request->set('session', 'error', $text1);
         $url = "../public/index.php?route=adminArticles#begin";
         header("location:".$url);
     }

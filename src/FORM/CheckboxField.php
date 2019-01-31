@@ -15,6 +15,7 @@ class CheckboxField extends Field
     }
     else{
         $widget .= '<span class="fred"> <label>'.$this->label.'</label><input type="checkbox" name="'.$this->name.'"';
+        $widget .= '</br>';
     }
 
     
@@ -24,6 +25,6 @@ class CheckboxField extends Field
       $widget .= ' checked';
     }
 
-    return $widget .= ' /></span>';
+    return $widget .= ' /></span><br>';
   }
 }

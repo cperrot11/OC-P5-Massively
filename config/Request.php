@@ -70,6 +70,9 @@ class Request
         if ($type==='session'){
             $_SESSION[$name]=$value;
         }
+        if ($type==='post'){
+            $_POST[$name]=$value;
+        }
     }
 
     public function unsetSession($name){
@@ -141,7 +144,12 @@ class Request
     public function getRequest(){
         return $this;
     }
-
+    public function isBack(){
+        return (isset($this->get['appel']) && $this->get['appel']==="back");
+    }
+    public function isFront(){
+        return (isset($this->get['appel']) && $this->get['appel']==="front");
+    }
 
 
 

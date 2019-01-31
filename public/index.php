@@ -3,7 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 /*autoload zone*/
-require '../config/dev.php';
+require '../config/ini.php';
 require '../config/Autoloader.php';
 \App\config\Autoloader::register();
 

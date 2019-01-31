@@ -22,6 +22,8 @@ class UserController
     private $user;
     private $userDAO;
     private $request;
+    private $get;
+    private $post;
 
     public function __construct()
     {
@@ -29,46 +31,44 @@ class UserController
         $this->userDAO = new UserDAO();
         $this->view = new View();
         $this->request = new Request();
+        $this->get = $this->request->get('query');
+        $this->post = $this->request->get('post');
     }
 
     public function addUser()
     {
         $this->user = new User();
         // si retour de formulaire transfert vers $user
-        if ($this->request->get( 'post', 'submit')) {
-                $this->user->setLogin($this->request->get( 'post', 'login'));
-                $this->user->setName($this->request->get( 'post', 'name'));
-                $this->user->setPass($this->request->get( 'post', 'pass'));
-                $this->user->setEmail($this->request->get( 'post', 'mail'));
+        if ($this->request->isPostSubmit()) {
+                $this->user->setLogin($this->post[login]);
+                $this->user->setName($this->post[name]);
+                $this->user->setPass($this->post[pass]);
+                $this->user->setEmail($this->post[email]);
             }
         $formBuilder = new AddUserForm($this->user);
         $formBuilder->build();
         $form = $formBuilder->form();
-        if ($this->request->get('submit', 'post') && $form->isValid()){
+        if ($this->request->isPostSubmit() && $form->isValid()){
             //enregistrement en base
-            $_POST['admin']=0;
-            $this->request->set('admin', 0, 'post');
-            if($this->userDAO->saveUser($this->request->get('post')))
-                {
-                    $_SESSION['login']= $_POST['login'];
-                    $_SESSION['role'] = "membre";
-                    $_SESSION['error']="<p>L'utilisateur '".$this->user->getName()."' a été créé en tant que membre, pour devenir administrateur, voir avec un administrateur déjà en place</p>";
-                }
-            else
-                {
+            $this->request->set('post', 'admin', 0);
+            if(!$this->userDAO->saveUser($this->post)){
                     $url = "../public/index.php?route=addUser";
                     header("location:".$url);
                     return;
                 };
-            if (isset($_GET['appel']) && $_GET['appel']==="back")
+            $user = $this->post[login];
+            $this->request->set('session', 'login', $user);
+            $this->request->set('session', 'role', 'membre');
+            $text1 = "<p>L'utilisateur '".$this->user->getName()."' a été créé en tant que membre, pour devenir administrateur, voir avec un administrateur déjà en place</p>";
+            $this->request->set('session', 'error', $text1);
+
+            if ($this->request->isBack())
             {
                 $this->adminUsers();
+                return;
             }
-            else
-            {
-                $url = "../public/index.php?route=login#begin";
-                header("location:".$url);
-            }
+            $url = "../public/index.php?route=login#begin";
+            header("location:".$url);
             return;
         }
         $this->view = new View();
@@ -77,39 +77,45 @@ class UserController
     }
     public function updateUser()
     {
-        if (!isset($_SESSION['role'])){
-            $this->frontController->login($_GET);
-            $_SESSION['error']='modification impossible pas de connexion en cours';
+        if (!$this->request->isLoged()){
+            $text1 = 'modification impossible pas de connexion en cours';
+            $this->request->set('session', 'error', $text1);
+            $url = "../public/index.php?route=login";
+            header("location:".$url);
             return false;
         }
         $user = new User();
         // si retour de formulaire transfert vers $user
-        if (isset($_POST['submit']))
+        if ($this->request->isPostSubmit())
         {
-            $user->setLogin($_POST['login']);
-            $user->setName($_POST['name']);
-            $user->setPass($_POST['pass']);
-            $user->setEmail($_POST['email']);
-            if (isset($_POST['admin'])){$_POST['admin']=($_POST['admin']=="on")?1:0;}
-            else $_POST['admin']=0;
+            $this->user->setLogin($this->post[login]);
+            $this->user->setName($this->post[name]);
+            $this->user->setPass($this->post[pass]);
+            $this->user->setEmail($this->post[email]);
+            $admin = $this->post[admin];
+            $this->request->set('post', 'admin', 0);
+            if ($admin==="on"){
+                $this->request->set('post', 'admin', 1);
+            }
         }
         else{
             //récupère l'user a modifier.
-            $user = $this->userDAO->getUser($_GET['login']);
+            $user = $this->userDAO->getUser($this->get['login']);
         }
         $formBuilder = new UpdateUserForm($user);
         $formBuilder->build();
         $form = $formBuilder->form();
 
-        if (isset($_POST['submit']) && $form->isValid()){
+        if ($this->request->isPostSubmit() && $form->isValid()){
             //enregistrement en base
-            $this->userDAO->updateUser($_POST);
-            $_SESSION['error']='Données utilisateur "'.$user->getName().'" mises à jour !';
-            if (isset($_GET['appel']) && $_GET['appel']==="front")
+            $this->userDAO->updateUser($this->post);
+            $text1 = 'Données utilisateur "'.$user->getName().'" mises à jour !';
+            $this->request->set('session', 'error', $text1);
+            if ($this->request->isFront())
             {   //affiche single article
-                $this->frontController->article($_GET['idArt']);
+                $this->frontController->article($this->get['idArt']);
             }
-            if (isset($_GET['appel']) && $_GET['appel']==="back")
+            if ($this->request->isBack())
             {
                 $this->adminUsers();
             }
@@ -122,7 +128,8 @@ class UserController
     {
         extract($get);
         $this->userDAO->deleteUser($get['login']);
-        $_SESSION['error']="Utilisateurs + ses articles supprimés.";
+        $text1="Utilisateurs + ses articles supprimés.";
+        $this->request->set('session', 'error', $text1);
         $url = "../public/index.php?route=adminUsers#begin";
         header("location:".$url);
         return;
