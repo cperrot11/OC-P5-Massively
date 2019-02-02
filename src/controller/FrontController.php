@@ -114,7 +114,7 @@ class FrontController
         $form = $formBuilder->form();
 
         if ($this->request->isPostSubmit() && $form->isValid()) {
-            $contact->envoi($this->form);
+            $contact->envoi($this->post);
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('contact', true,['formulaire' => $data]);

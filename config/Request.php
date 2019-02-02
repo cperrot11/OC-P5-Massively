@@ -145,10 +145,10 @@ class Request
         return $this;
     }
     public function isBack(){
-        return (isset($this->get['appel']) && $this->get['appel']==="back");
+        return (isset($this->query['appel']) && $this->query['appel']==="back");
     }
     public function isFront(){
-        return (isset($this->get['appel']) && $this->get['appel']==="front");
+        return (isset($this->query['appel']) && $this->query['appel']==="front");
     }
 
 

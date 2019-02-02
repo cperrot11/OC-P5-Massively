@@ -55,46 +55,10 @@ class BackController
         $this->session = $this->request->get('session');
         $this->file = new File();
     }
-    //1- Création article
-    public function addArticle($post)
-    {
-        if ($this->request->checkSession($this->frontController)) {
-            $article = new Article();
-            $article->setDateAdded(date("d-m-Y"));
-            $article->setAuthor($this->session[login]);
 
-            $file = $this->get['file'];
-            $article->hydrate($post, $file);
-
-            $formBuilder = new ArticleForm($article);
-            $formBuilder->build();
-            $form = $formBuilder->form();
-            if ($this->request->isPostSubmit() && $form->isValid()) {
-                $destination = 'C:/wamp64/www/OC/P5-Blog PHP/3-POO/App/uploads/';
-                $destination.= basename($file['picture']['name']);
-                $fileName = $file['picture']['tmp_name'];
-                move_uploaded_file($fileName, $destination );
-                $_articleDAO = new ArticleDAO();
-                if ($_articleDAO->saveArticle($post, $article->getPicture())!='false') {
-                    $text1 = 'Le nouvel article a bien été ajouté';
-                    $this->request->set('session', 'error', $text1);
-                }
-                else {
-                    $text1 = 'Création article impossible : ';
-                    $text1 = $text1.$this->session['error'];
-                    $this->request->set('session', 'error', $text1);
-                }
-                header('Location: ../public/index.php?route=articles');
-                return;
-            }
-            $data = $form->createView(); // On passe le formulaire généré à la vue.
-            $this->view->render('AdminAddArticle',true, ['formulaire' => $data]);
-        }
-
-    }
     public function adminGestion()
     {
-        if ($this->request->isAdmin()) {
+        if (!$this->request->isAdmin()) {
             $_SESSION['error']="L'accès réservé aux administrateurs";
             $this->frontController->login();
             return false;
@@ -103,7 +67,6 @@ class BackController
             $this->view->render('AdminGestion',true, []);
             }
     }
-
     public function adminCommentaires()
     {
         $comments = $this->commentDAO->getCommentAll();
@@ -181,13 +144,47 @@ class BackController
         $this->request->set('session', 'error', $text1);
         return;
     }
-
     public function adminArticles()
     {
         $articles = $this->articleDAO->getArticles();
         $this->view->render('AdminBlog',true, ['articles'=> $articles]);
     }
+    public function addArticle($post)
+    {
+        if ($this->request->checkSession($this->frontController)) {
+            $article = new Article();
+            $article->setDateAdded(date("d-m-Y"));
+            $article->setAuthor($this->session[login]);
 
+            $file = $this->get['file'];
+            $article->hydrate($post, $file);
+
+            $formBuilder = new ArticleForm($article);
+            $formBuilder->build();
+            $form = $formBuilder->form();
+            if ($this->request->isPostSubmit() && $form->isValid()) {
+                $destination = 'C:/wamp64/www/OC/P5-Blog PHP/3-POO/App/uploads/';
+                $destination.= basename($file['picture']['name']);
+                $fileName = $file['picture']['tmp_name'];
+                move_uploaded_file($fileName, $destination );
+                $_articleDAO = new ArticleDAO();
+                if ($_articleDAO->saveArticle($post, $article->getPicture())!='false') {
+                    $text1 = 'Le nouvel article a bien été ajouté';
+                    $this->request->set('session', 'error', $text1);
+                }
+                else {
+                    $text1 = 'Création article impossible : ';
+                    $text1 = $text1.$this->session['error'];
+                    $this->request->set('session', 'error', $text1);
+                }
+                header('Location: ../public/index.php?route=articles');
+                return;
+            }
+            $data = $form->createView(); // On passe le formulaire généré à la vue.
+            $this->view->render('AdminAddArticle',true, ['formulaire' => $data]);
+        }
+
+    }
     public function updateArticle($idArt)
     {
         $article = new Article();
@@ -213,7 +210,6 @@ class BackController
             'formulaire' => $data
         ]);
     }
-
     public function deleteArticle($idArt)
     {
         if ($this->articleDAO->deleteArticle($idArt)) {

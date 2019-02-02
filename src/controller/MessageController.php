@@ -16,6 +16,7 @@ namespace App\src\controller;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use App\config\Request;
 
 /**
  * Class MessageController
@@ -23,6 +24,10 @@ use PHPMailer\PHPMailer\Exception;
  */
 class MessageController
 {
+    private $request;
+    private $get;
+    private $post;
+    private $session;
     /**
      * MessageController constructor.
      */
@@ -38,6 +43,9 @@ class MessageController
         $this->mail->Password = 'Mecani4306';
         $this->mail->SMTPSecure = 'tls';
         $this->mail->Port = 587;
+        $this->request = new Request();
+        $this->session = $this->request->get('session');
+
     }
     public function envoi($post)
     {
@@ -57,12 +65,14 @@ class MessageController
             $this->mail->Body    = $content;
 
             $this->mail->send();
-            $_SESSION['error'] = 'Le message a été envoyé';
+            $text1 = 'Le message a été envoyé';
+            $this->request->set('session', 'error', $text1);
             return true;
         }
         catch (Exception $e)
         {
-            $_SESSION['error'] = "Le Message n'a pas pu être envoyé : ".$this->mail->ErrorInfo;
+            $text1 = "Le Message n'a pas pu être envoyé : ".$this->mail->ErrorInfo;
+            $this->request->set('session', 'error', $text1);
             return false;
         }
     }

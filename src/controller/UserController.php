@@ -1,9 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: c.perrotin
- * Date: 17/10/2018
- * Time: 13:40
+ * Manage the user
+ *
+ * @link http://wwww.perrotin.eu
  */
 
 namespace App\src\controller;
@@ -13,9 +12,12 @@ use App\src\FORM\AddUserForm;
 use App\src\FORM\UpdateUserForm;
 use App\src\model\User;
 use App\src\DAO\UserDAO;
-use App\src\FORM\ConnexionForm;
 use App\config\Request;
 
+/**
+ * Class UserController
+ * @package App\src\controller
+ */
 class UserController
 {
     private $view;
@@ -25,16 +27,25 @@ class UserController
     private $get;
     private $post;
 
+    /**
+     * UserController constructor.
+     */
     public function __construct()
     {
         $this->user = new User();
         $this->userDAO = new UserDAO();
         $this->view = new View();
+        //avoid using global variables
         $this->request = new Request();
         $this->get = $this->request->get('query');
         $this->post = $this->request->get('post');
     }
 
+    /**
+     * Manages the user addition
+     *
+     * @return void
+     */
     public function addUser()
     {
         $this->user = new User();
@@ -54,7 +65,7 @@ class UserController
             if(!$this->userDAO->saveUser($this->post)){
                     $url = "../public/index.php?route=addUser";
                     header("location:".$url);
-                    return;
+                    exit();
                 };
             $user = $this->post[login];
             $this->request->set('session', 'login', $user);
@@ -69,30 +80,36 @@ class UserController
             }
             $url = "../public/index.php?route=login#begin";
             header("location:".$url);
-            return;
+            exit();
         }
         $this->view = new View();
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('addUser',true, ['formulaire' => $data]);
     }
+
+    /**
+     * Update user
+     *
+     * @return bool|void
+     */
     public function updateUser()
     {
-        if (!$this->request->isLoged()){
-            $text1 = 'modification impossible pas de connexion en cours';
+        $user = new User;
+        if (!$this->request->isAdmin()){
+            $text1 = 'modification impossible pas de connexion administrateur';
             $this->request->set('session', 'error', $text1);
             $url = "../public/index.php?route=login";
             header("location:".$url);
-            return false;
+            exit();
         }
-        $user = new User();
         // si retour de formulaire transfert vers $user
         if ($this->request->isPostSubmit())
         {
-            $this->user->setLogin($this->post[login]);
-            $this->user->setName($this->post[name]);
-            $this->user->setPass($this->post[pass]);
-            $this->user->setEmail($this->post[email]);
-            $admin = $this->post[admin];
+            $user->setLogin($this->post['login']);
+            $user->setName($this->post['name']);
+            $user->setPass($this->post['pass']);
+            $user->setEmail($this->post['email']);
+            $admin = $this->post['admin'];
             $this->request->set('post', 'admin', 0);
             if ($admin==="on"){
                 $this->request->set('post', 'admin', 1);
@@ -119,11 +136,17 @@ class UserController
             {
                 $this->adminUsers();
             }
-            return;
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('AdminUpdateUser', true,['formulaire' => $data]);
     }
+
+    /**
+     * Delete user
+     *
+     * @param $get
+     * @return void
+     */
     public function deleteUser($get)
     {
         extract($get);
@@ -132,14 +155,22 @@ class UserController
         $this->request->set('session', 'error', $text1);
         $url = "../public/index.php?route=adminUsers#begin";
         header("location:".$url);
-        return;
+        exit();
     }
 
+    /**
+     * Direct to user administration page
+     *
+     */
     public function adminUsers()
     {
         $users = $this->userDAO->getUsers();
         $this->view->render('AdminUsers',true,['users'=>$users]);
     }
+
+    /**
+     * Logout user
+     */
     public function logout()
     {
         session_destroy();
