@@ -15,16 +15,14 @@ class CheckboxField extends Field
     }
     else{
         $widget .= '<span class="fred"> <label>'.$this->label.'</label><input type="checkbox" name="'.$this->name.'"';
-        $widget .= '</br>';
     }
 
     
-    if ($this->value=='Oui')
+    if ($this->value==='Oui')
     {
-      $widget .= ' value="'.htmlspecialchars($this->value).'"';
+      $widget .= ' value="on"';
       $widget .= ' checked';
     }
-
-    return $widget .= ' /></span><br>';
+    return $widget .= '/></span><br/>';
   }
 }

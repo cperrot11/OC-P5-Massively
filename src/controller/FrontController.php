@@ -59,9 +59,8 @@ class FrontController
     /**
      * New comment
      *
-     * @param $get
      */
-    public function addComment($get)
+    public function addComment()
     {
         $text1 = "Attention : L'ajout de commentaire est réservé aux membres";
         if (!$this->request->isMember() and !$this->request->isAdmin()){
@@ -81,12 +80,12 @@ class FrontController
 
         if ($this->request->isPostSubmit() && $form->isValid()) {
             //enregistrement en base
-            {$this->commentDAO->addComment($get['idArt'], $this->post);}
+            {$this->commentDAO->addComment($this->get['idArt'], $this->post);}
             //affiche single article
             $text2='Commentaire ajouté et en attente de validation';
             $this->request->set('session', 'error', $text2);
             $url = "../public/index.php?route=article&idArt=";
-            $url.=$get['idArt']."#begin";
+            $url.=$this->get['idArt']."#begin";
             header("location:".$url);
             return;
         }
@@ -134,14 +133,12 @@ class FrontController
     /**
      * Delete comment
      *
-     * @param $get
      * @return void
      */
-    public function deleteComment($get)
+    public function deleteComment()
     {
-        extract($get);
-        $this->commentDAO->deleteComment($get['idComment']);
-        $this->article($get['idArt']);
+        $this->commentDAO->deleteComment($this->get['idComment']);
+        $this->article($this->get['idArt']);
     }
 
     /**
@@ -161,8 +158,9 @@ class FrontController
      * @param $idArt
      * @return void
      */
-    public function article($idArt)
+    public function article()
     {
+        $idArt = $this->get['idArt'];
         $article = $this->articleDAO->getArticle($idArt);
         $comments = $this->commentDAO->getCommentsFromArticle($idArt);
 
@@ -179,8 +177,7 @@ class FrontController
      * @return bool
      */
     public function login(){
-
-        if ($this->session['login']<>"") {
+        if (isset($this->session['login'])){
             $user = $this->userDAO->getUser($this->session['login']);
         } else {
             $user = $this->user;

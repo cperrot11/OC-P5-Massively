@@ -102,15 +102,15 @@ class User extends Entity
     }
 
     /**
-     * @return true flase
+     * @return true false
      */
     public function getAdmin()
     {
-        return ($this->admin)==1?true:false;
+        return ($this->admin)==1?'Oui':'Non';
     }
 
     /**
-     * @return true flase
+     * @return true false
      */
     public function getAdminBool()
     {

@@ -8,7 +8,7 @@ namespace App\config;
 use App\src\controller\BackController;
 use App\src\controller\FrontController;
 use App\src\controller\UserController;
-use App\config\request;
+use App\config\Request;
 
 /**
  * Class Router
@@ -19,8 +19,6 @@ class Router
     private $_frontController;
     private $_backController;
     private $_userController;
-    private $_request;
-
     /**
      * Router constructor.
      */
@@ -59,35 +57,35 @@ class Router
                         break;
                     //Zone article
                     case 'article' :
-                        $this->_frontController->article($this->_request->get('query', 'idArt'));
-                        $this->_frontController->addComment($this->_request->get('query', 'idArt'));
+                        $this->_frontController->article();
+                        $this->_frontController->addComment();
                         break;
                     case 'articles' :
                         $this->_frontController->articles();
                         break;
                     case 'addArticle' :
-                        $this->_backController->addArticle($this->_request->get('post'));
+                        $this->_backController->addArticle();
                         break;
                     case 'adminArticles' :
                         $this->_backController ->adminArticles();
                         break;
                     case 'updateArticle' :
-                        $this->_backController ->updateArticle($this->_request->get('query', 'idArt'));
+                        $this->_backController ->updateArticle();
                         break;
                     case 'deleteArticle' :
-                        $this->_backController ->deleteArticle($this->_request->get('query', 'idArt'));
+                        $this->_backController ->deleteArticle();
                         break;
                     case 'addComment' :
-                        $this->_frontController->addComment($this->_request->get('query'));
+                        $this->_frontController->addComment();
                         break;
                     case 'updateComment' :
                         $this->_backController->updateComment();
                         break;
                     case 'deleteComment' :
-                        $this->_backController->deleteComment($this->_request->get('query'));
+                        $this->_backController->deleteComment();
                         break;
                     case 'valideComment' :
-                        $this->_backController->valideComment($this->_request->get('query'));
+                        $this->_backController->valideComment();
                         break;
                     case 'adminCommentaires' :
                         $this->_backController ->adminCommentaires();
@@ -113,7 +111,7 @@ class Router
                         $this->_userController->updateUser();
                         break;
                     case 'deleteUser' :
-                        $this->_userController->deleteUser($this->_request->get('query'));
+                        $this->_userController->deleteUser();
                         return;
                     default :
                         $this->_frontController->page404();

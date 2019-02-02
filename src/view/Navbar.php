@@ -17,9 +17,9 @@
             </a>
         </div>
         <ul class="icons">
-            <li><a title="Viadeo" href="http://www.viadeo.com/p/002viqljzd758sz" class="icon fa-viadeo"><span class="label">viadeo</span></a></li>
-            <li><a title="Facebook" href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-            <li><a title="Linkedin" href="https://www.linkedin.com/in/christophe-perrotin-34480/" class="icon fa-linkedin"><span class="label">Linkedin</span></a></li>
-            <li><a title="Github" href="https://github.com/cperrot11/" class="icon fa-github"><span class="label">GitHub</span></a></li>
+            <li><a title="Viadeo" href="http://www.viadeo.com/p/002viqljzd758sz" class="icon fa-viadeo" target="_blank"><span class="label">viadeo</span></a></li>
+            <li><a title="Facebook" href="#" class="icon fa-facebook"><span class="label" target="_blank">Facebook</span></a></li>
+            <li><a title="Linkedin" href="https://www.linkedin.com/in/christophe-perrotin-34480/" class="icon fa-linkedin" target="_blank"><span class="label">Linkedin</span></a></li>
+            <li><a title="Github" href="https://github.com/cperrot11/" class="icon fa-github" target="_blank"><span class="label">GitHub</span></a></li>
         </ul>
     </nav>

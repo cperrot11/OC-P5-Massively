@@ -53,13 +53,14 @@ class BackController
         $this->get = $this->request->get('query');
         $this->post = $this->request->get('post');
         $this->session = $this->request->get('session');
-        $this->file = new File();
+        $this->file = $this->request->get('file');
     }
 
     public function adminGestion()
     {
         if (!$this->request->isAdmin()) {
-            $_SESSION['error']="L'accès réservé aux administrateurs";
+            $text1 = "L'accès réservé aux administrateurs";
+            $this->request->set('session', 'error', $text1);
             $this->frontController->login();
             return false;
         }
@@ -102,38 +103,34 @@ class BackController
             if ($this->request->isFront()) {
                 $url = "../public/index.php?route=article&idArt=".$this->get['idArt']."#begin";
                 header("location:".$url);
-                return;
-
+                exit();
             }
             if ($this->request->isBack()) {
                 $url = "../public/index.php?route=adminCommentaires#begin";
                 header("location:".$url);
-                return;
+                exit();
             }
 
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
         $this->view->render('AdminUpdateComment',true, ['formulaire' => $data]);
     }
-    public function valideComment($get)
+    public function valideComment()
     {
         $texta = 'Modification impossible';
         $textb = 'Modification effectuée.';
-        $text1 = (!$this->commentDAO->valideComment($get)) ? $texta : $textb;
+        $text1 = (!$this->commentDAO->valideComment($this->get)) ? $texta : $textb;
         $this->request->set('session', 'error', $text1);
-
 
         $url = "../public/index.php?route=adminCommentaires#begin";
         header("location:".$url);
-        return;
-
+        exit();
     }
-    public function deleteComment($get)
+    public function deleteComment()
     {
-        extract($get);
-        $this->commentDAO->deleteComment($get['idComment']);
+        $this->commentDAO->deleteComment($this->get['idComment']);
         if ($this->request->isFront()) {
-            $url = "../public/index.php?route=article&idArt=".$get['idArt']."#begin";
+            $url = "../public/index.php?route=article&idArt=".$this->get['idArt']."#begin";
             header("location:".$url);
         }
         if ($this->request->isback()) {
@@ -149,15 +146,15 @@ class BackController
         $articles = $this->articleDAO->getArticles();
         $this->view->render('AdminBlog',true, ['articles'=> $articles]);
     }
-    public function addArticle($post)
+    public function addArticle()
     {
         if ($this->request->checkSession($this->frontController)) {
             $article = new Article();
             $article->setDateAdded(date("d-m-Y"));
-            $article->setAuthor($this->session[login]);
+            $article->setAuthor($this->session['login']);
 
-            $file = $this->get['file'];
-            $article->hydrate($post, $file);
+            $file = $this->file;
+            $article->hydrate($this->post, $file);
 
             $formBuilder = new ArticleForm($article);
             $formBuilder->build();
@@ -168,7 +165,7 @@ class BackController
                 $fileName = $file['picture']['tmp_name'];
                 move_uploaded_file($fileName, $destination );
                 $_articleDAO = new ArticleDAO();
-                if ($_articleDAO->saveArticle($post, $article->getPicture())!='false') {
+                if ($_articleDAO->saveArticle($this->post, $article->getPicture())!='false') {
                     $text1 = 'Le nouvel article a bien été ajouté';
                     $this->request->set('session', 'error', $text1);
                 }
@@ -185,8 +182,9 @@ class BackController
         }
 
     }
-    public function updateArticle($idArt)
+    public function updateArticle()
     {
+        $idArt = $this->request->get('query', 'idArt');
         $article = new Article();
         $article = $this->articleDAO->getArticle($idArt);
         //reprends les données ayant pu être modifiées
@@ -201,7 +199,7 @@ class BackController
                 $this->request->set('session', 'error', $text1);
                 $url = "../public/index.php?route=adminArticles#begin";
                 header("location:".$url);
-                return;
+                exit();
             }
 
         $data = $form->createView();
@@ -210,8 +208,9 @@ class BackController
             'formulaire' => $data
         ]);
     }
-    public function deleteArticle($idArt)
+    public function deleteArticle()
     {
+        $idArt = $this->request->get('query', 'idArt');
         if ($this->articleDAO->deleteArticle($idArt)) {
             $text1 = 'Article + commentaires correspondants effacés';
         }
@@ -221,5 +220,6 @@ class BackController
         $this->request->set('session', 'error', $text1);
         $url = "../public/index.php?route=adminArticles#begin";
         header("location:".$url);
+        exit();
     }
 }

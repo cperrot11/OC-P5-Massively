@@ -1,5 +1,5 @@
 <?php
-$this->title = "Gestion des articles";
+$this->title = "Mise à jour utilisateurs";
 ?>
 <div id="main">
     <section class="post">

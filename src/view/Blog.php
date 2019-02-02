@@ -20,7 +20,6 @@ $this->title = "Blog";
         }
         ?>
             <a class="button" href="../public/index.php?route=addArticle#begin">Ajouter un article</a>
-            <a class="button" href="../public/index.php?route=articles#first">Entrez...</a>
     </section>
 
             <?php

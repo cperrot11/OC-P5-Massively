@@ -55,6 +55,7 @@ class Request
         if (isset($this->$type[$name])){
             return ($this->$type[$name]);
         }
+
         return null;
     }
 
