@@ -14,7 +14,6 @@ use App\src\controller\FrontController;
  */
 class Request
 {
-    private $get;
     private $post;
     private $session;
     private $frontcontroller;
@@ -107,7 +106,7 @@ class Request
     public function isMember()
     {
         if (isset($this->session['role'])){
-            return $this->session['role']==="Membre";
+            return $this->session['role']==="membre";
         }
         return false;
     }

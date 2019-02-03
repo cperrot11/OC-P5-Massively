@@ -68,8 +68,9 @@ class FrontController
             $this->request->set('session', 'login', "");
         }
         $comment = new Comment();
-        $comment->setPseudo($this->session['login']);
-        // si retour de formulaire transfert vers $comment
+        if ($this->request->isLoged()){
+            $comment->setPseudo($this->session['login']);
+        }
         if ($this->request->isPostSubmit()) {
             $comment->setPseudo($this->post['pseudo']);
             $comment->setContent($this->post['content']);
@@ -90,7 +91,6 @@ class FrontController
             return;
         }
         $data = $form->createView(); // On passe le formulaire généré à la vue.
-//        $this->view->request->set('session', 'error', $this->request->get('session', 'error'));
         $this->view->render('AddComment', true, ['formulaire' => $data]);
     }
 
@@ -177,9 +177,10 @@ class FrontController
      * @return bool
      */
     public function login(){
-        if (isset($this->session['login'])){
+        if ($this->request->isLoged()){
             $user = $this->userDAO->getUser($this->session['login']);
-        } else {
+        }
+        else {
             $user = $this->user;
         }
         $formBuilder = new ConnexionForm($user);

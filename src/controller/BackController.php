@@ -41,6 +41,7 @@ class BackController
     private $post;
     private $session;
     private $file;
+    private $file_treat;
 
     public function __construct()
     {
@@ -54,6 +55,7 @@ class BackController
         $this->post = $this->request->get('post');
         $this->session = $this->request->get('session');
         $this->file = $this->request->get('file');
+        $this->file_treat = new File();
     }
 
     public function adminGestion()
@@ -75,7 +77,7 @@ class BackController
     }
     public function updateComment()
     {
-        if ($this->request->isAdmin()) {
+        if (!$this->request->isAdmin()) {
             $this->frontController->login($this->get);
             $text1 = 'modification impossible';
             $this->request->set('session', 'error', $text1);
@@ -184,7 +186,7 @@ class BackController
     }
     public function updateArticle()
     {
-        $idArt = $this->request->get('query', 'idArt');
+        $idArt = $this->get['idArt'];
         $article = new Article();
         $article = $this->articleDAO->getArticle($idArt);
         //reprends les données ayant pu être modifiées
@@ -193,7 +195,7 @@ class BackController
         $formBuilder->build();
         $form = $formBuilder->form();
         if ($this->request->isPostSubmit() && $form->isValid()) {
-                $this->file->movePicture($this->file);
+                $this->file_treat->movePicture($this->file);
                 $this->articleDAO->updateArticle($idArt, $this->post,$article->getPicture());
                 $text1 = 'Modification effectuées sur l\'article '.$idArt ;
                 $this->request->set('session', 'error', $text1);
