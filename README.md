@@ -2,10 +2,9 @@
 ## Welcome on board!
 This project closes the object-oriented programming part of my Openclassroom training.
 
-This is a demonstration blog, fully operational.
-Login	Pass	Role
-admin	admin	All
-user1	user1	Member
+This is a demonstration blog, fully operational :
+- Full usage : login = admin, password = admin
+- Simple member : login = user1, password = user1 
 
 **Dependencies**
 
