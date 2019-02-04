@@ -20,13 +20,12 @@ class PictureValidator extends Validator
       $infosfichier = pathinfo($file['picture']['name']);
       $extension_upload = $infosfichier['extension'];
       $extension_upload = strtoupper($extension_upload);
-      $extensions = array('JPG', 'JPEG', 'GIF', 'PNG', 'BMP');
-      if (in_array($extension_upload, $extensions))
+      if (in_array($extension_upload, EXTENSION))
           {
               return true;
           }
       $text1="Extension non conforme";
-      $this->request->set('session', 'error', text1);
+      $this->request->set('session', 'error', $text1);
       return false;
   }
   

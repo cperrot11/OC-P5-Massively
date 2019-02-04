@@ -40,8 +40,7 @@ class File
     public function movePicture($file)
     {
         if (isset($file) and !empty($file)) {
-            $destination = 'C:/wamp64/www/OC/P5-Blog PHP/3-POO/App/uploads/';
-            $destination.= basename($_FILES['picture']['name']);
+            $destination= PICTURE_REPO.basename($_FILES['picture']['name']);
             move_uploaded_file($_FILES['picture']['tmp_name'], $destination);
         }
     }

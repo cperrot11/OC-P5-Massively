@@ -162,10 +162,7 @@ class BackController
             $formBuilder->build();
             $form = $formBuilder->form();
             if ($this->request->isPostSubmit() && $form->isValid()) {
-                $destination = 'C:/wamp64/www/OC/P5-Blog PHP/3-POO/App/uploads/';
-                $destination.= basename($file['picture']['name']);
-                $fileName = $file['picture']['tmp_name'];
-                move_uploaded_file($fileName, $destination );
+                $this->file_treat->movePicture($this->file);
                 $_articleDAO = new ArticleDAO();
                 if ($_articleDAO->saveArticle($this->post, $article->getPicture())!='false') {
                     $text1 = 'Le nouvel article a bien été ajouté';

@@ -2,8 +2,9 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-/*autoload zone*/
+/* Constante def */
 require '../config/ini.php';
+/*autoload zone*/
 require '../config/Autoloader.php';
 \App\config\Autoloader::register();
 

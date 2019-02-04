@@ -37,10 +37,10 @@ class MessageController
         //Server settings
         $this->mail->SMTPDebug = 0;
         $this->mail->isSMTP();
-        $this->mail->Host = 'SSL0.OVH.NET';
+        $this->mail->Host = MAILHOST;
         $this->mail->SMTPAuth = true;
-        $this->mail->Username = 'contact@perrotin.eu';
-        $this->mail->Password = 'Mecani4306';
+        $this->mail->Username = MAILUSER;
+        $this->mail->Password = MAILPASS;
         $this->mail->SMTPSecure = 'tls';
         $this->mail->Port = 587;
         $this->request = new Request();
@@ -53,8 +53,8 @@ class MessageController
         try
         {
             $this->mail->setFrom($mail, $nom);
-            $this->mail->addAddress('c.perrotin@mecanicsud.com', 'Blog');
-            $this->mail->addReplyTo('c.perrotin@mecanicsud.com', 'Blog');
+            $this->mail->addAddress(MAILTO, 'Blog');
+            $this->mail->addReplyTo(MAILTO, 'Blog');
 
             //Attachments
             //$this->mail->addAttachment('../public/img/avatar.jpg', 'new.jpg');
