@@ -45,6 +45,7 @@ if(!isset($_SESSION))
         </div>
         <!-- Scripts -->
         <script src="../assets/js/jquery.js"></script>
+        <script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"> </script>
         <script src="../assets/js/jquery.jrumble.1.3.min.js"></script>
         <script src="../assets/js/jquery.scrollex.min.js"></script>
         <script src="../assets/js/jquery.scrolly.min.js"></script>
@@ -52,7 +53,7 @@ if(!isset($_SESSION))
         <script src="../assets/js/breakpoints.min.js"></script>
         <script src="../assets/js/util.js"></script>
         <script src="../assets/js/main.js"></script>
-        <script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"> </script>
+
         <script src="../assets/js/myJs.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </body>

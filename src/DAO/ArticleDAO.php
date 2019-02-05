@@ -8,7 +8,7 @@ class ArticleDAO extends DAO
 {
     public function getArticles()
     {
-        $sql = 'SELECT id, title, chapo, content, author, date_added, picture FROM article ORDER BY date_added DESC';
+        $sql = 'SELECT id, title, chapo, content, author, date_added, picture FROM article ORDER BY date_added DESC, id DESC';
         $result = $this->sql($sql);
         $articles = [];
         foreach ($result as $row) {
