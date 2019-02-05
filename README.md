@@ -24,10 +24,11 @@ This website also uses some "front" libraries:
 1. Clone this repository on your local machine.
 2. Import `config/Base_SQL.sql` to create your database (MySQL currently used).
 3. In project folder open a new terminal window and execute command line `composer install`.
+4. Rename 'config/default.php' to 'config/ini.php'
 4. Edit `config/ini.php` with:
 	* your `DB_NAME` (blog)
 	* your `DB_USER` (root)
-	* your `picture_repository`, where you want to store blogposts' uploaded pictures
+	* your `picture_repository`, where you want to store blogposts uploaded pictures
 	* the `allowed_extensions` you want to allow
 	* your mail datas (SMTP, mail to)
 5. Your website is ready to be used and customized :)
