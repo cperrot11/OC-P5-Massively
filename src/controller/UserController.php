@@ -63,7 +63,7 @@ class UserController
             //enregistrement en base
             $this->post['admin'] = 0;
             if(!$this->userDAO->saveUser($this->post)){
-                    $url = "../public/index.php?route=addUser";
+                    $url = "index.php?route=addUser";
                     header("location:".$url);
                     exit();
                 };
@@ -78,7 +78,7 @@ class UserController
                 $this->adminUsers();
                 return;
             }
-            $url = "../public/index.php?route=login#begin";
+            $url = "index.php?route=login#begin";
             header("location:".$url);
             exit();
         }
@@ -98,7 +98,7 @@ class UserController
         if (!$this->request->isAdmin()){
             $text1 = 'modification impossible pas de connexion administrateur';
             $this->request->set('session', 'error', $text1);
-            $url = "../public/index.php?route=login";
+            $url = "index.php?route=login";
             header("location:".$url);
         }
         // si retour de formulaire transfert vers $user
@@ -129,7 +129,7 @@ class UserController
             $this->userDAO->updateUser($this->post);
             $text1 = 'Données utilisateur "'.$user->getName().'" mises à jour !';
             $this->request->set('session', 'error', $text1);
-            $url = "../public/index.php?route=adminUsers#begin";
+            $url = "index.php?route=adminUsers#begin";
             header("location:".$url);
             return;
         }
@@ -148,7 +148,7 @@ class UserController
         $this->userDAO->deleteUser($this->get['login']);
         $text1="Utilisateurs + ses articles supprimés.";
         $this->request->set('session', 'error', $text1);
-        $url = "../public/index.php?route=adminUsers#begin";
+        $url = "index.php?route=adminUsers#begin";
         header("location:".$url);
         exit();
     }
@@ -169,7 +169,7 @@ class UserController
     public function logout()
     {
         session_destroy();
-        $url = "../public/index.php";
+        $url = "index.php";
         header("location:".$url);
     }
 

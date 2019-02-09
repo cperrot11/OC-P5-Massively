@@ -8,7 +8,7 @@ $this->title = "Accueil";
         <span class="subheading">Saisir vos identifiants et votre mot de passe.</span><br>
         <span class="subheading">Rq : Le mot de passe sera crypté sur nos serveurs</span>
         <hr>
-        <form method="post" action="../public/index.php?route=addUser#begin">
+        <form method="post" action="index.php?route=addUser#begin">
             <?php
             if(isset($_SESSION['error'])) {?>
                 <div class="cpAlert">
@@ -23,6 +23,6 @@ $this->title = "Accueil";
             <input class="button primary small" type="submit" value="Valider" id="submit" name="submit">
             <input class="button primary small" type="submit" value="Annuler" id="logout" name="logout">
         </form>
-        <a class="button" href="../public/index.php#begin">Retour à l'accueil</a>
+        <a class="button" href="index.php#begin">Retour à l'accueil</a>
     </section>
 </div>

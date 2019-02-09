@@ -103,12 +103,12 @@ class BackController
             $text1 = "Commentaire mis à jour !";
             $this->request->set('session', 'error', $text1);
             if ($this->request->isFront()) {
-                $url = "../public/index.php?route=article&idArt=".$this->get['idArt']."#begin";
+                $url = "index.php?route=article&idArt=".$this->get['idArt']."#begin";
                 header("location:".$url);
                 exit();
             }
             if ($this->request->isBack()) {
-                $url = "../public/index.php?route=adminCommentaires#begin";
+                $url = "index.php?route=adminCommentaires#begin";
                 header("location:".$url);
                 exit();
             }
@@ -124,7 +124,7 @@ class BackController
         $text1 = (!$this->commentDAO->valideComment($this->get)) ? $texta : $textb;
         $this->request->set('session', 'error', $text1);
 
-        $url = "../public/index.php?route=adminCommentaires#begin";
+        $url = "index.php?route=adminCommentaires#begin";
         header("location:".$url);
         exit();
     }
@@ -132,11 +132,11 @@ class BackController
     {
         $this->commentDAO->deleteComment($this->get['idComment']);
         if ($this->request->isFront()) {
-            $url = "../public/index.php?route=article&idArt=".$this->get['idArt']."#begin";
+            $url = "index.php?route=article&idArt=".$this->get['idArt']."#begin";
             header("location:".$url);
         }
         if ($this->request->isback()) {
-            $url = "../public/index.php?route=adminCommentaires#begin";
+            $url = "index.php?route=adminCommentaires#begin";
             header("location:".$url);
         }
         $text1 = "Commentaire supprimé";
@@ -173,7 +173,7 @@ class BackController
                     $text1 = $text1.$this->session['error'];
                     $this->request->set('session', 'error', $text1);
                 }
-                header('Location: ../public/index.php?route=articles');
+                header('Location: index.php?route=articles');
                 return;
             }
             $data = $form->createView(); // On passe le formulaire généré à la vue.
@@ -196,7 +196,7 @@ class BackController
                 $this->articleDAO->updateArticle($idArt, $this->post,$article->getPicture());
                 $text1 = 'Modification effectuées sur l\'article '.$idArt ;
                 $this->request->set('session', 'error', $text1);
-                $url = "../public/index.php?route=adminArticles#begin";
+                $url = "index.php?route=adminArticles#begin";
                 header("location:".$url);
                 exit();
             }
@@ -217,7 +217,7 @@ class BackController
             $text1 = 'Suppression impossible';
         }
         $this->request->set('session', 'error', $text1);
-        $url = "../public/index.php?route=adminArticles#begin";
+        $url = "index.php?route=adminArticles#begin";
         header("location:".$url);
         exit();
     }

@@ -10,9 +10,9 @@ if(!isset($_SESSION))
         <meta charset="UTF-8" />
         <title><?= $title ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="../assets/css/main.css" />
-        <link rel="stylesheet" href="../assets/css/mystyle.css" />
-        <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <link rel="stylesheet" href="assets/css/mystyle.css" />
+        <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
     </head>
     <body class="is-preload">
         <div id="wrapper" class="fade-in">
@@ -39,22 +39,22 @@ if(!isset($_SESSION))
         <div id="copyright">
             <ul>
                 <li>&copy; C.PERROTIN</li>
-                <li><a href="../public/index.php?route=adminGestion#begin">Administration</a></li>
+                <li><a href="index.php?route=adminGestion#begin">Administration</a></li>
                 <li><a href="#begin">Retour menu</a></li>
             </ul>
         </div>
         <!-- Scripts -->
-        <script src="../assets/js/jquery.js"></script>
+        <script src="assets/js/jquery.js"></script>
         <script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"> </script>
-        <script src="../assets/js/jquery.jrumble.1.3.min.js"></script>
-        <script src="../assets/js/jquery.scrollex.min.js"></script>
-        <script src="../assets/js/jquery.scrolly.min.js"></script>
-        <script src="../assets/js/browser.min.js"></script>
-        <script src="../assets/js/breakpoints.min.js"></script>
-        <script src="../assets/js/util.js"></script>
-        <script src="../assets/js/main.js"></script>
+        <script src="assets/js/jquery.jrumble.1.3.min.js"></script>
+        <script src="assets/js/jquery.scrollex.min.js"></script>
+        <script src="assets/js/jquery.scrolly.min.js"></script>
+        <script src="assets/js/browser.min.js"></script>
+        <script src="assets/js/breakpoints.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <script src="assets/js/main.js"></script>
 
-        <script src="../assets/js/myJs.js"></script>
+        <script src="assets/js/myJs.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </body>
 </html>

@@ -85,7 +85,7 @@ class FrontController
             //affiche single article
             $text2='Commentaire ajouté et en attente de validation';
             $this->request->set('session', 'error', $text2);
-            $url = "../public/index.php?route=article&idArt=";
+            $url = "index.php?route=article&idArt=";
             $url.=$this->get['idArt']."#begin";
             header("location:".$url);
             return;
@@ -210,11 +210,11 @@ class FrontController
                 $this->request->set('session', 'role', ($surfer->getAdmin())? "admin":"membre");
                 $text1 = "Vous êtes à présent connecté et pouvez commenter les articles.";
                 $this->request->set('session', 'error', $text1);
-                $url = "../public/index.php?route=articles#begin";
+                $url = "index.php?route=articles#begin";
             } else {
                 $text1 = "pseudo ou mot de passe incorrect";
                 $this->request->set('session', 'error', $text1);
-                $url = "../public/index.php?route=login";
+                $url = "index.php?route=login";
             }
             header("location:".$url);
         }

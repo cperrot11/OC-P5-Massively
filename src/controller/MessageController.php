@@ -57,7 +57,7 @@ class MessageController
             $this->mail->addReplyTo(MAILTO, 'Blog');
 
             //Attachments
-            //$this->mail->addAttachment('../public/img/avatar.jpg', 'new.jpg');
+            //$this->mail->addAttachment('img/avatar.jpg', 'new.jpg');
 
             //Content
             $this->mail->isHTML(true);

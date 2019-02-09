@@ -6,7 +6,7 @@
         <h2>Ajouter un commentaire</h2>
         <p class="subheading">Attention : Les commentaires saisies doivent être validés avant publication.</p>
 
-        <form method="post" action="../public/index.php?route=addComment<?php echo "&idArt=".$_GET['idArt'];?>#begin">
+        <form method="post" action="index.php?route=addComment<?php echo "&idArt=".$_GET['idArt'];?>#begin">
             <?php
             if(isset($_SESSION['error'])) {?>
                 <div class="cpAlert">

@@ -26,8 +26,7 @@ class Autoloader
      */
     public static function autoload($class)
     {
-        $class = str_replace('App', '', $class);
-        $class = str_replace('\\', '/', $class);
-        require_once '../'.$class.'.php';
+        $class = str_replace('App\\', '', $class);
+        require_once $class.'.php' ;
     }
 }

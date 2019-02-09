@@ -19,7 +19,7 @@ $this->title = "Blog";
             $this->request->unsetSession('error');
         }
         ?>
-            <a class="button" href="../public/index.php?route=addArticle#begin">Ajouter un article</a>
+            <a class="button" href="index.php?route=addArticle#begin">Ajouter un article</a>
     </section>
 
             <?php
@@ -32,7 +32,7 @@ $this->title = "Blog";
                         <header class="major">
                             <span class="date">Modifié le : <?= htmlspecialchars($article->getDateAdded());?></span>
                             <h2 class="actions special">
-                                <a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin">
+                                <a href="index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin">
                                     <?= htmlspecialchars($article->getTitle());?>
                                 </a>
                             </h2>
@@ -43,7 +43,7 @@ $this->title = "Blog";
                             <?= htmlspecialchars(substr($article->getContent(),0,200).'...');?></p>
                         <p>Auteur : <span class="auteur"><?= htmlspecialchars($article->getAuthor());?></span></p>
                         <ul class="actions special">
-                            <li><a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin" class="button">Lire la suite</a></li>
+                            <li><a href="index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin" class="button">Lire la suite</a></li>
                         </ul>
                     </article>
                     <section class="posts">
@@ -54,12 +54,12 @@ $this->title = "Blog";
                     ?>
                     <article class="cpTremble">
                         <header>
-                            <a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin">
+                            <a href="index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin">
                                 <?= htmlspecialchars($article->getTitle());?>
                             </a>
                         </header>
                         <p>
-                            <span class="image left"><img src=<?= "../uploads/".htmlspecialchars($article->getPicture());?> alt="" /></span>
+                            <span class="image left"><img src=<?= "uploads/".htmlspecialchars($article->getPicture());?> alt="" /></span>
                             <?= htmlspecialchars($article->getChapo(250))."...";?>
                         </p>
                         <footer>
@@ -67,7 +67,7 @@ $this->title = "Blog";
                                 <p>Auteur : <span class="auteur"><?= htmlspecialchars($article->getAuthor());?></span></p>
                                 <p class="date">Modifié le : <?= htmlspecialchars($article->getDateAdded());?></p>
                             </div>
-                            <a href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin" class="button">Lire la suite</a>
+                            <a href="index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin" class="button">Lire la suite</a>
                         </footer>
                     </article>
                     <?php

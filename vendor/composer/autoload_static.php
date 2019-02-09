@@ -7,42 +7,16 @@ namespace Composer\Autoload;
 class ComposerStaticInitb85128a46edcaccc530b2db3f6cec27b
 {
     public static $prefixLengthsPsr4 = array (
-        'Z' => 
-        array (
-            'Zend\\Validator\\' => 15,
-            'Zend\\Stdlib\\' => 12,
-        ),
         'P' => 
         array (
-            'Psr\\Container\\' => 14,
             'PHPMailer\\PHPMailer\\' => 20,
-        ),
-        'I' => 
-        array (
-            'Interop\\Container\\' => 18,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Zend\\Validator\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/zendframework/zend-validator/src',
-        ),
-        'Zend\\Stdlib\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/zendframework/zend-stdlib/src',
-        ),
-        'Psr\\Container\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/container/src',
-        ),
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
-        ),
-        'Interop\\Container\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container',
         ),
     );
 

@@ -15,7 +15,7 @@ $this->title = "Contact";
             unset($_SESSION['error']);
         }
         ?>
-        <form method="post" action="../public/index.php?route=contact#begin">
+        <form method="post" action="index.php?route=contact#begin">
             <?= $formulaire;?>
             <input class="button primary small" type="submit" value="Envoyer" id="submit" name="submit">
             <input class="button primary small" type="reset" value="Annuler" id="reset" name="reset">

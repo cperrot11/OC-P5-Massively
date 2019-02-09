@@ -36,13 +36,13 @@ class View
     public function render($template, $display, $data = [])
     {
         $this->admin = (substr($template,0,5)=="Admin")?true:false;
-        $this->file = '../src/view/'.$template.'.php';
+        $this->file = 'src/view/'.$template.'.php';
         //1- Construit le template avec les valeurs
         $this->content = $this->content . $this->renderFile($this->file, $data);
         //2- Rajoute le masque général + titre
         if ($display)
         {
-            $view = $this->renderFile('../src/view/Base.php', [
+            $view = $this->renderFile('src/view/Base.php', [
                 'title' => $this->title,
                 'admin' => $this->admin,
                 'content' => $this->content]);

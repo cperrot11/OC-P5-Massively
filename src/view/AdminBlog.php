@@ -7,8 +7,8 @@
            <span class="subheading">Trier le listing en cliquant sur le titre des colonnes.</span><br/>
            <span class="subheading">Vous pouvez modifier le contenu d'un article ou le supprimer.</span>
            <br/>
-           <a class="button" href="../public/index.php?route=addArticle#begin">Ajouter un article</a>
-           <a class="button" href="../public/index.php?route=adminGestion#begin">Retour à l'administration du blog</a>
+           <a class="button" href="index.php?route=addArticle#begin">Ajouter un article</a>
+           <a class="button" href="index.php?route=adminGestion#begin">Retour à l'administration du blog</a>
            <hr>
         <div class="row">
             <?php
@@ -38,13 +38,13 @@
                         ?>
                             <tr class="table-light">
                                 <td scope="row"><?= htmlspecialchars($article->getId());?></td>
-                                <td><a title="Lire" href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin"><?= htmlspecialchars($article->getTitle());?></a></td>
+                                <td><a title="Lire" href="index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin"><?= htmlspecialchars($article->getTitle());?></a></td>
                                 <td><?= htmlspecialchars($article->getAuthor());?></td>
                                 <td class="no-wrap"><?= htmlspecialchars($article->getDateAdded());?></td>
-                                <td><a title="Lire" class="icon fa-book" href="../public/index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin"></a></td>
-                                <td><a title="Modifier" class="icon fa-edit" href="../public/index.php?route=updateArticle&idArt=<?= htmlspecialchars($article->getId());?>#begin"></a></td>
+                                <td><a title="Lire" class="icon fa-book" href="index.php?route=article&idArt=<?= htmlspecialchars($article->getId());?>#begin"></a></td>
+                                <td><a title="Modifier" class="icon fa-edit" href="index.php?route=updateArticle&idArt=<?= htmlspecialchars($article->getId());?>#begin"></a></td>
                                 <td>
-                                    <form id="deleteform<?= $article->getId();?>" method="post" action="../public/index.php?route=deleteArticle&idArt=<?= $article->getId();?>">
+                                    <form id="deleteform<?= $article->getId();?>" method="post" action="index.php?route=deleteArticle&idArt=<?= $article->getId();?>">
                                         <a class="icon fa-trash delete" title="Supprimer" type="submit"/>
                                     </form>
                                 </td>

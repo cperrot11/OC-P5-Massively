@@ -32,11 +32,11 @@ $this->title = "Article";
             <blockquote> <?= htmlspecialchars($article->getChapo());?></blockquote>
         </header>
 
-        <div class="image main"><img src=<?= "../uploads/".htmlspecialchars($article->getPicture());?> alt="" /></div>
+        <div class="image main"><img src=<?= "uploads/".htmlspecialchars($article->getPicture());?> alt="" /></div>
         <p><?= htmlspecialchars($article->getContent());?></p>
 
         <p>Auteur : <span class="auteur"><?= htmlspecialchars($article->getAuthor());?></span></p>
-        <a class="button" href="../public/index.php?route=articles#begin">Retour à la liste des articles</a>
+        <a class="button" href="index.php?route=articles#begin">Retour à la liste des articles</a>
     </article>
     <div id="comments" class="text-left" style="margin-left: 50px">
                 <h3><?php switch (count($comments))
@@ -62,13 +62,13 @@ $this->title = "Article";
                                 <span> Posté le : <?= htmlspecialchars($comment->getDateAdded());?></span>
                             </div>
                             <p><?= htmlspecialchars($comment->getContent());?></p>
-                            <?php $path = "../public/index.php?route=deleteComment&appel=front&idComment=" ?>
+                            <?php $path = "index.php?route=deleteComment&appel=front&idComment=" ?>
                             <input type="hidden" id="path" value="<?php echo $path; ?>">
                             <?php if($this->request->isAdmin())
                             { ?>
                                 <footer>
-                                    <a title="Modifier" class="icon fa-edit" href="../public/index.php?route=updateComment&idArt=<?= htmlspecialchars($article->getId());?>&idComment=<?= htmlspecialchars($comment->getId());?>&appel=front#begin"> Modifier</a>
-                                    <a title="Supprimer" class="icon fa-trash validate" href="../public/index.php?route=deleteComment&idArt=<?= htmlspecialchars($article->getId());?>&idComment=<?= htmlspecialchars($comment->getId());?>&appel=front#begin"> Supprimer</a>
+                                    <a title="Modifier" class="icon fa-edit" href="index.php?route=updateComment&idArt=<?= htmlspecialchars($article->getId());?>&idComment=<?= htmlspecialchars($comment->getId());?>&appel=front#begin"> Modifier</a>
+                                    <a title="Supprimer" class="icon fa-trash validate" href="index.php?route=deleteComment&idArt=<?= htmlspecialchars($article->getId());?>&idComment=<?= htmlspecialchars($comment->getId());?>&appel=front#begin"> Supprimer</a>
                                 </footer>
                                 <?php
                             } ?>

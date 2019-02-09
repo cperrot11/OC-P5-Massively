@@ -4,7 +4,7 @@ $this->title = "Mise à jour utilisateurs";
 <div id="main">
     <section class="post">
         <h2>Modification utilisateur</h2>
-        <form method="post" action="../public/index.php?route=updateUser&appel=back#begin">
+        <form method="post" action="index.php?route=updateUser&appel=back#begin">
             <?php
             if(isset($_SESSION['error'])) {?>
                 <div class="cpAlert">
@@ -19,6 +19,6 @@ $this->title = "Mise à jour utilisateurs";
             <input class="button primary small" type="submit" value="Envoyer" id="submit" name="submit">
             <input class="button primary small" type="reset" value="Annuler" id="reset" name="reset">
         </form>
-        <a href="../public/index.php?route=adminUsers#begin">Retour à l'administration des utilisateurs</a>
+        <a href="index.php?route=adminUsers#begin">Retour à l'administration des utilisateurs</a>
     </section>
 </div>

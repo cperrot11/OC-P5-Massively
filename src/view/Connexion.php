@@ -13,13 +13,13 @@
             <?php } ?>
             <div>
                 <br/>
-                <a class="button" href="../public/index.php?route=addUser&appel=front#begin">Nouvel utilisateur</a>
-                <a class="button" href="../public/index.php#begin">Retour à l'accueil</a>
+                <a class="button" href="index.php?route=addUser&appel=front#begin">Nouvel utilisateur</a>
+                <a class="button" href="index.php#begin">Retour à l'accueil</a>
             </div>
             <hr>
 
     <div class="row">
-        <form method="post" action="../public/index.php?route=checkLogin#begin">
+        <form method="post" action="index.php?route=checkLogin#begin">
             <?php
             if(isset($_SESSION['error'])) {?>
                 <div class="cpAlert">
@@ -33,7 +33,7 @@
                 <?php echo $formulaire;?>
             <br/>
             <input class="button primary small" type="submit" value="Connecter" id="submit" name="submit">
-            <a class="button primary small" href="../public/index.php?route=logout#begin">Déconnecter</a>
+            <a class="button primary small" href="index.php?route=logout#begin">Déconnecter</a>
         </form>
     </div>
     </section>

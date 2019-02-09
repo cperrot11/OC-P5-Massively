@@ -7,7 +7,7 @@ $this->title = "Gestion commentaire";
         <span class="subheading">Trier le listing en cliquant sur le titre des colonnes.</span><br/>
         <span class="subheading">Vous pouvez valider/dévalider un commentaire, le modifier ou supprimer.</span>
         <br/>
-        <a class="button" href="../public/index.php?route=adminGestion#begin">Retour à l'administration du blog</a>
+        <a class="button" href="index.php?route=adminGestion#begin">Retour à l'administration du blog</a>
         <hr>
         <div class="row">
             <?php
@@ -40,15 +40,15 @@ $this->title = "Gestion commentaire";
                                 <td><?= htmlspecialchars($comment->getPseudo());?></td>
                                 <td><?= htmlspecialchars($comment->getContent(80));?></td>
                                 <td class="no-wrap"><?= htmlspecialchars($comment->getDateAdded());?></td>
-                                <td><a title="Lire article" href="../public/index.php?route=article&idArt=<?= htmlspecialchars($comment->getArticleId());?>#begin">
+                                <td><a title="Lire article" href="index.php?route=article&idArt=<?= htmlspecialchars($comment->getArticleId());?>#begin">
                                     <?= htmlspecialchars($comment->getArticleId());?>
                                 </td></a>
-                                <td><a title="Valider O/N" class=<?= ($comment->getValide()==="1")?'"icon fa-check-square"':'"icon fa-square"' ?> href="../public/index.php?route=valideComment&idComment=<?= htmlspecialchars($comment->getId());?>&valide=<?= htmlspecialchars($comment->getValide());?>#begin">
+                                <td><a title="Valider O/N" class=<?= ($comment->getValide()==="1")?'"icon fa-check-square"':'"icon fa-square"' ?> href="index.php?route=valideComment&idComment=<?= htmlspecialchars($comment->getId());?>&valide=<?= htmlspecialchars($comment->getValide());?>#begin">
                                     </a>
                                 </td>
-                                <td><a title="Modifier" class="icon fa-edit" href="../public/index.php?route=updateComment&idArt=<?= htmlspecialchars($comment->getArticleId());?>&idComment=<?= htmlspecialchars($comment->getId());?>&appel=back#begin"></a></td>
+                                <td><a title="Modifier" class="icon fa-edit" href="index.php?route=updateComment&idArt=<?= htmlspecialchars($comment->getArticleId());?>&idComment=<?= htmlspecialchars($comment->getId());?>&appel=back#begin"></a></td>
                                 <td>
-                                    <form id="deleteform<?= $comment->getId();?>" method="post" action="../public/index.php?route=deleteComment&appel=back&idComment=<?= $comment->getId();?>">
+                                    <form id="deleteform<?= $comment->getId();?>" method="post" action="index.php?route=deleteComment&appel=back&idComment=<?= $comment->getId();?>">
                                         <a class="icon fa-trash delete" title="Supprimer" type="submit"/>
                                     </form>
                                 </td>

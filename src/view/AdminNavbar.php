@@ -6,10 +6,10 @@
             {$route="accueil";}
         ?>
         <ul class="links" id="begin">
-                <li title="Retour à l'accueil du site" class=<?= ($_GET['route']==='accueil')?"active":"" ?>><a href="../public/index.php?route=accueil#begin">Site</a></li>
-                <li class=<?= stristr($_GET['route'],'Article')?"active":"" ?>><a href="../public/index.php?route=adminArticles#begin">Articles</a></li>
-                <li class=<?= stristr($_GET['route'],'comment')?"active":"" ?>><a href="../public/index.php?route=adminCommentaires#begin">Commentaires</a></li>
-                <li class=<?= stristr($_GET['route'],'User')?"active":"" ?>><a href="../public/index.php?route=adminUsers#begin">Membres</a></li>
+                <li title="Retour à l'accueil du site" class=<?= ($_GET['route']==='accueil')?"active":"" ?>><a href="index.php?route=accueil#begin">Site</a></li>
+                <li class=<?= stristr($_GET['route'],'Article')?"active":"" ?>><a href="index.php?route=adminArticles#begin">Articles</a></li>
+                <li class=<?= stristr($_GET['route'],'comment')?"active":"" ?>><a href="index.php?route=adminCommentaires#begin">Commentaires</a></li>
+                <li class=<?= stristr($_GET['route'],'User')?"active":"" ?>><a href="index.php?route=adminUsers#begin">Membres</a></li>
                 <li class=<?= ($_GET['route']==='adminGestion')?"active":"" ?>><a href="index.php?route=adminGestion#begin">Admin</a></li>
         </ul>
         <div class="connexion">
