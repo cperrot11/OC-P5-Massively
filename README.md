@@ -17,7 +17,10 @@ This website also uses some "front" libraries:
 
 - Jquery, Jqueryj.rumble and Jquery.scrolly
 - Sass
+- SweetAlert for popup
 
+**Analyse Code climate** = 
+https://codeclimate.com/github/cperrot11/OC-P5-Massively
 
 **How to install?**
 
