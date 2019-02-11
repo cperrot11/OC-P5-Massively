@@ -1,3 +1,4 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/db8d29f16163e67ebbb5/maintainability)](https://codeclimate.com/github/cperrot11/OC-P5-Massively/maintainability)
 # My first php blog
 ## Welcome on board!
 This project closes the object-oriented programming part of my Openclassroom training.
@@ -18,9 +19,6 @@ This website also uses some "front" libraries:
 - Jquery, Jqueryj.rumble and Jquery.scrolly
 - Sass
 - SweetAlert for popup
-
-**Analyse Code climate** = 
-https://codeclimate.com/github/cperrot11/OC-P5-Massively
 
 **How to install?**
 
